@@ -1,0 +1,91 @@
+@use "../global/variables" as var;
+
+@function rem($px) {
+  @return ($px / 16) * 1rem;
+}
+
+//color-code
+.color-white {
+  color: var.$color-white;
+}
+.color-black {
+  color: var.$color-black;
+}
+.color-red {
+  color: var.$color-red;
+}
+.color-gold {
+  color: var.$color-gold;
+}
+.color-silver {
+  color: var.$color-silver;
+}
+
+
+//font-family
+.sofia {
+	font-family: sofia-pro, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	&.bold {
+		font-weight: 600;
+	}
+}
+
+.mincho {
+  font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif !important;
+}
+
+//text-style
+.fxw-w {
+  flex-wrap: wrap;
+}
+.ta-c {
+  text-align: center;
+}
+.ta-l {
+  text-align: left;
+}
+.ta-r {
+  text-align: right;
+}
+
+//font-size
+.xs-font-size {
+  font-size: var.$xs-font-size;
+}
+.small-font-size {
+  font-size: var.$small-font-size;
+}
+.base-font-size {
+  font-size: var.$base-font-size;
+}
+
+//font-weight
+.bold {
+	font-weight: bold;
+}
+
+//color
+.color-white {
+  color: var.$color-white;
+}
+.color-black {
+  color: var.$color-black;
+}
+.color-red {
+  color: var.$color-red;
+}
+
+//letter-spacing
+.ls-11 {
+  letter-spacing: var.$ls-11;
+}
+
+//line-height
+.lh-20 {
+  line-height: var.$lh-20;
+}
+.lh-2{
+  line-height: 2;
+}

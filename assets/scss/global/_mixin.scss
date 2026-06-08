@@ -1,0 +1,172 @@
+@use "../global/variables"as var;
+@use "../global/typograpy" as typo;
+
+@mixin column-layout {
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin border-col-3 {
+	display: flex;
+	justify-content: space-between;
+	li {
+		width: 32%;
+		.border-col-item {
+			padding: 16px 12px 12px;
+			font-size: var.$base-font-size;
+			font-weight: bold;
+			text-align: center;
+			border-radius: 4px;
+		}
+	}
+}
+.border-col-3 {
+	@include border-col-3;
+}
+
+//親要素の横幅を無視して横幅いっぱいに広げる
+@mixin width-100vw {
+	position: relative;
+	left: 50%;
+	width: 100vw;
+	transform: translateX(-50%);
+}
+
+//上下中央寄せ 親要素にrelariveをつける
+@mixin top-bottom-center {
+	display: block;
+	margin: 0 auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	transform: translateY(-50%) translateX(-50%);
+}
+
+//白矢印上下中央配置
+@mixin arrow-center-white {
+	position: absolute;
+	display: inline-block;
+	top: 50%;
+	left: auto;
+	transform: translateY(-50%);
+	background-image: url(../images/common/arrow-right-white.svg);
+	background-size: contain;
+  vertical-align: middle;
+	content: "";
+}
+
+//赤矢印上下中央配置
+@mixin arrow-center-red {
+	position: absolute;
+	display: inline-block;
+	top: 50%;
+	left: auto;
+	transform: translateY(-50%);
+	background-image: url(../images/common/arrow-right-red.svg);
+	background-size: contain;
+  vertical-align: middle;
+	content: "";
+}
+
+//黒矢印上下中央配置
+@mixin arrow-center-black {
+	position: absolute;
+	display: inline-block;
+	top: 50%;
+	left: auto;
+	transform: translateY(-50%);
+	background-image: url(../images/common/arrow-right-gray.svg);
+	background-size: contain;
+  vertical-align: middle;
+	content: "";
+}
+
+//テキスト横スラッシュ
+@mixin slash-title {
+	position: relative;
+	padding: 0 15px;
+	text-align: center;
+  &:before,
+  &:after {
+    content: '';
+  	position: absolute;
+  	top: 50%;
+  	display: inline-block;
+  	width: 20px;
+  	height: 1px;
+  	background-color: var.$color-black;
+  	transform: rotate(-60deg);
+  }
+  &:before {
+    left:10px;
+    transform: rotate(60deg);
+  }
+  &:after {
+    right:10px;
+  }
+}
+
+//矢印
+@mixin arrow {
+	position: absolute;
+	display: inline-block;
+	top: 50%;
+	bottom: 0;
+	right: 8px;
+	width: 6px;
+  height: 6px;
+	margin-top: -3px;
+	transform: translateY(-50%);
+  transform: rotate(45deg);
+	content: '';
+}
+
+//赤枠線ボタン
+@mixin red-bdr-btn {
+	position: relative;
+	display: block;
+	padding: 15px 0 15px 12px;
+	color: var.$color-black;
+	font-size: var.$base-font-size;
+	font-weight: bold;
+	border: 2px solid var.$color-red;
+	border-radius: 4px;
+	background: var.$color-white;
+}
+
+@mixin gradation-red-border {
+	position: relative;
+	&:after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 1px;
+		bottom: 0;
+		left: 0;
+		background: rgb(218,23,43);
+		background: -moz-linear-gradient(90deg, rgba(218,23,43,1) 59%, rgba(218,23,43,0) 100%);
+		background: -webkit-linear-gradient(90deg, rgba(218,23,43,1) 59%, rgba(218,23,43,0) 100%);
+		background: linear-gradient(90deg, rgba(218,23,43,1) 59%, rgba(218,23,43,0) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#da172b",endColorstr="#da172b",GradientType=1);
+	}
+}
+
+@mixin red-border-ttl {
+	position: relative;
+	display: flex;
+	align-items: center;
+  margin-bottom: 20px;
+	font-size: typo.rem(18);
+	border-bottom: 2px solid var.$color-red;
+	span {
+		padding: 8px 0 8px 8px;
+	}
+	&:before {
+		height: 22px;
+		width: 3px;
+		background-color: var.$color-red;
+		content: "";
+	}
+}

@@ -1,0 +1,357 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+@use "../component/arrow" as arrow;
+
+#drawernav {
+	position: fixed;
+	top:55px;
+	right: -292px;
+	width: 292px;
+	height: 100%;
+	margin-bottom: 0;
+	background: var.$color-beige;
+	color: var.$color-black;
+	letter-spacing: var.$ls-01;
+	z-index: 2;
+	overflow-y: scroll;
+	-webkit-transition: all 400ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	-moz-transition: all 400ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	-o-transition: all 400ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	transition: all 400ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	-webkit-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	-moz-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	-o-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	@include var.mq-up('md'){
+		width: 500px;
+		right: -500px;
+	}
+	@include var.mq-up('xl'){
+		top:82px;
+	}
+	ul {
+		list-style: none;
+		padding: 0;
+		li {
+			a {
+				color: var.$color-black;
+				display: block;
+				text-decoration: none;
+				&:hover{
+					color: var.$color-black;
+					background: #FFDAD2;
+				}
+			}
+		}
+	}
+	h4{
+		padding: 0 15px;
+	}
+	.drawer-select-ttl {
+		margin-top: 52px;
+	}
+	.drawer-select-link {
+		li {
+			width: 32%;
+			a {
+				padding: 16px 12px 12px;
+				font-size: var.$base-font-size;
+				font-weight: bold;
+				text-align: center;
+				border: 2px solid var.$color-red;
+				border-radius: 4px;
+			}
+		}
+	}
+	.drawer-column-2 {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: 12px 0 20px;
+		li {
+			width: 90%;
+			border-bottom:1px solid #D5D5D5;
+			a {
+				position: relative;
+				padding: 8px 0 8px 5px;
+				font-size: var.$small-font-size;
+				&:after {
+					@include arrow.arrow-right-red;
+					right: 20px;
+				}
+				> div{
+					padding: 0 15px;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+	#select-tel {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		row-gap: 10px;
+		@include var.mq-up('xl'){
+			margin-top:15px;
+		}
+		.ex1-city-category-outer,
+		.ex1-city-outer{
+			position:relative;
+			&:after {
+				@include arrow.arrow-right-red;
+			}
+		}
+		.ex1-city-category-outer{
+			width: 100%;
+		}
+		.ex1-city-outer{
+			width:100%;
+		}
+		select {
+			width:100%;
+			padding: 8px;
+			border:none;
+			appearance: none;
+			color:var.$color-black;
+			opacity: 1;
+			background: var.$color-beige;
+			text-align: center;
+			&#ex1-city-category {
+				background: var.$color-beige;
+			}
+		}
+	}
+	.job{
+		a{
+			background: var.$color-red;
+			display: block;
+			padding-bottom: 5px;
+			color:#fff;
+			border-radius: 0 0 4px 4px;
+			img{
+				max-width: 100%;
+				height: auto;
+				padding-bottom: 5px;
+			}
+		}
+	}
+	.top_title{
+		line-height: 58px;
+		padding-left: 12px;
+		font-size: 19px;
+	}
+	.search_prefectures_outer{
+		background: #fff;
+		padding:12px 10px;
+		width: 90%;
+		margin: auto;
+		&:hover{
+			background-color: rgba(255, 218, 210, 0.3);
+		}
+		> p{
+			font-size: 18px;
+			@include var.mq-up('xl'){
+				font-size: 16px;
+			}
+		}
+	}
+	.api_current_location_button{
+		margin: 0 auto 15px;
+		@include var.mq-up('xl'){
+			background-color: #fff;
+		}
+		&:hover{
+			background-color: rgba(255, 218, 210, 0.3);
+		}
+		a{
+			font-family: "Noto Sans JP", sans-serif;
+			&::before{
+				width: 16px;
+				height: 20px;
+			}
+		}
+	}
+	.drawer-fixed {
+		position: fixed;
+		width: 100%;
+		height: 55.55px;
+		background: var.$color-white;
+		box-shadow: 0 4px 6px 0 rgb(0 0 0 / 20%);
+		z-index: 1000;
+	}
+}
+
+#humberger{
+	position: fixed;
+	z-index: 100;
+	cursor: pointer;
+	@include var.mq-down('md'){
+		top: 21px;
+		right: 0;
+		padding: 0 10px;
+		width: 52px;
+	}
+	@include var.mq-up('md'){
+		top: 35px;
+		right: 1%;
+		width: 30px;
+	}
+}
+.icon-bar{
+	height: 3px;
+	background: var.$color-red;
+	display: block;
+	margin-bottom: 9px;
+	transition: all 400ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+}
+.fixed-content{
+	right: inherit;
+	width: 100%;
+	z-index: 2;
+  transition: all 400ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+  transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+}
+#overlay{
+	z-index:-1;
+	opacity: 0;
+	background: #000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	transition: all 400ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	.jcmedia{
+		position:relative;
+		top:50%;
+		left:50%;
+	  transform: translate(-50%, -50%);
+	  -webkit-transform: translate(-50%, -50%);
+	  -ms-transform: translate(-50%, -50%);
+		width:100%;
+		padding-top: 56.25%;
+		@include var.mq-up('xl') {
+			width:640px;
+			padding-top:0;
+		}
+		iframe{
+			position: absolute;
+	    top: 0;
+	    right: 0;
+	    width: 100%;
+	    height: 100%;
+	    padding: 0 20px;
+			@include var.mq-up('xl') {
+				position: relative;
+				height: 360px;
+				padding: 0;
+				max-width: 100%;
+			}
+		}
+		.round_btn {
+		  display: block;
+			position: absolute;
+	    top: -10px;
+	    left: 4px;
+		  width: 30px;
+		  height: 30px;
+		  border: 2px solid #333; /* 枠の調整 */
+		  border-radius: 50%;  /* 丸みの度合い */
+		  background: #fff; /* ボタンの背景色 */
+			cursor: pointer;
+		}
+
+		.round_btn::before, .round_btn::after {
+		  content: "";
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  width: 3px; /* 棒の幅（太さ） */
+		  height: 22px; /* 棒の高さ */
+		  background: #333; /* バツ印の色 */
+		}
+
+		.round_btn::before {
+		  transform: translate(-50%,-50%) rotate(45deg);
+		}
+
+		.round_btn::after {
+		  transform: translate(-50%,-50%) rotate(-45deg);
+		}
+	}
+}
+
+
+body.drawer-opened {
+	overflow-y: hidden;
+	#page {
+		left: -292px;
+		box-shadow: 1px 0 2px #000;
+		-webkit-box-shadow: 1px 0 2px #000;
+	}
+	.fixed-content{
+		left: -292px;
+	}
+	#drawernav{
+		right: 0;
+		top:55px;
+		padding-bottom: 80px;
+		box-shadow: -2px 5px 7px 0px rgba(0, 0, 0, 0.35);
+		@include var.mq-up('xl'){
+			top:82px;
+			padding-bottom: 30px;
+		}
+		.flex_box{
+			@include var.mq-up('xl'){
+				display: flex;
+				width: 90%;
+				margin: auto;
+				column-gap: 10px;
+			}
+			> div{
+				@include var.mq-up('xl'){
+					width: 50%;
+					height: 160px;
+					border-radius: 4px;
+					padding-top:20px;
+					padding-bottom:20px;
+				}
+			}
+		}
+	}
+	#humberger {
+		position: absolute;
+		.icon-bar{
+			height: 2px;
+			background: var.$color-red;
+			&:nth-child(1){
+				transform:translate(0,4px) rotate(45deg);
+			}
+			&:nth-child(2){
+				transform:translate(0,-7px) rotate(-45deg);
+			}
+		}
+		&:after {
+			animation-name: fadein;
+			animation-duration: 1s;
+			@keyframes fadein{
+		    from{
+			    opacity: 0;
+			    transform: translatesy(20px);
+		    }
+		    to{
+			    opacity: 1;
+			    transform: translatey(0);
+		    }
+			}
+		}
+	}
+	#overlay{
+		z-index: 0;
+		/* z-index: 3; */
+		opacity: 0.3;
+		left: -292px;
+	}
+}

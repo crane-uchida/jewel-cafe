@@ -1,0 +1,37 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+@use "../global/typograpy" as typo;
+@use "../component/arrow" as arrow;
+
+.slick-dots li {
+	width: 16px;
+	margin: 0;
+	button {
+		width: 16px;
+		height: 16px;
+		&:before {
+			width: 16px;
+			height: 16px;
+		}
+	}
+}
+
+.slick-kaitori {
+	margin-top: 20px;
+	li.slick-kaitori-item {
+		margin: 0 4px;
+		box-shadow: 0 0 3px rgb(0 0 0 / 10%);
+		img {
+			width: 100%;
+		}
+		.slick-kaitori-info {
+			padding: 12px;
+			.slick-kaitori-txt {
+				font-size: var.$base-font-size;
+			}
+			.slick-kaitori-detail {
+				font-size: var.$small-font-size;
+			}
+		}
+	}
+}

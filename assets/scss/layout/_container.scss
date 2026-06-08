@@ -1,0 +1,33 @@
+@use "../global/variables" as var;
+
+.section-inner {
+	width: var.$layout-width-inner;
+	margin: 0 auto;
+  @include var.mq-down('lg') {
+    width: var.$width-main;
+  }
+	@include var.mq-range('xxl') {
+    padding: 0 20px;
+  }
+}
+
+.section-inner-700{
+  margin-left: auto;
+  margin-right: auto;
+  @include var.mq-up('lg') {
+    width: 700px;
+  }
+}
+
+.color-box-600{
+  background-color: #FFEBEB;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  @include var.mq-up('lg') {
+    width: 600px;
+  }
+}

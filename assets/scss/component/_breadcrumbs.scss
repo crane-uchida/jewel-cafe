@@ -1,0 +1,113 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+@use "../component/arrow" as arrow;
+
+.breadcrumbs {
+	margin-bottom: 24px;
+	padding: 13px 0 26px;
+	font-size: var.$base-font-size;
+	background-image: url("../images/common/dot-border-4.png");
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	background-size: auto 13px;
+	@include var.mq-down('md'){
+		padding: 0!important;
+	}
+	.section-inner{
+		@include var.mq-down('md'){
+			width: 100%;
+			height: 40px;
+			white-space: nowrap;
+			overflow-x: auto;
+			display: flex;
+			font-size:11px;
+			-ms-overflow-style: none; /*Edgeでスクロールバーを非表示*/
+			scrollbar-width: none; /*Firefoxでスクロールバーを非表示*/
+			&::-webkit-scrollbar{
+				display: none; /*ChromeとSafariでスクロールバーを非表示*/
+			}
+		}
+	}
+	a {
+		display: inline-block;
+		color: var.$color-black;
+		position: relative;
+		padding-right: 24px;
+		span {
+			@include var.mq-up('md'){
+				@include arrow.arrow-right-black;
+				border-right: solid 1px var.$color-black;
+				border-top: solid 1px var.$color-black;
+			}
+		}
+	}
+}
+
+.shop,
+.shop-detail,
+.purchase-page {
+	.breadcrumbs {
+		padding-top: 70px;
+		@include var.mq-up('xl') {
+			padding-top: 120px;
+		}
+	}
+}
+
+
+.breadcrumbs_type2{
+	font-size: 12px;
+	background: #F2F2F2;
+	padding-top:18px;
+	padding-bottom: 7px;
+	@include var.mq-down('md'){
+		background:#C80000;
+		padding:0;
+	}
+	a {
+		display: inline-block;
+		color: var.$color-black;
+		position: relative;
+		padding-right: 24px;
+		@include var.mq-down('md'){
+			color:#fff;
+			line-height: 40px;
+			padding:0 3%;
+			&::before{
+				top: 0;
+				right: -4px;
+				border-width: 20px 0 20px 10px;
+				border-style: solid;
+				border-color: transparent transparent transparent #fff;
+				display: block;
+				position: absolute;
+				content: "";
+			}
+			&::after{
+				top: 0;
+				right: -3px;
+				border-width: 20px 0 20px 10px;
+				border-style: solid;
+				border-color: transparent transparent transparent #C80000;
+				display: block;
+				position: absolute;
+				content: "";
+			}
+		}
+		span {
+			@include var.mq-up('md'){
+				@include arrow.arrow-right-black;
+				border-right: solid 1px var.$color-black;
+				border-top: solid 1px var.$color-black;
+			}
+		}
+	}
+	span{
+		@include var.mq-down('md'){
+			color:#fff;
+			line-height: 40px;
+			padding: 0 3%;
+		}
+	}
+
+}

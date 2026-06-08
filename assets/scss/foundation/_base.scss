@@ -1,0 +1,424 @@
+@use "../global/variables" as var;
+
+@font-face {
+	font-family: 'Original Yu Gothic';
+	src: local('Yu Gothic Medium');
+	font-weight: 100;
+}
+@font-face {
+	font-family: 'Original Yu Gothic';
+	src: local('Yu Gothic Medium');
+	font-weight: 200;
+}
+@font-face {
+	font-family: 'Original Yu Gothic';
+	src: local('Yu Gothic Medium');
+	font-weight: 300;
+}
+@font-face {
+	font-family: 'Original Yu Gothic';
+	src: local('Yu Gothic Medium');
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'Original Yu Gothic';
+	src: local('Yu Gothic Bold');
+	font-weight: bold;
+}
+
+body {
+	/*font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		'Hiragino Sans', 'Noto Sans CJK JP', 'Original Yu Gothic', 'Yu Gothic',
+		sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+		'Noto Sans Emoji';*/
+	font-family: 'Noto Sans JP', sans-serif;
+	color: var.$color-black;
+	line-height: var.$lh-15;
+	letter-spacing: var.$ls-01;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	&:hover {
+		transition: all .3s;
+		opacity: 0.6;
+	}
+}
+
+.only-pc {
+	display: block !important;
+}
+.only-sp {
+	display: none !important;
+}
+@include var.mq-down('lg') {
+	.only-pc {
+		display: none !important;
+	}
+	.only-sp {
+		display: block !important;
+	}
+}
+
+.pc-flex {
+	@include var.mq-up('xl') {
+		display: flex;
+	}
+}
+
+.wrap-inner {
+	overflow: hidden;
+}
+
+// レイアウト汎用クラス
+
+// display設定
+.d-n {
+  display: none;
+}
+.d-i {
+  display: inline;
+}
+.d-b {
+  display: block;
+}
+.d-ib {
+  display: inline-block;
+}
+.d-tb {
+  display: table;
+}
+.d-tbc {
+  display: table-cell;
+}
+.d-tbr {
+  display: table-row;
+}
+.d-f {
+  display: flex;
+}
+.d-if {
+  display: inline-flex;
+}
+.display-t {
+  display: table;
+  width: 100%;
+}
+
+
+// table-layout
+.t-layout-f {
+  table-layout: fixed;
+}
+
+// justify-content設定
+.jc-sb {
+  justify-content: space-between;
+}
+.jc-sa {
+  justify-content: space-around;
+}
+.jc-c {
+	justify-content: center;
+}
+
+// align-items設定
+.ai-c {
+  align-items: center;
+}
+
+// flex子要素の幅指定
+.f-1 {
+  flex: 1;
+}
+
+// vertical設定
+.va-t {
+  vertical-align: top;
+}
+.va-m {
+  vertical-align: middle;
+}
+
+// position
+.pos-a {
+  position: absolute;
+}
+.pos-r {
+  position: relative;
+}
+.pos-f {
+  position: fixed;
+}
+.sticky {
+  position: sticky;
+  z-index: 1000;
+}
+
+// float
+.fl-l {
+  float: left;
+}
+.fl-r {
+  float: right;
+}
+.clear {
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+
+// overflow
+.ov-h {
+  overflow: hidden;
+}
+
+// margin, padding
+$numList: 0, 2, 4, 8, 10, 12, 16, 20, 24, 32, 40, 52, 60, 80;
+$marginList: m, mt, mr, mb, ml, mlr, mtb;
+$paddingList: p, pt, pr, pb, pl, pd, plr, ptb;
+@each $margin in $marginList {
+  @each $num in $numList {
+    @if $margin == m {
+      .#{$margin}-#{$num} { margin: #{$num}px !important; }
+    } @else if $margin == mt {
+      .#{$margin}-#{$num} { margin-top: #{$num}px !important; }
+    } @else if $margin == mr {
+      .#{$margin}-#{$num} { margin-right: #{$num}px !important; }
+    } @else if $margin == mb {
+      .#{$margin}-#{$num} { margin-bottom: #{$num}px !important; }
+    } @else if $margin == ml {
+      .#{$margin}-#{$num} { margin-left: #{$num}px !important; }
+    } @else if $margin == mlr {
+      .#{$margin}-#{$num} { margin-left: #{$num}px !important; margin-right: #{$num}px !important; }
+    } @else if $margin == mtb {
+      .#{$margin}-#{$num} { margin-top: #{$num}px !important; margin-bottom: #{$num}px !important; }
+    }
+  }
+}
+.ml-auto { margin-left: auto !important; }
+.mr-auto { margin-right: auto !important; }
+
+@each $padding in $paddingList {
+  @each $num in $numList {
+    @if $padding == p {
+      .#{$padding}-#{$num} { padding: #{$num}px !important; }
+    } @else if $padding == pt {
+      .#{$padding}-#{$num} { padding-top: #{$num}px !important; }
+    } @else if $padding == pr {
+      .#{$padding}-#{$num} { padding-right: #{$num}px !important; }
+    } @else if $padding == pb {
+      .#{$padding}-#{$num} { padding-bottom: #{$num}px !important; }
+    } @else if $padding == pl {
+      .#{$padding}-#{$num} { padding-left: #{$num}px !important; }
+    } @else if $padding == plr {
+      .#{$padding}-#{$num} { padding-left: #{$num}px !important; padding-right: #{$num}px !important; }
+    } @else if $padding == ptb {
+      .#{$padding}-#{$num} { padding-top: #{$num}px !important;  padding-bottom: #{$num}px !important; }
+    }
+  }
+}
+
+// width
+.w-10 {
+  width: 10%;
+}
+.w-15 {
+  width: 15%;
+}
+.w-20 {
+  width: 20%;
+  @media (max-width: 768px) {
+    width: 25%;
+  }
+}
+.w-25 {
+  width: 25%;
+}
+.w-30 {
+  width: 30%;
+  @media (max-width: 768px) {
+    width: 25%;
+  }
+}
+.w-35 {
+  width: 35%;
+}
+.w-40 {
+  width: 40%;
+  @media (max-width: 768px) {
+    width: 35%;
+  }
+}
+.w-45 {
+  width: 45%;
+}
+.w-48 {
+  width: 48%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-55 {
+  width: 55%;
+}
+.w-60 {
+  width: 60%;
+}
+.w-65 {
+  width: 65%;
+}
+.w-70 {
+  width: 70%;
+}
+.w-80 {
+  width: 80%;
+}
+.w-88 {
+  width: 88px;
+}
+.w-150 {
+  width: 150px;
+}
+$widthPerList: 15, 20, 25, 30, 40, 45, 50, 60, 65, 70, 80, 85, 90, 95, 100;
+  @each $width in $widthPerList {
+      .w-#{$width}per { width: #{$width}#{'%'} }
+  }
+
+.mw-100per {
+  max-width: 100%;
+}
+
+// opacity
+$opacityPerList: 0, 10, 20, 40, 50, 60, 80, 100;
+  @each $opacity in $opacityPerList {
+    .op-#{$opacity}per { opacity: ($opacity/100); }
+  }
+
+// border
+.bd-n {
+  border: none;
+}
+.bdrs-4 {
+  border-radius: 4px;
+}
+.bdrs-50per {
+  border-radius: 50%;
+}
+.bdrs-12 {
+  border-radius: 12px;
+}
+.bd-rs-48 {
+  border-radius: 48px;
+}
+.border-r-circle {
+  border-radius: 100px;
+}
+.bd-t {
+	border-top: 1px solid var.$color-black;
+
+  &:last-child {
+    border-bottom: 1px solid var.$color-black;
+  }
+}
+.bd-b {
+	border-bottom: 1px solid var.$color-black;
+}
+
+// list-style
+.list-style-position-i {
+  list-style-position: inside;
+}
+.pl1em-ti1em {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+// vertical-align
+.v-align-middle {
+  vertical-align: middle;
+}
+
+//z-index
+$z-indexList: 0, 1, 2, 3, 4, 5, 10, 20, 30, 50, 100, 9999;
+  @each $z-index in $z-indexList {
+      .z-idx-#{$z-index} { z-index: #{$z-index} }
+  }
+
+// iPhone用拡大回避設定
+.touch-action-m {
+  touch-action: manipulation;
+}
+.scale-tr-72 {
+  font-size: 1.6rem;
+  line-height: 1;
+  transform-origin: top right;
+  transform: scale(0.72);
+}
+
+//cursor
+.cur-p {
+  cursor: pointer;
+  &:hover {
+    opacity: .8;
+  }
+}
+.cur-d {
+  cursor: default;
+}
+
+
+//あとで修正する
+.flex.-wrap {
+	flex-wrap: wrap;
+}
+.flex {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.sp{
+  @media screen and (max-width: 767px){
+    display: block;
+  }
+  @media screen and (min-width: 768px){
+    display: none;
+  }
+}
+.pc{
+  @media screen and (max-width: 767px){
+    display: none;
+  }
+  @media screen and (min-width: 768px){
+    display: block;
+  }
+}
+@media (min-width: 751px) {
+  a[href*="tel:"] {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+  }
+}
+.marker{
+  background: linear-gradient(transparent 60%, yellow 30%);
+}
+
+textarea{
+  @media (min-width: 751px){
+    field-sizing: content;
+    min-height: 80px;
+  }
+}
+
+img{
+  height: auto;
+}

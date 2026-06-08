@@ -1,0 +1,147 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+@use "../global/typograpy" as typo;
+
+//title
+.section-ja-title {
+  margin: 12px 0 20px;
+  color: var.$color-black;
+  font-size: typo.rem(20);
+  letter-spacing: var.$ls-01;
+  @include var.mq-up("xl") {
+    margin: 40px 0 50px;
+    font-size: typo.rem(36);
+    letter-spacing: var.$ls-05;
+  }
+}
+
+.section-en-title {
+  position: relative;
+  margin-bottom: 8px;
+  font-size: typo.rem(26);
+  font-weight: normal;
+  text-align: center;
+  letter-spacing: var.$ls-05;
+}
+
+.slash-title {
+  @include mixin.slash-title;
+}
+
+.common-ttl {
+  min-height: auto;
+  max-width: 1000px;
+  padding: 30px 0;
+  margin: 0 auto 15px;
+  background-image: url("../images/common/common-ttl-bg.png");
+  background-size: 100%;
+  letter-spacing: var.$ls-11;
+  @include var.mq-up("xl") {
+    max-width: 700px;
+    min-height: 279px;
+    background-position: center;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .section-inner {
+    padding-left: 20px;
+    width: 90vw;
+    .common-ttl-sub {
+      font-size: var.$small-font-size;
+      @include var.mq-up("xl") {
+        font-size: typo.rem(23);
+      }
+    }
+    .common-ttl-main {
+      font-size: typo.rem(20);
+      @include var.mq-up("xl") {
+        font-size: typo.rem(42);
+      }
+      .marker-yellow {
+        background: linear-gradient(transparent 55%, #ffff00 0%);
+        height: 27px;
+        display: inline-block;
+        @include var.mq-up("xl") {
+          background: linear-gradient(transparent 70%, #ffff00 0%);
+          height: 55px;
+        }
+      }
+    }
+    .common-ttl-en {
+      font-size: var.$small-font-size;
+    }
+  }
+}
+
+.red-border-left-ttl {
+  margin-bottom: 20px;
+  padding: 4px 12px;
+  border-left: 5px solid var.$color-red;
+}
+
+.mincho-border-ttl {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  color: var.$color-red;
+  font-size: typo.rem(20);
+  font-weight: 400;
+  @include mixin.gradation-red-border;
+  @include var.mq-up("xl") {
+    font-size: 40px;
+  }
+}
+
+.ttl-jc-logo {
+  width: 72px;
+  @include var.mq-up("xl") {
+    width: 120px;
+  }
+}
+
+.ttl-box-red {
+  display: block;
+  margin-bottom: 12px;
+  padding: 12px 12px;
+  font-size: typo.rem(16);
+  color: var.$color-white;
+  background: var.$color-red;
+  border-radius: 4px;
+}
+
+.ttl-404 {
+  margin: 104px 0 20px;
+  color: var.$color-black;
+  font-size: typo.rem(20);
+  letter-spacing: var.$ls-01;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include var.mq-up("xl") {
+    margin: 120px 0 50px;
+    font-size: typo.rem(36);
+    letter-spacing: var.$ls-05;
+  }
+
+  .ttl-404-icon {
+    max-width: 30%;
+    margin: 0 -20px;
+  }
+}
+
+.title_type2{
+  color: var.$color-red;
+  font-size:28px;
+  font-weight: bold;
+  text-align: center;
+  @include var.mq-up("xl"){
+    font-size: 36px;
+  }
+}
+.contents_type2{
+  padding-top: 60px;
+  @include var.mq-up("xl") {
+    padding-top: 80px;
+  }
+}
