@@ -1,7 +1,8 @@
+@use "sass:math";
 @use "../global/variables" as var;
 
 @function rem($px) {
-  @return ($px / 16) * 1rem;
+  @return math.div($px, 16) * 1rem;
 }
 
 //color-code
