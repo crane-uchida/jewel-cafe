@@ -1,0 +1,217 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+@use "../global/typograpy" as typo;
+@use "../component/arrow" as arrow;
+
+.form-page {
+	.section-ja-title {
+		padding-top: 73px;
+		@include var.mq-up('xl') {
+			padding-top: 0;
+		}
+	}
+}
+
+.form-top-text {
+	padding: 25px 30px;
+	background: var.$color-beige;
+	font-size: var.$small-font-size;
+	@include var.mq-up('xl') {
+		font-size: var.$base-font-size;
+	}
+}
+
+.form-flow {
+	margin-top: 49px;
+	ul {
+		justify-content: space-around;
+		li {
+			position: relative;
+			width: 100%;
+			padding: 8px 0;
+			text-align: center;
+			font-weight: bold;
+			background: var.$color-pink;
+			&.flow-active {
+				color: var.$color-white;
+				background: var.$color-red;
+				&:after {
+					position: absolute;
+					top: 0;
+					right: -15px;
+					width: 0;
+					height: 0;
+					border-left: 15px solid var.$color-red;
+					border-top: 20px solid transparent;
+					border-bottom: 20px solid transparent;
+					content: "";
+					z-index: 1;
+				}
+			}
+			&:nth-of-type(2),
+			&:nth-of-type(3) {
+				&.flow-active {
+					padding-left: 8px;
+					&:before {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 0;
+						height: 0;
+						border-left: 15px solid var.$color-pink;
+						border-top: 20px solid transparent;
+						border-bottom: 20px solid transparent;
+						content: "";
+						z-index: 1;
+					}
+				}
+			}
+			&:nth-of-type(3) {
+				&:after {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+.form {
+	margin-bottom: 94px;
+	.form-list {
+		.form-item {
+			padding: 20px 0;
+			border-bottom: 1px solid var.$color-gray;
+			@include var.mq-up('xl') {
+				padding: 40px 0;
+			}
+			label {
+				vertical-align: middle;
+			}
+			dt {
+				margin-bottom: 8px;
+				font-size: typo.rem(16);
+				font-weight: bold;
+				.input-required {
+					margin: -6px 0 0 4px;
+					padding: 0 4px;
+					font-size: typo.rem(10);
+					color: var.$color-white;
+					background: var.$color-red;
+					border-radius: 2px;
+				}
+			}
+			input,
+			select,
+			textarea {
+				padding: 8px;
+				border: 1px solid var.$color-gray;
+				@include var.mq-up('xl') {
+					padding: 12px;
+				}
+				&::placeholder {
+					color: var.$color-gray;
+				}
+			}
+			input {
+				font-size: var.$base-font-size;
+			}
+			input[type=radio],
+			input[type=check] {
+				margin: -2px 4px 0 0;
+			}
+			.form-file {
+				margin-right: 8px;
+				padding: 4px 12px;
+				font-size: var.$base-font-size;
+				color: var.$color-black;
+				background: var.$color-beige;
+				border: 1px solid var.$color-gray;
+				border-radius: 2px;
+			}
+			select {
+				background: var.$color-beige;
+				border-radius: 2px;
+			}
+			dd {
+				img {
+					max-width: 328px;
+					margin-top: 20px;
+				}
+			}
+		}
+		p.form-att {
+			margin-top: 8px;
+			font-size: var.$small-font-size;
+			@include var.mq-up('xl') {
+				font-size: var.$base-font-size;
+			}
+			a {
+				color: var.$color-red;
+				font-weight: bold;
+				text-decoration: underline;
+			}
+		}
+	}
+	.form-thanks {
+		@include mixin.width-100vw;
+		padding: 55px 0;
+		background: var.$color-beige;
+		.sofia {
+			font-size: typo.rem(28);
+			font-weight: bold;
+		}
+	}
+}
+
+.property-form-flow {
+	margin-top: 20px;
+}
+
+.property-form {
+	.form-list {
+		.form-list-ttl {
+			display: flex;
+			margin-top: 20px;
+			font-size: typo.rem(18);
+			font-weight: bold;
+			align-items: center;
+			.border {
+				background-color: var.$color-black;
+			  height: 1px;
+			  margin-left: 20px;
+			  width: 70%;
+			}
+		}
+		.form-item {
+			padding: 20px 0 0 0;
+			border: none;
+		}
+	}
+}
+.form-postal {
+
+  p:first-child {
+    margin-right: 4px;
+  }
+
+  p:last-child {
+    
+    display: flex;
+    align-items: center;
+
+    .postal-code {
+      input {
+        width: 22.4vw;
+        max-width: 84px;
+      }
+      
+    }
+
+    .prefecture {
+      select {
+        width: 35.4vw;
+        max-width: 133px;
+      }
+    }
+  }
+}

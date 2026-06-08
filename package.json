@@ -1,0 +1,30 @@
+{
+  "name": "jewelcafe_replace",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/onecourse-jp/jewelcafe_replace.git",
+  "author": "yuki <64077619+code-cuisine@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
+    "autoprefixer": "^10.2.5",
+    "babel-loader": "^8.2.2",
+    "browser-sync": "^2.26.14",
+    "css-declaration-sorter": "^6.0.2",
+    "css-loader": "^5.2.4",
+    "fibers": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-mode": "^1.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-sass": "^4.1.0",
+    "postcss": "^8.2.14",
+    "postcss-loader": "^5.2.0",
+    "sass": "^1.32.12",
+    "sass-loader": "^11.0.1",
+    "webpack": "^5.36.2",
+    "webpack-stream": "^6.1.2"
+  }
+}

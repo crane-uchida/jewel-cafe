@@ -1,0 +1,690 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+@use "../global/typograpy" as typo;
+@use "../component/arrow" as arrow;
+
+//search
+.search-shop {
+	margin-bottom: 3em;
+	color: var.$color-white;
+	font-weight: bolder;
+	background: rgb(230, 71, 120);
+	background: -moz-linear-gradient(135deg, rgba(230, 71, 120, 1) 0%, rgba(190, 13, 20, 1) 100%);
+	background: -webkit-linear-gradient(135deg, rgba(230, 71, 120, 1) 0%, rgba(190, 13, 20, 1) 100%);
+	background: linear-gradient(135deg, rgba(230, 71, 120, 1) 0%, rgba(190, 13, 20, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e64778",endColorstr="#be0d14",GradientType=1);
+
+	//sp-only width 100vw
+	@include mixin.width-100vw;
+	@include var.mq-up('xl') {
+		width: 100%;
+	}
+	.search-shop-bg {
+		background-image: url("../images/common/bg_shops.png");
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+	.container {
+		width: var.$width-main;
+		margin: 0 auto;
+		background-image: url("../images/common/bg_japan_shops.png");
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+		padding-bottom: 10vw;
+		overflow: hidden;
+		@include var.mq-up('xl') {
+			width: 100%;
+		}
+	}
+	.search-shop-en {
+		padding: 12px 0;
+		justify-content: flex-start;
+		.border {
+			width: 25%;
+			height: 1px;
+			background-color: var.$color-white;
+			margin-left: 20px;
+		}
+	}
+	.shop-ja-ttl {
+		margin: 15px 0 20px;
+		font-size: typo.rem(16);
+		@include var.mq-up('xl') {
+			margin: 0 0 20px;
+			text-align: center;
+			font-size: typo.rem(20);
+			br {
+				display: none;
+			}
+		}
+	}
+	.search-shop-list {
+		.wrap a {
+			position: relative;
+			box-shadow: 2px 2px 3px rgb(119 10 10 / 40%);
+			padding: 8px 12px;
+	    background-color: var.$color-white;
+	    border-radius: 4px;
+	    color: var.$color-black !important;
+			font-weight: normal;
+	    margin-bottom: 5px;
+			&:after {
+				@include arrow.arrow-right-black;
+			}
+		}
+		position: relative;
+		overflow: hidden;
+		.area_list {
+			opacity: 1;
+			transition: all 0.3s;
+			transition-delay: 0.2s;
+		}
+		&.selecting .area_list {
+			opacity: 0;
+			transition: all 0.3s;
+		}
+		.area_list .ico_arrow:before {
+			display: none;
+		}
+		.shopsArea .area_list .ico_arrow:before {
+			display: block;
+		}
+		.prefs {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			transform: translateX(100%);
+			opacity: 0;
+			z-index: 2;
+			transition: all 0.3s;
+		}
+		&.selecting .prefs {
+			transform: translateX(0);
+			opacity: 1;
+			[data-area-wrap] {
+				opacity: 0;
+				display: none;
+			}
+		}
+		.prefs {
+			.wrap {
+				display: none;
+			}
+			.areaback {
+				cursor: pointer;
+				transition: all 0.3s;
+				margin-top: 8px;
+				display: inline-block;
+			}
+		}
+		.search-shops .prefback {
+			cursor: pointer;
+			transition: all 0.3s;
+			margin-top: 1em;
+			display: inline-block;
+		}
+		.prefs .areaback:hover,
+		.search-shops .prefback:hover {
+			opacity: 0.6;
+		}
+		.prefs .areaback .ico_arrow,
+		.search-shops .prefback .ico_arrow {
+			position: relative;
+			padding-right: 0;
+			padding-left: 1.5em;
+			font-size: var.$small-font-size;
+			&:before {
+				@include arrow.arrow-left-white;
+			}
+		}
+		.prefs .areaback .ico_arrow:before,
+		.search-shops .prefback .ico_arrow:before {
+			border-color: var.$color-white;
+			right: auto;
+			left: 0;
+		}
+		a {
+			padding: 13px;
+			background-color: var.$color-white;
+			border-radius: 4px;
+			color: var.$color-black !important;
+			font-size: var.$small-font-size;
+			margin-bottom: 5px;
+		}
+		.search-shops {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			transform: translateX(100%);
+			opacity: 0;
+			z-index: 3;
+			transition: all 0.3s;
+			.wrap {
+				display: none;
+				a {
+					font-size: var.$small-font-size;
+					color: var.$color-black !important;
+				}
+			}
+		}
+		.shopsArea .wrap a {
+			font-size: var.$small-font-size;
+			color: var.$color-black !important;
+		}
+		.search-shops .wrap a .ico_arrow,
+		.shopsArea .wrap a .ico_arrow {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			height: 2.5em;
+		}
+		.search-shops .wrap a .ico_arrow:before,
+		.shopsArea .wrap a .ico_arrow:before {
+			border-color: var.$color-red;
+		}
+		.search-shops .noshops {
+			padding: 2em 0;
+			font-size: 120%;
+			width: auto;
+		}
+		&.selecting {
+			&.selecting_shop .search-shops {
+				transform: translateX(0);
+				opacity: 1;
+			}
+			.prefs {
+				transition: all 0.3s;
+				transition-delay: 0;
+			}
+			&.selecting_shop .prefs {
+				opacity: 0;
+			}
+		}
+	}
+}
+@media screen and (min-width: 751px) {
+	.search-shop {
+		.container {
+			padding: 68px 46px 40px;
+			background-size: auto 110%;
+		}
+		.search-shop-en {
+			justify-content: flex-start;
+			font-size: var.$xs-font-size;
+			@include var.mq-up('xl') {
+				font-size: typo.rem(16);
+			}
+		}
+		.main {
+			margin: 1em 0;
+			font-size: 3rem;
+		}
+		.search-shop-list .wrap {
+			justify-content: flex-start;
+			a {
+				width: 32.8%;
+				font-size: var.$base-font-size;
+				margin: 0.26%;
+				padding: 12px;
+			}
+		}
+	}
+}
+@media screen and (max-width: 750px) {
+	.search-shop .main {
+		font-size: 4.5vw;
+		letter-spacing: 3px;
+	}
+}
+/*--------------------------------------------------------------------*/
+/*--------------------------------------------------------------------*/
+/*--------------------------------------------------------------------*/
+@media screen and (min-width: 751px) {}
+@media screen and (max-width: 750px) {
+	.search-shop .search-shop-list {
+		.search-shops .wrap a,
+		.shopsArea .wrap a {
+			font-size: 3vw;
+		}
+	}
+}
+/*--------------------------------------------------------------------*/
+.search-shop-flex {
+	&.-wrap {
+		flex-wrap: wrap;
+	}
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+
+	&.c2 > * {
+		width: 48%;
+		box-sizing: border-box;
+	}
+}
+
+//store
+.store {
+	background: var.$color-pink;
+  .section-inner {
+		//display: none; //仕様決まるまで一旦非表示
+    @include var.mq-up('xl') {
+      padding: 41px 37px 52px 32px;
+    }
+  }
+  .store-select {
+    @include var.mq-up('xl') {
+      li {
+        margin-bottom: 16px;
+        a {
+          width: 328px;
+        }
+      }
+    }
+    img.store-map-bg {
+			display: block;
+      width: 100%;
+			margin: 0 auto 220px;
+			//padding-bottom: 180px;
+    }
+  }
+	.section-ja-title {
+		position: absolute;
+		left: 0;
+		text-align: left;
+		span {
+			display: block;
+			font-size: typo.rem(22);
+		}
+	}
+}
+
+//easy search box
+.search {
+  padding: 34px 0 28px;
+  @include var.mq-up('xl') {
+    padding: 85px 0 45px;
+  }
+  .search-box {
+    background: var.$color-gray;
+    padding: 30px;
+    @include var.mq-up('xl') {
+      display: flex;
+      justify-content: space-between;
+      padding: 38px 90px;
+    }
+    .search-box-item {
+      width: 100%;
+
+      p {
+        font-size: 15px;
+        text-align: center;
+        @include var.mq-up('xl') {
+          font-size: 18px;
+        }
+      }
+      
+      .search-box-form {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        input {
+          width: calc(100% - 42px);
+          padding: 20px 16px;
+          height: 42px;
+          border: none;
+          &::placeholder {
+            color: #C8C8C8;
+          }
+          @include var.mq-up('xl') {
+            width: calc(100% - 62px);
+            height: 62px;
+          }
+        }
+        button {
+          width: 42px;
+          height: 42px;
+          border: none;
+          background: var.$color-red;
+          position: relative;
+          @include var.mq-up('xl') {
+            width: 62px;
+            height: 62px;
+          }
+          &::before {
+            content: "";
+            position: absolute;
+            background: url(../images/icon/search-icon.svg) no-repeat center center / cover;
+            width: 14px;
+            height: 14px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            @include var.mq-up('xl') {
+              width: 21px;
+              height: 21px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .search-popular-tag {
+    margin: 28px 0;
+    @include var.mq-up('xl') {
+      margin: 22px 0 14px;
+    }
+    ul {
+      display: flex;
+      li + li{
+        margin-left: 10px
+      }
+    }
+  }
+  .search-list {
+    ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-gap: 8px;
+			@include var.mq-range('xs') {
+				grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+			}
+      @include var.mq-up('xl') {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 16px;
+      }
+      li {
+        display: flex;
+        padding: 15px;
+        flex-direction: column;
+        border: 1px solid #8f8f8f;
+        border-radius: 4px;
+        background: var.$color-white;
+				@include var.mq-range('xs') {
+					padding: 12px;
+				}
+        @include var.mq-up('xl') {
+          //width: 241px;
+          padding: 20px 40px;
+        }
+        .search-list-content {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          .search-list-tag {
+            margin: 12px 0;
+            font-size: var.$base-font-size;
+          }
+          .search-list-txt {
+            margin-bottom: 12px;
+            font-size: var.$small-font-size;
+            @include var.mq-up('xl') {
+              font-size: var.$base-font-size;
+            }
+          }
+          .search-item-price {
+            margin-top: auto;
+            .search-item-price-ttl {
+              padding: 0 4px;
+            }
+            .search-item-txt {
+              font-size: typo.rem(22);
+              letter-spacing: var.$ls-05;
+              white-space: nowrap;
+              @include var.mq-up('xl') {
+                font-size: typo.rem(26);
+              }
+              span {
+                font-size: var.$small-font-size;
+              }
+            }
+          }
+        }
+        img {
+          display: block;
+          width: 83px;
+          margin: 0 auto 12px;
+          @include var.mq-up('xl') {
+            width: 122px;
+            margin: 0 auto 20px;
+          }
+        }
+      }
+    }
+  }
+  .search-link {
+    margin-top: 22px;
+		@include var.mq-down('md') {
+      @include mixin.width-100vw;
+    }
+    @include var.mq-up('xl') {
+      margin-top: 32px;
+    }
+    ul {
+      li {
+        + li {
+          margin-left: 18px;
+          @include var.mq-up('xl') {
+            margin-left: 14px;
+          }
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+//shops-search-shop
+.shops-search-shop {
+	width: 100%;
+	background: none;
+	margin-bottom: 0;
+	.search-shop-list {
+		height: 180px;
+		@include var.mq-up('xl') {
+			height: 120px;
+		}
+		.wrap {
+			a {
+				@include mixin.red-bdr-btn;
+				box-shadow: none;
+				&:after {
+					@include arrow.arrow-right-red;
+				}
+			}
+		}
+		span {
+			color: var.$color-red;
+		}
+		.prefs .areaback .ico_arrow:before,
+		.search-shops .prefback .ico_arrow:before {
+			border-color: var.$color-red;
+			right: auto;
+			left: 0;
+		}
+		.search-shops .noshops {
+			color: var.$color-red;
+		}
+	}
+}
+
+//shop search
+.store-panel {
+  display:none;
+	&.is-active {
+	  display:block;
+	}
+}
+
+.store-area-group {
+	.store-area-box {
+		position: absolute;
+		padding: 20px 26px 24px 25px;
+		background: var.$color-white;
+		box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+		border-radius: 4px;
+		.store-area-ttl {
+			padding-bottom: 8px;
+			margin-bottom: 4px;
+			border-bottom: 2px solid var.$color-gray;
+		}
+		.store-area-tab {
+			max-width: 85px;
+			border-bottom: 1px solid var.$color-gray;
+			a {
+				position: relative;
+				display: block;
+				padding: 4px 0;
+				color: var.$color-black;
+				font-weight: bold;
+				&:after {
+					@include arrow.arrow-bottom-black;
+				}
+			}
+		}
+		.store-area-box-column2,
+		.store-area-box-column3 {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			.store-area-tab {
+				width: 45%;
+			}
+		}
+		.store-area-box-column2 {
+			width: 190px;
+		}
+		.store-area-box-column3 {
+			width: 294px;
+			.store-area-tab {
+				width: 30%;
+			}
+		}
+	}
+	.hokkaido {
+		top: 5%;
+		right: 39%;
+	}
+	.tohoku {
+		top: 31%;
+		right: -2%;
+	}
+	.kanto {
+		right: -2%;
+		bottom: 10%;
+	}
+	.chubu {
+		right: 3%;
+		bottom: -19%;
+	}
+	.kansai {
+		right: 43%;
+		bottom: -19%;
+	}
+	.kyusyu {
+		left: 0;
+		bottom: -23.3%;
+	}
+	.chugoku {
+		top: 27.6%;
+		left: 19%;
+	}
+	.okinawa {
+		top: 36.5%;
+		left: 0;
+	}
+}
+
+.store-list-group {
+	padding: 31px 50px 38px;
+	background: #D0D0D1;
+	.store-panel {
+		.store-panel-ttl {
+			margin-bottom: 8px;
+			font-size: typo.rem(20);
+			text-align: center;
+		}
+		.store-panel-box {
+			display: flex;
+			padding: 18px 30px;
+			background: var.$color-white;
+			.store-panel-box-list {
+				width: 80%;
+				//border-left: 1px solid var.$color-black;
+			}
+			p {
+				width: 20%;
+				font-weight: bold;
+			}
+			.border {
+				background: var.$color-black;
+				width: 1px;
+				height: auto;
+			}
+			table {
+				width: 100%;
+				margin-left: 20px;
+				tr {
+					td {
+						padding: 0 0 4px;
+						a {
+							position: relative;
+							padding-right: 20px;
+							color: var.$color-black;
+							font-size: var.$base-font-size;
+							font-weight: bold;
+							&:after {
+								@include arrow.arrow-right-black;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.map-pin-icon {
+	img {
+		position: absolute;
+		&.hokkaido-map-pin {
+			top: 13%;
+			right: 11%;
+		}
+		&.tohoku-map-pin {
+			top: 42%;
+			right: 23%;
+		}
+		&.kanto-map-pin {
+			bottom: 26%;
+			right: 23%;
+		}
+		&.chubu-map-pin {
+			bottom: 4%;
+			left: 45%;
+		}
+		&.kansai-map-pin {
+			bottom: 4%;
+			left: 33%;
+		}
+		&.kyusyu-map-pin {
+			bottom: 4%;
+			left: 4%;
+		}
+		&.chugoku-map-pin {
+			bottom: 23.5%;
+			left: 16%;
+		}
+		&.okinawa-map-pin {
+			bottom: 34%;
+			left: 1%;
+		}
+	}
+}

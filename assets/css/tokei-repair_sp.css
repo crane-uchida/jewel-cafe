@@ -1,0 +1,2364 @@
+@charset 'utf-8';
+
+/* **********************************************************************
+ *
+ *       Title:   Site-Shokunin CMS sp.css
+ *       Notes:   Hand-crafted by WebLab Corporation in Tokyo.
+ *
+ ********************************************************************** */
+
+
+.footer-shop-nav{
+    display: none;
+}
+
+/* トップスライドショースタイル設定
+======================================================= */
+
+.main-safe {background: #fff; text-align: center;}
+.main-safe div {width: 100%; height: 0px; padding: 65% 0 0 0; background: url(../images/shop/tokei-repair/main_safe_sp.jpg) 50% 0 no-repeat; background-size: 100% auto;}
+.main-shop {background: #fff; text-align: center;}
+.main-shop div {width: 100%; height: 0px; padding: 65% 0 0 0; background: url(../images/shop/tokei-repair/main_shop_sp.jpg) 50% 0 no-repeat; background-size: 100% auto;}
+.main-delivery {background: #fff; text-align: center;}
+.main-delivery div {width: 100%; height: 0px; padding: 65% 0 0 0; background: url(../images/shop/tokei-repair/main_delivery_sp.jpg) 50% 0 no-repeat; background-size: 100% auto;}
+
+.main01 {
+    background: #342617;
+    text-align: center;
+}
+.main01 div {
+    width: 100%;
+    height: 0px;
+    padding: 65% 0 0 0;
+    background: url(../images/shop/tokei-repair/main01.jpg) 50% 0 no-repeat;
+    background-size: 100% auto;
+}
+.main02 {
+    text-align: center;
+}
+.main02 div {
+    width: 100%;
+    height: 0px;
+    padding: 65% 0 0 0;
+    background: url(../images/shop/tokei-repair/main02.jpg) 50% 0 no-repeat;
+    background-size: 100% auto;
+}
+.main03 {
+    background: #fff;
+    text-align: center;
+}
+.main03 div {
+    width: 100%;
+    height: 0px;
+    padding: 65% 0 0 0;
+    background: url(../images/shop/tokei-repair/main03.jpg) 50% 0 no-repeat;
+    background-size: 100% auto;
+}
+.main04 {
+    text-align: center;
+}
+.main04 div {
+    width: 100%;
+    height: 0px;
+    padding: 65% 0 0 0;
+    background: url(../images/shop/tokei-repair/main04.jpg) 50% 0 no-repeat;
+    background-size: 100% auto;
+}
+
+#bxslider {
+    padding: 0 0 10px;
+    background: #f0eeeb;
+}
+
+#bxslider ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: left;
+}
+
+.bx-viewport {
+    margin: 0 0 10px;
+}
+
+#bxslider .bx-controls-direction {
+    display: none;
+}
+
+#bxslider .bx-controls .bx-pager {
+    text-align: center;
+}
+#bxslider .bx-controls .bx-pager-item {
+    display: inline;
+}
+#bxslider .bx-controls .bx-pager-item a {
+    display: inline-block;
+    overflow: hidden;
+    width: 14px;
+    height: 0 !important;
+    margin: 0 6px;
+    padding-top: 14px;
+    outline: medium none;
+}
+html.ie #bxslider .bx-controls .bx-pager-item a {
+    display: inline;
+}
+#bxslider .bx-controls .bx-pager-item a {
+    background: url(../images/shop/tokei-repair/main_list.png) no-repeat 0 0;
+}
+#bxslider .bx-controls .bx-pager-item a.active {
+    background: url(../images/shop/tokei-repair/main_list_ov.png) no-repeat 0 0;
+}
+
+
+/* トップページスタイル設定
+======================================================= */
+
+.top_main {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+}
+
+.top_titbox {
+    padding: 0 0 10px;
+    background: url(../images/shop/tokei-repair/line_toph2.gif) 0 bottom repeat-x;
+    margin: 0 0 10px;
+}
+
+.top_titbox h2 {
+    float: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.top_titbox h2 span {
+    font-size: 1.0rem;
+    color: #8e785e;
+    font-family: 'Sorts Mill Goudy', serif;
+    padding: 0 0 0 10px;
+    font-weight: normal;
+}
+
+.top_titbox p {
+    display: none;
+    float: right;
+    text-align: right;
+    font-size: 12px;
+    font-size: 1.2rem;
+    padding: 5px 0 0 0;
+}
+
+.top_titbox p a {
+    background: url(../images/shop/tokei-repair/arw_btn.png) 0 50% no-repeat;
+    padding: 0 0 0 15px;
+}
+.top_titbox p a,
+.top_titbox p a:visited {
+    color: #333;
+}
+
+/* 超高価買取速報 */
+
+.top_itemlist {
+    width: 100%;
+    overflow: hidden;
+}
+
+.top_itemlist ul {
+    width: 102%;
+    overflow: hidden;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    *zoom: 1;
+}
+
+.top_itemlist li {
+    float: left;
+    width: 48%;
+    margin-right: 2%;
+    padding-bottom: 15px;
+    *zoom: 1;
+}
+
+.top_itemlist li .inr {
+    border: 1px solid #e6e6e6;
+}
+.top_itemlist li p {
+    font-size: 11px;
+    font-size: 1.1rem;
+    padding: 10px;
+}
+.top_itemlist li p.price {
+    background: #8e785e;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    font-size: 1.4rem;
+    padding: 3px 0;
+    color: #fff;
+}
+.top_itemlist li p.who {
+    background: #f7f6f5;
+    border-bottom: 1px solid #e6e6e6;
+    text-align: center;
+    font-size: 11px;
+    font-size: 1.1rem;
+    padding: 3px 0;
+}
+
+/* 国内最高額宣言! */
+.declaration {
+    background: #3e3021 url(../images/shop/tokei-repair/bg_declaration.jpg) 0 0 no-repeat;
+    background-size: 100% auto;
+    margin: 0 0 40px;
+    padding: 0 0 3%;
+}
+
+.declaration .head_txt {
+    padding: 25% 3% 0 3%;
+    color: #fff;
+    margin: 0 0 20px;
+}
+.declaration .point {
+    background: #fff;
+    width: 94%;
+    margin: 0 auto;
+}
+.declaration .point h3 {
+    background: #8e785e;
+    text-align: center;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 10px 0;
+}
+.declaration .point ul {
+    width: 92%;
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 15px 0 5px;
+    overflow: hidden;
+}
+.declaration .point ul li {
+    width: 100%;
+    margin: 0 0 10px 0;
+    padding: 0 0 10px;
+    border-bottom: 1px dashed #e6e6e6;
+}
+.declaration .point ul li:last-child {
+    border-bottom: none;
+    margin: 0;
+}
+.declaration .point ul li h4 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #8e785e;
+    line-height: 1.3;
+    margin: 0 0 5px;
+}
+.declaration .point ul li h4 br {
+    display: none;
+}
+.declaration .point ul li p {
+    font-size: 11px;
+    font-size: 1.1rem;
+}
+
+/* Web査定 */
+.webassessment {
+    background: #f0eeeb url(../images/shop/tokei-repair/bg_webassessment.jpg) 93% 55% no-repeat;
+    background-size: 30% auto;
+    padding: 15px;
+    margin: 0 0 40px;
+}
+.webassessment .catch {
+    font-size: 1.4rem;
+    margin: 0 0 10px;
+}
+.webassessment .texts {
+    width: 65%;
+}
+.webassessment .btn a {
+    display: block;
+    width: 100%;
+    background: #a51d3a;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 0;
+}
+.webassessment .btn a span {
+    display: block;
+    background: url(../images/shop/tokei-repair/arw_hnav.png) 95% 50% no-repeat;
+    padding: 0 0 0 0;
+}
+.webassessment .ttl{font-size: 2rem; line-height: 1.4; color:#a51d3a; font-weight: bold; margin-bottom: 15px;}
+
+
+/* 来店案内 */
+.counter_guide {
+    background: #f0eeeb;
+    padding: 10px;
+    margin: 0 0 40px;
+}
+.counter_guide .inner {
+    background: #fff;
+    padding: 3px;
+    box-shadow:0px 0px 5px 0px #ccc;
+    -moz-box-shadow:0px 0px 5px 0px #ccc;
+    -webkit-box-shadow:0px 0px 5px 0px #ccc;
+}
+.counter_guide .inr_box {
+    border: 1px solid #f0eeeb;
+    padding: 15px;
+}
+.counter_guide .info-r {
+    width: 100%;
+}
+.counter_guide h3 {
+    background: url(../images/shop/tokei-repair/dot_bar.gif) 0 bottom repeat-x;
+    font-size: 1.6rem;
+    padding: 10px 0 10px;
+    margin: 0 0 20px;
+    font-weight: bold;
+}
+.counter_guide p {
+    font-size: 11px;
+    font-size: 1.1rem;
+}
+.counter_guide dl {
+    clear: both;
+    padding: 10px 0 15px;
+    overflow: hidden;
+}
+.counter_guide dt {
+    width: 100%;
+    font-size: 13px;
+    font-size: 1.3rem;
+    color: #8e785e;
+    margin: 0 0 10px;
+}
+.counter_guide dd {
+    width: 100%;
+    font-size: 14px;
+    font-size: 1.4rem;
+}
+.counter_guide dd a {
+    display: block;
+    background: #8e785e;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 0;
+}
+.counter_guide dd a span {
+    background: url(../images/shop/tokei-repair/arw_hnav.png) 0 50% no-repeat;
+    padding: 0 0 0 15px;
+}
+.counter_guide .tar {
+    text-align: left !important;
+}
+
+/* 必要書類 */
+.needdocs {
+    border: 10px solid #f0eeeb;
+    border-top: 10px solid #f0eeeb;
+}
+.needdocs h3 {
+    background: #f0eeeb;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0 0 10px;
+}
+.needdocs .inner {
+    overflow: hidden;
+    padding: 15px;
+}
+
+.top_side {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* ブランドショットが選ばれる理由 */
+
+.top_reason {
+    background: url(../images/shop/tokei-repair/bg_top_reason.gif) 0 0;
+    background-size: 100% auto;
+    padding: 0;
+}
+.top_reason .inner {
+    background-image: url(../images/shop/tokei-repair/bg_reason_inner_l.png) ,url(../images/shop/tokei-repair/bg_reason_inner_r.png);
+    background-size: 40%,34%;
+    background-position: left top,right top;
+    background-repeat:no-repeat, no-repeat;
+    text-align: center;
+    padding: 8% 0 3%;
+}
+
+.top_reason h2 {
+    font-size: 18px;
+    font-size: 1.8rem;
+    margin: 0 0 20px;
+    color: #fff;
+}
+.top_reason h2 span {
+    display: block;
+    font-size: 10px;
+    font-size: 1.0rem;
+    color: #d8bd8e;
+    font-family: 'Sorts Mill Goudy', serif;
+    padding: 0 0 0 10px;
+}
+
+.reasonlist {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.reasonlist ul {
+    width: 90%;
+    overflow: hidden;
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    *zoom: 1;
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+
+.reasonlist li {
+    width: 100%;
+    margin-right: 0;
+    padding-bottom: 5%;
+    *zoom: 1;
+}
+
+.reasonlist li .inr {
+    background: #fff;
+    padding: 15px;
+    text-align: left;
+}
+
+.reasonlist li p {
+    font-size: 11px;
+    font-size: 1.1rem;
+}
+
+.reasonlist li p.tit {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+.reasonlist li p.tit.rea01 {
+    background: url(../images/shop/tokei-repair/ico_rea01.gif) 0 0 no-repeat;color: #8e785e;
+}
+.reasonlist li p.tit.rea02 {
+    background: url(../images/shop/tokei-repair/ico_rea02.gif) 0 0 no-repeat;color: #8e785e;
+}
+.reasonlist li p.tit.rea03 {
+    background: url(../images/shop/tokei-repair/ico_rea03.gif) 0 0 no-repeat;color: #8e785e;
+}
+.reasonlist li p.tit.rea04 {
+    background: url(../images/shop/tokei-repair/ico_rea04.gif) 0 0 no-repeat;color: #8e785e;
+}
+.reasonlist li p.tit.rea05 {
+    background: url(../images/shop/tokei-repair/ico_rea05.gif) 0 0 no-repeat;color: #8e785e;
+}
+.reasonlist li p.tit.rea06 {
+    background: url(../images/shop/tokei-repair/ico_rea06.gif) 0 0 no-repeat;color: #8e785e;
+}
+
+/* どんな状態でも買い取ります！ */
+
+.top_purchase {
+    background: #f0eeeb;
+    padding: 30px 0;
+    margin: 0 0 40px;
+}
+
+.top_purchase .inner {
+    width: 94%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.top_purchase h2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+.top_purchase h2 span {
+    display: block;
+    font-size: 10px;
+    font-size: 1.0rem;
+    color: #8e785e;
+    font-family: 'Sorts Mill Goudy', serif;
+    padding: 0 0 0 10px;
+    font-weight: normal;
+}
+.top_purchase p {
+    font-size: 11px;
+    font-size: 1.1rem;
+}
+
+.purchaselist {
+    width: 100%;
+    overflow: hidden;
+}
+
+.purchaselist ul {
+    width: 100%;
+    overflow: hidden;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    *zoom: 1;
+    text-align: center;
+}
+
+.purchaselist li {
+    display: inline-block;
+    width: 30.5%;
+    margin-right: 1%;
+    padding-bottom: 3%;
+    *zoom: 1;
+}
+.purchaselist li p {
+    display: block;
+    font-size: 1.0rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    background: #4f4f4f;
+    padding: 5px 0;
+}
+
+
+/* お客様の声・よくあるご質問 */
+
+.half_wrap {
+    width: 90%;
+    margin: 0 auto 40px;
+}
+
+.half_wrap .pc_none a {
+    display: block;
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+.half_wrap .pc_none a span {
+    background: url(../images/shop/tokei-repair/arw_more.gif) 0 50% no-repeat;
+    background-size: 10px auto;
+    padding: 0 0 0 15px;
+}
+
+.top_voice {
+    width: 100%;
+    margin: 0 0 40px;
+}
+
+ul.voicelist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ul.voicelist li {
+    border: 1px solid #e6e6e6;
+    padding: 3px;
+    margin: 0 0 10px;
+}
+ul.voicelist li .inner {
+    border: 1px solid #f0eeeb;
+    padding: 20px;
+}
+ul.voicelist li p {
+    font-size: 11px;
+    font-size: 1.1rem;
+}
+ul.voicelist li p.tit {
+    font-size: 14px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    background: url(../images/shop/tokei-repair/ico_voice.gif) 0 0 no-repeat;
+    padding: 0 0 0 24px;
+    margin: 0 0 10px;
+}
+ul.voicelist li p.name {
+    font-weight: bold;
+}
+ul.voicelist li p.name span {
+    color: #8e785e;
+    margin: 0 0 0 10px;
+}
+
+.top_faq {
+    width: 100%;
+}
+
+ul.faqlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ul.faqlist li {
+    background: url(../images/shop/tokei-repair/ico_q.gif) 0 0 no-repeat;
+    padding: 3px 0 3px 35px;
+    margin: 0 0 10px;
+}
+
+.rating_count{text-align:right; margin-bottom: 10px;}
+.rating_count p{display:inline; font-size: 1.1rem;}
+.rating_count .star{color:#8e785e; font-size:1.3rem;}
+
+
+
+/* ページ内リンクの帯（予約・お問い合わせフォームへ） */
+.band-wrap{background:#C80000;margin-bottom: 30px;}
+.band-wrap .inner{padding: 5px 5%;}
+.band-wrap .txt01{color:#fff; text-align:center; font-size: 1.6rem; font-weight: bold; padding:5px 0 3px; margin-bottom: 5px;}
+.band-wrap .txt02{color:#fff; text-align:center; font-size:1.2rem; padding:7px 0;}
+.band-wrap .box{overflow: hidden; zoom: 1;display: flex; flex-wrap:wrap;justify-content: center;}
+.band-wrap .box .l{margin-bottom: 15px;}
+.band-wrap .box .l a p:hover{text-decoration:underline;}
+.band-wrap .box .r{}
+.band-wrap .tel{font-weight:bold; line-height: 1; font-size: 3rem; background:url(../images/shop/tokei-repair/icon_tel.png) 0 -5px no-repeat; padding-left:31px;}
+.band-wrap .tel a{color:#fff;}
+.band-wrap .ribbon1 {display: inline-block; position: relative; height: 35px; line-height: 40px; vertical-align: middle; text-align: center; padding: 0 30px; font-size: 1.6rem; background: #ffe800; color: #C80000; box-sizing: border-box; font-weight: bold;}
+.band-wrap .ribbon1:before, .band-wrap .ribbon1:after {position: absolute; content: ''; width: 0px; height: 0px; z-index: 1;}
+.band-wrap .ribbon1:before {top: 0; left: 0; border-width: 18px 0px 16px 15px; border-color: transparent transparent transparent #C80000; border-style: solid;}
+.band-wrap .ribbon1:after {top: 0; right: 0; border-width: 18px 15px 16px 0px; border-color: transparent #C80000 transparent transparent; border-style: solid;}
+@media screen and (max-width: 320px) {
+.band-wrap .txt01{font-size: 1.5rem;}
+.band-wrap .tel{font-size: 2.4rem;background-position: 0 -10px;}
+.band-wrap .ribbon1{font-size: 1.4rem;}
+.band-wrap .txt02{font-size: 1rem;}
+}
+
+
+/* 予約・お問い合わせフォーム */
+#reserve{width: 100%; margin: 0 auto; padding: 30px 20px; box-sizing: border-box;}
+#reserve h2{font-weight: normal; font-size: 2rem; border-bottom: 1px solid #e1e1e1; padding-bottom: 10px; margin-bottom: 20px;}
+
+
+
+
+/* 下層見出し設定
+======================================================= */
+
+.main h1 {
+    font-size: 2.0rem;
+    font-weight: bold;
+    margin: 0 0 20px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #e6e6e6;   /* 下層ページ大見出し（タイトル）枠線（下線）色 */
+    color: #333;   /* 下層ページ大見出し（タイトル）文字色 */
+}
+
+.main .block h3 {
+    font-size: 1.6rem;
+    margin: 0 0 20px;
+    color: #333;
+    border-top: 2px solid #8e785e;
+    border-bottom: 2px solid #e6e6e6;
+    padding: 10px 0;
+}
+
+
+/* ブランドトップ
+======================================================= */
+
+.brand_intro {margin: 0 0 40px;}
+.brand_intro p{margin-bottom:20px;}
+
+.brand_intro h2 {
+    font-size: 20px;
+    font-size: 2.0rem;
+    margin: 0 0 30px;
+    color: #333;
+    border-top: 2px solid #8e785e;
+    border-bottom: 2px solid #e6e6e6;
+    padding: 10px 0;
+}
+
+.brand_about {
+    margin: 0 0 40px;
+}
+
+.brand_about h3 {
+    font-size: 18px;
+    font-size: 1.8rem;
+    margin: 0 0 25px;
+    color: #333;
+    background: url(../images/shop/tokei-repair/dot_bar.gif) 0 bottom repeat-x;
+    padding: 0 0 15px 0;
+}
+
+.subcatlist {
+    background: #f0eeeb;
+    padding: 10px;
+    margin: 0 0 40px;
+}
+.subcatlist .category_box ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.subcatlist .category_box.tokei {
+    width: 100%;
+    margin: 0 auto;
+}
+.subcatlist .category_box a,
+.subcatlist .category_box a:link{
+    text-decoration:none;
+}
+.subcatlist .category_box.tokei ul li{
+    width: 49%;
+    /*height: 250px;*/
+    float: left;
+    margin-right: 0;
+    margin-bottom: 7px;
+}
+.subcatlist .category_box.tokei ul li:nth-child(even){
+    float: right;
+    margin-right: 0;
+}
+.subcatlist .category_box.tokei ul li img {
+    display: block;
+    width: 100%;
+    height:auto;
+}
+.subcatlist .category_box.tokei ul li div {
+    padding-top: 5px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    background: #8e785e;
+    padding-left: 7px;
+}
+.subcatlist .category_box.tokei ul li p.txt{
+    padding: 0;
+    color: #fff;
+    font-size: 12px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-decoration: none;
+    text-align: center;
+}
+
+.subcatlist .satei_btm {
+    padding: 10px 0 10px;
+}
+.subcatlist .satei_btm p {
+    font-size: 1.2rem;
+    padding: 0 0 0 0;
+}
+.subcatlist .satei_btm p.tit {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #8e785e;
+    background: none;
+    line-height: 1.3;
+}
+
+.tab, .tab li, .tab li a {/*クリックするタブ部分*/
+    float: left;
+    width: 20%;
+    padding:0px;
+    margin:0px;
+}
+.tab li a {
+    display: block;
+    padding: 4px 0;
+    background: #f0eeeb;
+    color: #333;
+    text-decoration: none;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    box-sizing: border-box;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 11px;
+    text-align: center;
+}
+.content {
+    clear: both;
+    padding: 18px 10px 10px 10px;
+    margin-bottom: 30px;
+}
+
+h3.strengthening {
+    font-size: 16px;
+    font-size: 1.6rem;
+    background: #f0eeeb;
+    padding: 7px 10px;
+    margin: 0 0 20px;
+}
+
+h3.strengthening strong {
+    border-left: 4px solid #8e785e;
+    padding: 0 0 0 10px;
+}
+
+.area {/*切り替わる部分はまず全部消しておく*/
+    display: none;
+}
+.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.tab li.active {/*選択中のタブ。色を変える等*/
+    background: #f0eeeb;
+    color: #333;
+}
+
+.tab li.active a {
+    color: #fff;
+    background: #8e785e;
+    border-left: 1px solid #fff;
+}
+.tab {
+    width: 100%;
+}
+.tab li:last-child a {
+    border-right: none;
+}
+.area ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.area ul li {
+    font-size: 11px;
+    font-size: 1.1rem;
+    margin: 0 0 5px;
+}
+
+/* お客様の声 */
+
+.un_voice {
+    width: 100%;
+    margin: 0 0 40px;
+}
+
+.un_voice ul.voicelist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.un_voice ul.voicelist li {
+    border: 1px solid #e6e6e6;
+    padding: 3px;
+    margin: 0 0 30px;
+}
+.un_voice ul.voicelist li .inner {
+    border: 1px solid #f0eeeb;
+    padding: 20px;
+}
+.un_voice ul.voicelist li p {
+    font-size: 14px;
+    font-size: 1.4rem;
+}
+.un_voice ul.voicelist li p.tit {
+    font-size: 16px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    background: url(../images/shop/tokei-repair/ico_voice.gif) 0 0 no-repeat;
+    padding: 0 0 0 24px;
+    margin: 0 0 10px;
+    color:#000;
+    line-height: 1.3;
+}
+.un_voice ul.voicelist li p.name {
+    font-weight: bold;
+}
+.un_voice ul.voicelist li p.name span {
+    color: #8e785e;
+    margin: 0 5px 0 8px;
+}
+
+.wp-pagenavi {
+    clear: both;
+    font-size: 13px;
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 0 0 60px;
+}
+
+.wp-pagenavi a, .wp-pagenavi span {
+    border: none;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 2px;
+    background: #f0eeeb;
+    color: #333;
+}
+
+.wp-pagenavi a:hover, .wp-pagenavi span.current {
+    border: none;
+    background: #8e785e;
+    color: #fff;
+}
+
+.wp-pagenavi span.current {
+    border: none;
+    background: #8e785e;
+    font-weight: bold;
+    color: #fff;
+}
+
+.star5_rating{
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    white-space: nowrap;
+    color: #CCCCCC; /* グレーカラー 自由に設定化 */
+    /*font-size: 30px; フォントサイズ 自由に設定化 */
+}
+.star5_rating:before, .star5_rating:after{
+    content: '★★★★★';
+}
+.star5_rating:after{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ffcf32; /* イエローカラー 自由に設定化 */
+}
+.star5_rating[data-rate="5.0"]:after{width:100%;}
+.star5_rating[data-rate="4.9"]:after{width:95%;}
+.star5_rating[data-rate="4.8"]:after{width:94%;}
+.star5_rating[data-rate="4.7"]:after{width:93%;}
+.star5_rating[data-rate="4.6"]:after{width:91%;}
+.star5_rating[data-rate="4.5"]:after{width:90%;}
+
+
+/* 詳細 */
+.detail_voice {
+    width: 100%;
+    margin: 0 0 40px;
+}
+.detail_voice ul.voicelist li p {
+    font-size: 1.3rem;
+}
+.detail_voice ul.voicelist li p.tit {
+    font-size: 1.6rem;
+    font-weight: bold;
+    background: url(../images/shop/tokei-repair/ico_voice.gif) 0 0.3em no-repeat;
+    padding: 0 0 0 24px;
+    margin: 0 0 10px;
+}
+.detail_voice ul.voicelist li p.name {
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.voice_comment {
+    background: #f0eeeb;
+    padding: 5px;
+    font-size: 14px;
+    font-size: 1.4rem;
+    margin: 0 0 40px;
+}
+.voice_comment .inner {
+    border: 1px solid #fff;
+    padding: 18px 25px;
+}
+.voice_comment p.tit {
+    margin: 0 0 10px;
+    font-weight: bold;
+    background: url(../images/shop/tokei-repair/ico_comment.gif) 0 0 no-repeat;
+    padding: 0 0 0 30px;
+    color: #8e785e;
+}
+
+.articlenav {
+    font-size: 14px;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #696969;
+    margin: 0 0 20px;
+}
+
+.articlenav span.nav-previous {
+    float: left;
+    display: block;
+    width: 80px;
+    min-height: 34px;
+}
+
+.articlenav span.nav-next {
+    float: right;
+    width: 80px;
+    display: block;
+    min-height: 34px;
+}
+
+.articlenav span.nav-previous a,
+.articlenav span.nav-next a {
+    display: block;
+    background: #f0eeeb;
+    color: #333;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.articlenav span.nav-previous a:hover,
+.articlenav span.nav-next a:hover {
+    background: #f0eeeb;
+    color: #333;
+}
+
+/* よくあるご質問
+======================================================= */
+
+ul.faq_menu {
+    list-style-type: none;
+    margin: 0 0 30px;
+    padding: 0;
+}
+
+ul.faq_menu li {
+    background: url(../images/shop/tokei-repair/ico_q.gif) 0 50% no-repeat;
+    padding: 2px 0 2px 36px;
+    margin: 0 0 10px;
+}
+
+.faq_list {
+    border-top: 1px dashed #d6d6d6;
+    padding: 40px 0 0 0;
+}
+
+.faq_list dl {
+    padding: 0 0 40px;
+    margin: 0 0 40px;
+    border-bottom: 1px dashed #d6d6d6;
+    font-size: 14px;
+    font-size: 1.4rem;
+}
+
+.faq_list dt {
+    background: url(../images/shop/tokei-repair/ico_q.gif) 0 0 no-repeat;
+    padding: 2px 0 2px 36px;
+    font-size: 1.6rem;
+    margin: 0 0 10px;
+}
+
+.faq_list dd {
+    background: url(../images/shop/tokei-repair/ico_a.gif) 0 0 no-repeat;
+    padding: 2px 0 2px 36px;
+}
+
+
+
+/* よくあるご質問（トップページ）
+======================================================= */
+.top_faq .faq_list{border-top: none; padding: 5px 0 0;}
+.top_faq .faq_list dt{font-size: 1.5rem; margin: 0 0 5px; line-height: 1.3;}
+.top_faq .faq_list dd{font-size: 1.2rem;}
+.top_faq .faq_list dl{padding: 0 0 15px; margin: 0 0 20px;}
+
+
+
+
+/* 買取速報
+======================================================= */
+
+aside {
+    margin: 0 0 30px;
+}
+
+aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside h3 {
+    background: url(../images/shop/tokei-repair/line_toph2.gif) 0 bottom repeat-x;
+    padding: 0 0 10px;
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-size: 1.8rem;
+}
+label.screen-reader-text {
+    display: none;
+}
+aside select {
+    width: 100%;
+}
+aside select,
+aside input {
+    font-size: 13px;
+    font-size: 1.3rem;
+}
+aside.widget_recent_entries ul li {
+    background: url(../images/shop/tokei-repair/arw_btn.png) 0 .3em no-repeat;
+    padding: 0 0 0 15px;
+}
+
+aside.widget_categories ul a {
+    display: none;
+}
+aside ul.children {
+    margin: 0 0 0 0;
+}
+aside ul.children li a {
+    display: block;
+}
+aside ul.children li {
+    background: url(../images/shop/tokei-repair/arw_btn.png) 0 .3em no-repeat;
+    padding: 0 0 0 15px;
+}
+aside ul.children li ul.children li {
+    background: url(../images/shop/tokei-repair/sitemap_arrow.gif) 0 .3em no-repeat;
+    padding: 0 0 0 15px;
+}
+
+/* 詳細 */
+.main .contents_area h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0 0 30px;
+    color: #333;
+    border-top: 2px solid #8e785e;
+    border-bottom: 2px solid #e6e6e6;
+    padding: 10px 0;
+}
+
+.report_detail {
+    margin: 0 0 60px;
+}
+
+.report_detail .img {
+    text-align: center;
+    margin: 0 0 20px;
+}
+.report_detail .price {
+    text-align: center;
+    background: #8e785e;
+    font-weight: bold;
+    font-size: 18px;
+    font-size: 1.8rem;
+    color: #fff;
+    padding: 10px 0;
+}
+.report_detail .pref {
+    text-align: center;
+    background: #f7f6f5;
+    border: 1px solid #e6e6e6;
+    padding: 10px 0;
+    margin: 0 0 20px;
+}
+
+
+/* 会社概要設定
+======================================================= */
+
+.main h2.basic {
+    font-size: 1.6rem;
+    margin: 0 0 30px;
+    color: #333;
+    border-top: 2px solid #8e785e;
+    border-bottom: 2px solid #e6e6e6;
+    padding: 10px 0;
+    line-height: 1.4;
+}
+
+table.nbr td.tar {
+    padding: 10px 0 0 0 !important;
+    text-align: center !important;
+}
+
+.agreenum ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.agreenum ul li {
+    padding: 0;
+    margin: 0 0 5px;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+.btn a {
+    display: block;
+    background: #8e785e;
+    padding: 10px;
+    text-align: center;
+}
+.btn a,
+.btn a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+.btn a span {
+    background: #8e785e url(../images/shop/tokei-repair/arw_hnav.png) 0 50% no-repeat;
+    padding: 0 0 0 12px;
+}
+.btn.small a {
+    width: 120px;
+    padding: 3px 10px;
+}
+.w240 {
+    width: 240px;
+    margin: 0 auto;
+}
+
+
+/* 店頭買取
+======================================================= */
+
+.conter_main {
+    border: 10px solid #e5e2de;
+    margin: 0 0 20px;
+    background: #392b1c url(../images/shop/tokei-repair/bg_counter.jpg) 0 0 no-repeat;
+}
+.conter_main h1 {
+    border: none;
+    color: #fff;
+    margin: 0;
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 1;
+    padding: 20px 0 25px 20px;
+}
+.cm_feature {
+    width: 100%;
+    overflow: hidden;
+    padding: 0 10px 0 10px;
+    box-sizing: border-box;
+}
+.cm_feature ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.cm_feature li {
+    width: 100%;
+    color: #a51d3a;
+    background: #fff;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 16px 0 5px 0;
+    margin: 0 0 10px;
+}
+.cm_feature li.p01 {
+    background: #fff url(../images/shop/tokei-repair/bg_point01.gif) 0 0 no-repeat;
+}
+.cm_feature li.p02 {
+    background: #fff url(../images/shop/tokei-repair/bg_point02.gif) 0 0 no-repeat;
+}
+.cm_feature li.p03 {
+    background: #fff url(../images/shop/tokei-repair/bg_point03.gif) 0 0 no-repeat;
+}
+.cm_feature li span {
+    font-size: 1.6rem;
+    display: block;
+}
+p.pcs_catch {
+    width: 100%;
+    font-size: 1.6rem;
+    color: #a51d3a;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 0 auto 40px;
+}
+
+.ph_3line {
+    width: 100%;
+    overflow: hidden;
+}
+
+.ph_3line ul {
+    overflow: hidden;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ph_3line li {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 10px;
+    padding: 0px;
+}
+
+.pcs_flow {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.main .pcs_flow h3 {
+    border: none;
+    padding: 0;
+    margin: 0 0 10px;
+    color: #a51d3a;
+    font-size: 16px;
+    font-size: 1.6rem;
+}
+.pcs_flow li {
+    padding: 0 0 40px;
+    margin: 0 0 40px;
+    border-bottom: 1px dashed #d6d6d6;
+}
+
+.flow_tel {
+    width: 100%;
+    margin: 0 auto 20px;
+    padding: 15px 0;
+    border: 3px solid #e6e6e6;
+    font-size: 2.0rem;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+}
+.flow_tel span {
+    display: inline-block;
+    font-size: 2.4rem;
+    font-weight: normal;
+    background: url(../images/shop/tokei-repair/ico_tel_l.png) 5px 50% no-repeat;
+    padding: 0 0 0 30px;
+}
+.flow_tel span a {
+    color: #333;
+}
+
+.btn_form a {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    background: #a51d3a;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.btn_form a,
+.btn_form a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+.btn_form a span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: url(../images/shop/tokei-repair/arw_btn_w.png) 0 50% no-repeat;
+    padding: 0 0 0 20px;
+}
+
+.main h3.check {
+    border: none;
+    border-bottom: 4px solid #a51d3a;
+    background: url(../images/shop/tokei-repair/ico_check.png) 0 .3em no-repeat;
+    background-size: 24px auto;
+    padding: 5px 0 5px 32px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 0 0 30px;
+}
+
+
+/* 出張、宅配買取
+======================================================= */
+
+.visit_main {
+    border: 10px solid #e5e2de;
+    margin: 0 auto 20px;
+    background: #392b1c url(../images/shop/tokei-repair/bg_visit.jpg) 0 0 no-repeat;
+}
+.delivery_main {
+    border: 10px solid #e5e2de;
+    margin: 0 auto 20px;
+    background: #392b1c url(../images/shop/tokei-repair/bg_delivery.jpg) 0 0 no-repeat;
+}
+.visit_main h1,
+.delivery_main h1 {
+    border: none;
+    color: #fff;
+    margin: 0;
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 1;
+    padding: 20px 0 25px 20px;
+}
+
+.btn_area {
+    border: 3px solid #e6e6e6;
+    overflow: hidden;
+    padding: 15px;
+    margin: 0 0 40px;
+}
+.btn_area p.tit {
+    font-size: 1.6rem;
+    font-weight: bold;
+    background: url(../images/shop/tokei-repair/arw_db.gif) right 50% no-repeat;
+    background-size: 40px auto;
+    padding: 6px 53px 5px 0;
+}
+.btn_area p.btn_form a {
+    width: 100%;
+}
+ul.kitsize {
+    list-style-type: none;
+    margin: 0 0 30px;
+    padding: 0;
+}
+ul.kitsize li {
+    float: left;
+    margin: 0 70px 0 0;
+}
+.kitimg img {
+    width: 600px;
+}
+
+
+/* お問い合わせ設定
+======================================================= */
+
+.wpcf7 table {
+    font-size: 14px;
+}
+
+.wpcf7 table th {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 0 5px;
+    text-align: left;
+}
+
+.wpcf7 table th:first-of-type{padding-top:0;}
+
+.wpcf7 table th span {
+    background: #a51d3a;
+    color: #fff;
+    font-size: 12px;
+    font-size: 1.2rem;
+    padding: 1px 4px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin: 0 0 0 10px;
+    line-height: 1;
+}
+
+.wpcf7 table td {
+    display: block;
+    padding: 0 0 20px;
+    border-right: none !important;
+    overflow: hidden;
+}
+
+.wpcf7 input,
+.wpcf7 textarea,
+.wpcf7 select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #e1e1e1;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.wpcf7 input[type="checkbox"],
+.wpcf7 input[type="radio"] {
+    width: auto;
+}
+
+.wpcf7 .attached_file input[type="file"]{border:none; padding: 0;}
+.wpcf7 .attached_file p + p{padding-top:5px;}
+
+.wpcf7 textarea {
+    height: 100px;
+}
+
+.wpcf7 input.wpcf7c-btn-confirm,
+.wpcf7 input.wpcf7-submit {
+    display: block;
+    background: #a51d3a;
+    color: #fff;
+    padding: 25px 30px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 2rem;
+}
+
+.wpcf7 input.wpcf7c-btn-confirm:hover,
+.wpcf7 input.wpcf7-submit:hover {
+    border: 1px solid #a51d3a;
+    background: #fff;
+    color: #a51d3a;
+}
+
+.wpcf7 input.wpcf7-back {
+    display: block;
+    background: #fff;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border: 1px solid #e1e1e1;
+    padding: 7px 30px;
+    margin: 0 auto;
+    width: 150px;
+}
+.wpcf7 input.wpcf7-back:hover {
+    background: #e1e1e1;
+    color: #fff;
+}
+
+.wpcf7 .attention{font-size: 1.1rem;}
+.wpcf7 .privacy-box{background:#f6f6f6; padding:5px 10px; margin-bottom: 20px;}
+.wpcf7 .privacy-box .ttl{margin-bottom:3px;}
+.wpcf7 .privacy-box .txt-body{font-size: 1.2rem;}
+.wpcf7 input.zip{width:11em;}
+
+.radio-btn{display:table; width: 100%;}
+.radio-btn .wpcf7-list-item{display:table-cell; width: 50%;}
+.radio-btn .wpcf7-list-item-label{display: block; padding: 1em; width: 100%; border: 1px solid #c8c8c8; border-radius: 3px; -webkit-tap-highlight-color: rgba(29,84,167,.1); background-color: #fff; -webkit-box-sizing: border-box; box-sizing: border-box; text-align: center;}
+.radio-btn input:checked+.wpcf7-list-item-label{border: 2px solid #a51d3a; font-weight: 700;}
+.radio-btn label{position:relative; display:block;}
+.radio-btn label input{position:absolute; top: 40%; left: 30%;}
+
+input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset;}
+
+.wpcf7 .takuhai-size-box{font-size: 1.2rem;}
+
+
+
+
+/* プラグインスタイル上書き */
+div.wpcf7-response-output {
+    margin: 0;
+    padding: 0;
+}
+
+div.wpcf7-validation-errors {
+    border: none;
+    background: #a51d3a;
+    color: #fff;
+    font-size: 13px;
+    font-size: 1.3rem;
+    padding: 5px 10px;
+}
+
+div.wpcf7-mail-sent-ok {
+    border: none;
+    background: #8bc657;
+    color: #fff;
+    font-size: 13px;
+    font-size: 1.3rem;
+    padding: 5px 10px;
+    margin: 0 0 20px;
+}
+
+span.wpcf7-not-valid-tip {
+    color: #a51d3a;
+    font-size: 1.3rem;
+    font-weight:bold;
+    padding-top: 3px;
+}
+
+.wpcf7c-conf {
+    background: #fafafa;
+}
+
+
+/* フォームステップ */
+
+.wpcf7c-elm-step1,
+.wpcf7c-elm-step2,
+.wpcf7c-elm-step3 {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto 10px;
+    background: url(../images/shop/tokei-repair/arw_step.gif) 50% 50% no-repeat;
+}
+
+.wpcf7c-elm-step1 ul,
+.wpcf7c-elm-step2 ul,
+.wpcf7c-elm-step3 ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 103%;
+    overflow: hidden;
+    *zoom: 1;
+}
+
+.wpcf7c-elm-step1 li,
+.wpcf7c-elm-step2 li,
+.wpcf7c-elm-step3 li {
+    float: left;
+    width: 30%;
+    margin-right: 3%;
+    *zoom: 1;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.step01 {
+    background: #f6f6f6 url(../images/shop/tokei-repair/bg_step01_off.gif) 50% 0 no-repeat;
+    padding: 50px 0 20px 0;
+}
+.step01.selected {
+    background: #f6f6f6 url(../images/shop/tokei-repair/bg_step01_on.gif) 50% 0 no-repeat;
+}
+.step02 {
+    background: #f6f6f6 url(../images/shop/tokei-repair/bg_step02_off.gif) 50% 0 no-repeat;
+    padding: 50px 0 20px 0;
+}
+.step02.selected {
+    background: #f6f6f6 url(../images/shop/tokei-repair/bg_step02_on.gif) 50% 0 no-repeat;
+}
+.step03 {
+    background: #f6f6f6 url(../images/shop/tokei-repair/bg_step03_off.gif) 50% 0 no-repeat;
+    padding: 50px 0 20px 0;
+}
+.step03.selected {
+    background: #f6f6f6 url(../images/shop/tokei-repair/bg_step03_on.gif) 50% 0 no-repeat;
+}
+
+.wpcf7c-elm-step1.form,
+.wpcf7c-elm-step2.form {
+    width: 980px;
+    background: none;
+}
+
+
+/* LINE査定のご案内
+======================================================= */
+#line_content{margin-bottom:50px;}
+#line_content .main-img{margin-bottom:20px;}
+#line_content .line_ttl {text-align: center; font-size: 1.8rem; font-weight: bold; margin: 20px 0px;}
+#line_content .flow_line{}
+#line_content .flow_line figure{}
+#line_content .flow_img{margin: 0 0 30px 0; padding: 0; text-align:justify; font-size: 0;}
+#line_content .flow_img li{}
+#line_content .flow_img li.fa-caret-down:before{font-family:FontAwesome; font-size: 10rem; color:#ffde00; display:block; text-align:center;}
+#line_content .flow_img .txt{font-size: 1.3rem; padding: 10px 0 0; line-height: 1.6;}
+#line_content .sp_none{display:none;}
+#line_content .line_point_box {background: #e5e5e5; padding: 5px 20px 20px; box-sizing: border-box; margin-bottom: 20px;}
+#line_content .point_img {}
+#line_content .point_txt {}
+#line_content ul.point_ul02 {background: #00b900; box-sizing: border-box; padding: 10px; margin:0; border-radius: 5px;}
+#line_content ul.point_ul02 li {color: #fff; font-size: 1.4rem; list-style: none; padding-left: 1em; text-indent: -1em;}
+#line_content ul.point_ul01 li {font-size: 1.4rem; line-height:1.8; list-style: none;}
+#line_content ul.point_ul01 li:before{content:"●"; color:#00b900;}
+#line_content ul.point_ul02 li span {font-size: 19px; font-weight: bold;}
+#line_content ul.point_ul02 li:before{content:"●"; color:#fff;}
+#line_content ul.point_ul02 li:first-of-type:before{content:"";}
+#line_content ul.point_ul01 {margin:10px 0; padding:0;}
+
+
+
+/* 下層block設定
+======================================================= */
+
+.main .block {
+    margin: 0 0 40px;
+}
+
+
+
+/* サイドのLINE査定
+======================================================= */
+.side-line-wrap{background:#01bb00; text-align:center; padding: 10px 0;}
+.side-line-wrap a{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;color: #fff; font-weight: bold; text-decoration: none; font-size: 1.6rem; text-align: left; line-height: 1.4;width: 90%; margin: 0 auto;}
+.side-line-wrap a .left{}
+.side-line-wrap a .right{}
+
+
+
+/* BLOCK内スタイル設定
+======================================================= */
+
+.texts {
+    font-size: 1.0rem;
+    line-height: 1.3;
+}
+.textn {
+    font-size: 100%;
+}
+.textl {
+    font-size: 138.5%;
+}
+.textll {
+    font-size: 200%;
+}
+.textxl {
+    font-size: 350%;
+}
+.textxxl {
+    font-size: 500%;
+}
+
+table {
+    width: 100%;
+    padding: 0;
+    border-collapse: collapse;
+}
+
+table.nbr,
+table.tbr table.nbr {
+    border-collapse: collapse;
+    border-top: none;
+    border-left: none;
+}
+
+table.nbr th,
+table.tbr table.nbr th {
+    padding: 0;
+    color: #333;
+    border-right: none;
+    border-bottom: none;
+}
+
+table.nbr td,
+table.tbr table.nbr td {
+    padding: 0;
+    color: #333;
+    border-right: none;
+    border-bottom: none;
+}
+
+table.tbr,
+table.nbr table.tbr {
+    border-collapse: collapse;
+    border-top: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+}
+
+table.tbr th,
+table.nbr table.tbr th {
+    font-weight: bold;
+    padding: 10px;
+    color: #333;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    background: #f9f7f4;
+    display: block;
+}
+
+table.tbr td,
+table.nbr table.tbr td {
+    padding: 10px;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    display: block;
+}
+
+
+/*テーブルbasic02設定*/
+
+table.tbr {
+    width: 100%;
+}
+
+table.tbr thead {
+    display: none;
+}
+
+table.tbr th,
+table.tbr td {
+    display: block;
+}
+
+table.tbr td[data-title]:before {
+    color: #666;
+    content: attr(data-title) " :";
+    font-weight: bold;
+    padding: 0 10px 0 0;
+    text-transform: none;
+    display: block;
+    float: left;
+}
+
+table.tbr td span {
+    display: block;
+    overflow: hidden;
+}
+
+iframe {
+    overflow: hidden;
+    max-width: 99%;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+.photo_r,
+.photo_l,
+.photo_c,
+.photo-r,
+.photo-l,
+.photo-c {
+    width: auto !important;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin: 0 auto 20px;
+    text-align: center;
+    color: #333;
+}
+
+.photo_r img,
+.photo_l img,
+.photo_c img,
+.photo-r img,
+.photo-l img,
+.photo-c img {
+    display: block;
+    margin: 0 auto 10px;
+}
+
+
+/* リンク定義
+======================================================= */
+
+ul.link_un {
+    margin: 5px 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul.link_un li {
+    margin: 0 0 5px;
+}
+
+ul.link_un li.arw {
+    padding: 0 0 0 16px;
+    background: url(../images/shop/tokei-repair/arw.png) no-repeat 0 5px;
+}
+
+ul.link_un li.blank {
+    padding: 0 0 0 16px;
+    background: url(../images/shop/tokei-repair/ico_blank.gif) no-repeat 0 5px;
+}
+
+ul.link_un li.pdf {
+    padding: 0 0 0 21px;
+    background: url(../images/shop/tokei-repair/ico_pdf.gif) no-repeat 0 2px;
+}
+
+
+/* 引用定義
+======================================================= */
+
+.quote {
+    padding: 15px;
+    border: 5px solid #f5f5f5;
+}
+
+
+/* お問い合わせ設定
+======================================================= */
+
+
+form ul,
+form ol {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+form input,
+form select,
+form label {
+    padding: 5px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+
+
+/* お問い合わせ error */
+
+label.error {
+    border: 1px solid #ff8383;
+    background: #ffe8e8;
+}
+
+input.error {
+    border: 1px solid #ff8383;
+    background: #ffe8e8;
+}
+
+select.error {
+    border: 1px solid #ff8383;
+    background: #ffe8e8;
+}
+
+textarea.error {
+    border: 1px solid #ff8383;
+    background: #ffe8e8;
+}
+
+
+
+/* 真ん中
+======================================================= */
+
+.tal {
+    text-align: left !important;
+}
+
+.tac {
+    text-align: center !important;
+}
+
+.tar {
+    text-align: right !important;
+}
+
+
+
+/* TOPへ戻る
+======================================================= */
+
+.top_back {
+    clear: both;
+    padding: 0 0 30px;
+    text-align: center;
+}
+
+.top_back a {
+    padding: 0 15px;
+}
+
+
+/* 汎用スタイル設定
+======================================================= */
+
+.tac { text-align: center; }
+.tal { text-align: left; }
+.ter { text-align: right; }
+
+.mb5 { margin-bottom: 5px; }
+.mb10 { margin-bottom: 10px; }
+.mb15 { margin-bottom: 15px; }
+.mb20 { margin-bottom: 20px; }
+.mb30 { margin-bottom: 30px; }
+.mb40 { margin-bottom: 40px; }
+.mt5 { margin-top: 5px; }
+
+.sp_none { display: none; }
+.clearfix {
+    zoom: 1;
+}
+.clearfix:after {
+    display: block;
+    clear: both;
+    content: '';
+}
+*:after {
+    display: block;
+    clear: both;
+}
+
+
+
+/* 修理
+======================================================= */
+#repair .breadcrumb{display:none;}
+#repair .half_wrap{margin:40px auto 10px;}
+#repair .br-sp{display:none;}
+
+#repair .ribbon1 {display: inline-block; position: relative; height: 30px; line-height: 32px; vertical-align: middle; text-align: center; padding: 0 30px; font-size: 1.7rem; background: #ffe800; color: #C80000; box-sizing: border-box; font-weight: bold;}
+#repair .ribbon1:before, #repair .ribbon1:after {position: absolute; content: ''; width: 0px; height: 0px; z-index: 1;}
+#repair .ribbon1:before {top: 0; left: 0; border-width: 15px 0px 15px 15px; border-color: transparent transparent transparent #C80000; border-style: solid;}
+#repair .ribbon1:after {top: 0; right: 0; border-width: 15px 15px 15px 0px; border-color: transparent #C80000 transparent transparent; border-style: solid;}
+#repair .ribbon2 {width: 90%; display: inline-block; position: relative; height: 50px; line-height: 52px; vertical-align: middle; text-align: center; padding: 0 35px; font-size: 1.8rem; background: #C80000; color: #fff; box-sizing: border-box; font-weight: bold;}
+#repair .ribbon2:before, #repair .ribbon2:after {position: absolute; content: ''; width: 0px; height: 0px; z-index: 1;}
+#repair .ribbon2:before {top: 0; left: 0; border-width: 25px 0px 25px 25px; border-color: transparent transparent transparent #fff; border-style: solid;}
+#repair .ribbon2:after {top: 0; right: 0; border-width: 25px 25px 25px 0px; border-color: transparent #fff transparent transparent; border-style: solid;}
+#repair .ribbon3 {display: inline-block; position: relative; height: 50px; line-height: 52px; vertical-align: middle; text-align: center; padding: 0 31px; font-size: 1.7rem; background: #C80000; color: #fff; box-sizing: border-box; font-weight: bold;}
+#repair .ribbon3:before, #repair .ribbon3:after {position: absolute; width: 0px; height: 0px; z-index: 1; display: inline-block;}
+#repair .ribbon3:before {content: url(../images/shop/tokei-repair/ribbon3_l.png); margin-left:-57px;}
+#repair .ribbon3:after {content: url(../images/shop/tokei-repair/ribbon3_r.png); margin-left:29px;}
+#repair .ribbon4 {display: inline-block; position: relative; height: 40px; line-height: 42px; vertical-align: middle; padding: 0 40px 0 15px; font-size: 22px; background: #C80000; color: #FFF; box-sizing: border-box; width: 97%; margin-bottom: 10px;}
+#repair .ribbon4:after {position: absolute; content: ''; width: 0px; height: 0px; z-index: 1;}
+#repair .ribbon4:after {top: 0; right: 0; border-width: 20px 10px 20px 0px; border-color: transparent #fff transparent transparent; border-style: solid;}
+#repair .ribbon5 {display: inline-block; position: relative; height: 50px; line-height: 52px; vertical-align: middle; text-align: center; padding: 0 15px; font-size: 1.4rem; background: #ffed00; color: #C80000; box-sizing: border-box; font-weight: bold;}
+#repair .ribbon5:before, #repair .ribbon5:after {position: absolute; width: 0px; height: 0px; z-index: 1; display: inline-block;}
+#repair .ribbon5:before {content: url(../images/shop/tokei-repair/ribbon5_l.png); margin-left:-41px;}
+#repair .ribbon5:after {content: url(../images/shop/tokei-repair/ribbon5_r.png); margin-left:13px;}
+
+
+#repair .main-wrap .image01,
+#repair .main-wrap .image02,
+#repair .main-wrap .image03{position:relative;}
+#repair .main-wrap .image01 p{position:absolute; top:10px; left:10px; background: #ffe800; display: inline-block; padding: 5px 10px; font-size: 1.3rem; font-weight: bold; line-height: 1.4; opacity: 0.8;}
+#repair .main-wrap .image02 p{position:absolute; top:10px; left:10px; background: #ffe800; display: inline-block; padding: 5px 10px; font-size: 1.3rem; font-weight: bold; line-height: 1.4; opacity: 0.8;}
+#repair .main-wrap .image03 p{position:absolute; top:10px; left:10px; background: #ffe800; display: inline-block; padding: 5px 10px; font-size: 1.3rem; font-weight: bold; line-height: 1.4; opacity: 0.8;}
+#repair .main-b-wrap{width: auto;}
+#repair .main-b-wrap .image01{position:relative;}
+#repair .main-b-wrap .image01 p{position:absolute; top:10px; left:10px; background: #ffe800; display: inline-block; padding: 5px 10px; font-size: 1.3rem; font-weight: bold; line-height: 1.4; opacity: 0.8; font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;}
+#repair .main-b-wrap .image01 .overlay-text,
+.tokei-repair-slider .main-b-wrap .image01 .overlay-text{
+    font-size: 3vw;
+}
+
+#repair .kind-of-repair-wrap{background:#e5e2de; padding: 20px 0 0;}
+#repair .kind-of-repair-wrap .inner{}
+#repair .kind-of-repair-wrap h1{color:#595959; font-size: 2rem; text-align: center; margin-bottom: 7px; font-weight: bold;}
+#repair .kind-of-repair-wrap .main-txt{color:#595959; font-size: 1.3rem; line-height: 1.6; margin-bottom: 10px; padding: 0 15px;}
+#repair .kind-of-repair-wrap .box-wrap .box{background: #fff; box-sizing: border-box; padding-bottom: 20px; width:auto;}
+#repair .kind-of-repair-wrap .box-wrap .box:first-of-type{padding-top:15px;}
+#repair .kind-of-repair-wrap .box-wrap .box:last-of-type{padding-bottom:15px;}
+#repair .kind-of-repair-wrap .box-wrap .box .box-wrap2{padding: 0 15px;}
+#repair .kind-of-repair-wrap .box-wrap .box .box-wrap2 figure{margin-bottom: 5px;}
+#repair .kind-of-repair-wrap .box-wrap .box .box-wrap2 .txt{font-size: 1.4rem; line-height: 1.5;}
+#repair .kind-of-repair-wrap .box-wrap .box .more{font-size: 1.2rem; font-weight: bold; text-align: right; line-height: 1;}
+#repair .kind-of-repair-wrap .box-wrap .box .more:before{content: "\f04b"; font-family: FontAwesome; color:#C80000; font-size: 1rem; padding-right: 3px;}
+#repair .kind-of-repair-wrap .box-wrap .box .more a{text-decoration:none; color:#595959;}
+#repair .kind-of-repair-wrap .box-wrap .box .more a:hover{text-decoration:underline;}
+#repair .kind-of-repair-wrap .box-wrap .box .details-link{background: #C80000; width: 50%;margin: 10px auto 0; text-align: center;}
+#repair .kind-of-repair-wrap .box-wrap .box .details-link a{color:#fff;font-size: 1.4rem; display: block; padding: 3px; text-decoration: none;}
+#repair .kind-of-repair-wrap .box-wrap .box .txt2{background: #C80000; margin: 10px auto 0; text-align: center; color:#fff;font-size: 1.4rem; display: block; width: 90%;}
+
+#repair .leave-wrap{width:auto; text-align: left;}
+#repair .leave-wrap .txt1{font-size:2rem; font-weight:bold; margin: 20px 0 10px; padding: 0 15px;}
+#repair .leave-wrap .txt2{font-size:1.3rem; line-height: 1.6; margin-bottom: 10px; padding: 0 15px;}
+#repair .leave-wrap .txt3{font-size:1.4rem; font-weight:bold; line-height: 1.7; background: linear-gradient(transparent 50%, #ebff6a 0%); display: inline; padding: 0 5px;}
+#repair .leave-wrap .txt3-outer{padding: 0px 15px;}
+
+#repair .case-wrap{margin:20px 0 30px;}
+#repair .case-wrap .ribbon-box{position:relative; top:-34px; left: 0; right: 0; text-align:center;}
+#repair .case-wrap .focus-box{text-align: center; background: #C80000; padding: 10px; margin-top: 50px; width: auto;}
+#repair .case-wrap .focus-box h3{color:#fff; font-size: 1.4rem;}
+#repair .case-wrap .focus-box h3 b{color:#ffe800; border-bottom: 1px solid #ffe800;}
+#repair .case-wrap .inner{background:#C80000 url(../images/shop/tokei-repair/case_woman.png) no-repeat 15px 80px; background-size:23%; color:#fff; padding:15px 0 15px; box-sizing: border-box; width: auto;}
+#repair .case-wrap .inner .image01{display:inline-block; width: 50%; vertical-align:bottom; margin-left:120px; margin-bottom: 10px; position: static;}
+#repair .case-wrap .main-txt{background:url(../images/shop/tokei-repair/icon_calculator.png) 15px 0 no-repeat; background-size: 40px 40px; padding:0 15px 0 65px; font-size: 1.4rem!important; font-weight: bold; line-height: 1.5; width:auto;}
+#repair .case-wrap .sale{color: #ffed00; font-size: 1.8rem; font-weight: bold; text-align: center; margin-top: 10px;}
+
+#repair .case-wrap .box-wrap .box-l{border-top: 1px solid #fff; border-bottom: 1px solid #fff; padding: 5px 15px; font-size: 1.3rem; line-height: 1.4; background: #C80000; width:auto;float: none;
+    color: #fff;
+    text-align: left;
+    border-left: none;
+    border-right: none;}
+#repair .case-wrap .box-wrap .box-r{margin-left: 15px; margin-top: 10px; width:auto;}
+#repair .case-wrap .box-wrap .box-r dl{}
+#repair .case-wrap .box-wrap .box-r dt{background:#ffed00; color:#C80000; font-size: 1.2rem; display: inline-block; padding: 4px 7px; line-height: 1;}
+#repair .case-wrap .box-wrap .box-r dd{font-size: 1.4rem; line-height: 1.5; margin-top: 5px;}
+#repair .case-wrap .box-wrap .box-r dd:first-of-type{margin-bottom:10px;}
+#repair .case-wrap .box-wrap .box-r dd:last-of-type{font-size:1.6rem;}
+#repair .case-wrap .box-wrap .box-r dd .txt1{color:#ffed00; font-weight: bold; font-size: 1.6rem; padding: 0px 5px;}
+#repair .case-wrap .box-wrap .box-r dd .txt2{color:#ffed00; font-weight: bold; font-size: 2rem; padding: 0px 5px;}
+
+#repair .price-list-wrap{margin:0 auto 20px; width:auto;}
+#repair .price-list-wrap h3{font-size:1.8rem; font-weight: bold; color: #666666; margin: 25px 0 10px 15px; background:url(../images/shop/tokei-repair/icon_arrow01.png)  no-repeat 0 3px; padding-left: 25px; line-height: 1.3;}
+#repair .price-list-wrap .t01, #repair .price-list-wrap .t01 th, #repair .price-list-wrap .t01 td {border-collapse: collapse; border-top:1px solid #b0b0b0; border-bottom:1px solid #b0b0b0; padding:0 15px;}
+#repair .price-list-wrap .t01 th:first-of-type, #repair .price-list-wrap .t01 td:first-of-type{border-collapse: collapse; border-right:1px solid #b0b0b0;}
+#repair .price-list-wrap .t01{text-align:center; color:#666666; margin-bottom: 20px; width:auto;}
+#repair .price-list-wrap .t01 th{background:#e5e2de; padding: 10px 15px; vertical-align: top}
+#repair .price-list-wrap .t01 th:first-of-type{width:50%;}
+#repair .price-list-wrap .t01 th h4{font-weight:bold; font-size:1.7rem; margin-bottom: 3px;}
+#repair .price-list-wrap .t01 th .model{font-size:1rem; line-height:1.3;}
+#repair .price-list-wrap .t01 td{padding: 10px; line-height:1.4;}
+#repair .price-list-wrap .t01 td .regular{font-size:1.8rem; display: block; text-decoration: line-through;}
+#repair .price-list-wrap .t01 td .sale{font-size: 2.4rem; font-weight:bold; color: #C80000; display: block;}
+#repair .price-list-wrap .image01{text-align: center; position: static;}
+#repair .price-list-wrap .image01 img{width:40%;}
+#repair .price-list-wrap .t02 th, #repair .price-list-wrap .t02 td {border-collapse: collapse; border:1px solid #b0b0b0;}
+#repair .price-list-wrap .t02, #repair .price-list-wrap .t02 .th-f, #repair .price-list-wrap .t02 .td-f{border-left:none; font-weight:bold;}
+#repair .price-list-wrap .t02, #repair .price-list-wrap .t02 .th-l, #repair .price-list-wrap .t02 .td-l{border-right:none;}
+#repair .price-list-wrap .t02 .td-f{padding:5px;}
+#repair .price-list-wrap .t02{text-align:center; font-size: 1.1rem;}
+#repair .price-list-wrap .t02 th{padding:6px 3px; font-weight: bold; text-align: center;}
+#repair .price-list-wrap .t02 td{padding: 6px 3px; line-height: 1.4;}
+#repair .price-list-wrap .t02 td .regular{font-size:1rem; display: block; text-decoration: line-through; font-weight: normal;}
+#repair .price-list-wrap .t02 td .sale{font-size: 1.1rem; font-weight:bold; color: #C80000; display: block;}
+#repair .price-list-wrap .t02 td .jp{font-size:1rem; color: #595959;}
+#repair .price-list-wrap .t02 tr:nth-child(odd) {background: #eee;}
+#repair .price-list-wrap .t02 tr:first-child{background:#e5e2de;}
+#repair .price-list-wrap .t02 tr:hover {background:#ccc;}
+#repair .price-list-wrap .focus-box{text-align: center; background: #8d785e; padding: 10px; margin-top: 20px;}
+#repair .price-list-wrap .focus-box p{color:#fff; font-size: 1.5rem;}
+#repair .price-list-wrap .focus-box b{color:#ffe800; border-bottom: 1px solid #ffe800;}
+
+#repair .band-wrap{background:#C80000; text-align: center;}
+#repair .band-wrap .inner{width: 100%;}
+#repair .band-wrap .txt01{color:#fff; text-align:center; font-size: 1.4rem; font-weight: bold; padding:10px 0 10px;}
+#repair .band-wrap .txt01 br{display: block;}
+#repair .band-wrap .txt02{color:#fff; text-align:center; font-size:1.2rem; padding:5px 0 10px;}
+#repair .band-wrap .box{width: auto;}
+#repair .band-wrap .box .l{margin-bottom: 13px}
+#repair .band-wrap .box .r{}
+#repair .band-wrap .tel{font-weight:bold; line-height: 1; font-size: 2.7rem; background:url(../images/shop/tokei-repair/icon_tel.png) 0 -8px no-repeat; padding-left:0; display: inline-block;}
+#repair .band-wrap .tel a{color:#fff;}
+#repair .band-wrap .tel a::before{width: 20px;}
+
+#repair .results-wrap{margin: 50px 0 25px; background:#e5e2de; padding-bottom: 30px;}
+#repair .results-wrap .inner{width: 100%;}
+#repair .results-wrap .ribbon-box{position:relative; top:-25px; left: 0; right: 0; text-align:center;}
+#repair .results-wrap .item-wrap .item-box{width: 100%;margin-bottom: 0;}
+#repair .results-wrap .item-wrap .item-box .item-box-inner{background:#fff; padding:10px;}
+#repair .results-wrap .item-wrap .item-box .name{background: url(../images/shop/tokei-repair/icon_arrow02.png) #C80000 10px 10px no-repeat; color:#fff; display: block; font-size:1.4rem; padding: 5px 0 5px 25px;}
+#repair .results-wrap .item-wrap .item-box .pic-wrap{overflow:hidden; margin-bottom: 5px;}
+#repair .results-wrap .item-wrap .item-box .pic-wrap figure{width:48%; float:left;}
+#repair .results-wrap .item-wrap .item-box .pic-wrap figure:first-of-type{margin-right:4%;}
+#repair .results-wrap .item-wrap .item-box .pic-wrap img{border: 1px solid #e6e6e6;}
+#repair .results-wrap .item-wrap .item-box .content{color:#8e7860; font-size: 1.2rem; font-weight: bold; padding:0;}
+#repair .results-wrap .item-wrap .item-box table{font-size:1.3rem; border-bottom: 1px dotted #8e7860; margin-top: 3px;}
+#repair .results-wrap .item-wrap .item-box th{/* width: 50%; */ width:100%; line-height: 1.2; padding-bottom: 5px;}
+#repair .results-wrap .item-wrap .item-box td{vertical-align: bottom; padding-left: 10px; padding-bottom: 5px; line-height: 1;}
+#repair .results-wrap .item-wrap .item-box span{font-size:1rem; padding-left: 2px;}
+#repair .results-wrap .item-wrap .item-box .total{color: #8e7860; font-size: 1.2rem; font-weight: bold; width: 50%; display: inline-block;}
+#repair .results-wrap .item-wrap .item-box .price{font-size:1.8rem; font-weight:bold; display: inline-block; padding-top: 3px; color:#595959;}
+#repair .results-wrap .item-wrap .item-box p{font-size:1.2rem; line-height: 1.6;}
+
+#repair .qa-wrap{width: auto;}
+#repair .qa-wrap .txt{font-size: 1.4rem; line-height: 1.4; margin: 15px 0; padding: 0 15px;}
+#repair .qa-wrap ul{margin: 0; padding: 0; list-style: none; width:auto;}
+#repair .qa-wrap .box{padding: 0 15px;}
+#repair .qa-wrap ul li{border-bottom: 1px dotted #ccc; margin-bottom: 15px;width: auto;}
+#repair .qa-wrap ul:last-child li:last-child{border-bottom:none;}
+#repair .qa-wrap ul li .q{color:#C80000; background:url(../images/shop/tokei-repair/bg_q.png) 0px 2px no-repeat; line-height: 1.3; font-size: 1.6rem; padding-left: 25px; margin-bottom: 5px;}
+#repair .qa-wrap ul li .a{font-size:1.2rem; padding-left: 25px; padding-bottom: 10px;}
+
+#repair .atmosphere-wrap{width: auto;}
+#repair .atmosphere-wrap h3{text-align:center; font-size: 1.5rem; font-weight:bold; margin: 15px 0 5px;}
+#repair .atmosphere-wrap .txt{padding: 0 15px; font-size: 1.3rem; line-height: 1.6; margin-bottom: 10px;}
+#repair .atmosphere-wrap .box{font-size:0; margin-bottom: 20px;}
+#repair .atmosphere-wrap .box figure{width:19.9%; display: inline-block;}
+
+#repair-form-wrap{width: 100%; margin: 0 auto; padding: 30px 20px; box-sizing: border-box;}
+#repair-form-wrap h2{font-weight: normal; font-size: 2rem; border-bottom: 1px solid #e1e1e1; padding-bottom: 10px; margin-bottom: 20px;}
+
+@media screen and (max-width: 320px) {
+#repair .ribbon1{font-size: 1.5rem; padding: 0 23px;}
+#repair .ribbon2{font-size: 1.5rem; padding: 0 30px;}
+#repair .ribbon3{font-size: 1.5rem; padding: 0 14px;}
+#repair .ribbon3:before{margin-left: -40px;}
+#repair .ribbon3:after{margin-left:13px;}
+#repair .ribbon5{font-size: 1.5rem; padding: 0 14px;}
+#repair .ribbon5:before{margin-left: -40px;}
+#repair .ribbon5:after{margin-left:13px;}
+#repair .main-wrap .image01 p, #repair .main-wrap .image02 p, #repair .main-wrap .image03 p{font-size: 1.1rem;}
+#repair .main-b-wrap .image01 p{font-size: 1.1rem;}
+#repair .atmosphere-wrap h3{font-size: 1.3rem;}
+#repair .price-list-wrap .focus-box p{font-size: 1.3rem;}
+#repair .case-wrap .focus-box h3{font-size: 1.3rem;}
+
+}
+
+
+
+
+/* 修理 電池交換
+======================================================= */
+#repair.changing-battery{}
+#repair.changing-battery ul{margin:0; padding:0;}
+#repair.changing-battery section#primary-content > .ttl{font-size: 2rem; padding: 0 3%; font-weight: normal;margin: 20px 0px;}
+#repair.changing-battery section#primary-content .group{display:flex; flex-wrap:wrap; justify-content:space-between; list-style:none;}
+#repair.changing-battery section#primary-content .group li{width:100%;margin-bottom: 30px;}
+#repair.changing-battery section#primary-content .group li.summary-box > .ttl{font-weight: normal;font-size: 2.8rem;height: 50px;line-height: 54px;}
+#repair.changing-battery section#primary-content .group li.summary-box > .ttl.ribbon4:after{border-width: 25px 10px 25px 0px;}
+#repair.changing-battery section#primary-content .group li.price-box .ttl,
+#repair.changing-battery section#primary-content .group li.period-box .ttl{font-weight: normal;font-size: 2.2rem; background: #C80000; color: #FFF; box-sizing: border-box; height: 50px; line-height: 54px; text-align: center;}
+#repair.changing-battery section#primary-content .group li.pic-box img{padding: 0 3%; box-sizing: border-box;}
+#repair.changing-battery section#primary-content .group .summary-txt{margin-top: 10px; font-size: 1.4rem; line-height: 1.6;padding: 0 3%;}
+#repair.changing-battery section#primary-content .group .summary-txt br{display:none;}
+#repair.changing-battery section#primary-content .group .cont{background:#ebebeb; padding: 10px 20px; text-align: center;}
+#repair.changing-battery section#primary-content .group li.period-box .cont{padding-top: 25px;min-height: 259px; box-sizing: border-box;}
+#repair.changing-battery section#primary-content .group li.period-box .cont .txt1{margin-bottom: 17px;}
+#repair.changing-battery section#primary-content .group .cont .name{font-size: 2.4rem; font-weight: normal;}
+#repair.changing-battery section#primary-content .group .cont .txt1{font-size: 1.4rem; line-height: 1.5;margin-bottom: 12px;}
+#repair.changing-battery section#primary-content .group .cont .txt2{color: #C80000; font-weight: bold; font-size: 5rem; line-height: 1; margin-bottom: 12px;}
+#repair.changing-battery section#primary-content .group .cont .txt2 .tax{font-size:2rem; font-weight:normal;}
+#repair.changing-battery section#primary-content .group .cont .txt3{border: 2px solid #C80000; padding: 5px 0 1px; background: #fff; color: #C80000; font-size:1.8rem;margin-bottom: 10px;}
+#repair.changing-battery section#primary-content .group .cont .note{font-size: 1rem; line-height: 1.6; text-align: left;}
+
+#repair.changing-battery section#primary-content .notice-wrap{display: flex; margin-bottom: 40px; flex-wrap: wrap;}
+#repair.changing-battery section#primary-content .notice-wrap .left{background: #C80000; color: #fff; font-size: 1.8rem; line-height: 1.4;display: flex; align-items: center;width: 100%; justify-content: center; padding: 5px 0; margin-bottom: 12px;}
+#repair.changing-battery section#primary-content .notice-wrap .left br{display:none;}
+#repair.changing-battery section#primary-content .notice-wrap .right{}
+#repair.changing-battery section#primary-content .notice-wrap .txt1{font-size:1.35rem;padding: 0 3%; margin-bottom: 10px;}
+#repair.changing-battery section#primary-content .notice-wrap .bullet-point{padding: 0 3% 0 8%;}
+#repair.changing-battery section#primary-content .notice-wrap .bullet-point li{font-size:1.1rem;}
+
+#repair.changing-battery section#quartz-watch >.ttl{border-top: 1px solid #000; padding-top: 30px; font-size: 2rem; font-weight: bold; text-align: center; color: #C80000;margin-bottom: 10px;}
+#repair.changing-battery section#quartz-watch .txt1{font-size: 1.3rem; margin-bottom: 20px;padding: 0 3%;}
+#repair.changing-battery section#quartz-watch .txt1 br{display:none;}
+#repair.changing-battery section#quartz-watch .brand-wrap{display: flex; flex-wrap:wrap; justify-content:space-between; list-style:none; margin-bottom: 10px;padding: 0 3%;}
+#repair.changing-battery section#quartz-watch .brand-wrap li{width:31%; text-align: center;    margin-bottom: 20px;}
+#repair.changing-battery section#quartz-watch .brand-wrap li .pic{border: 1px solid #808080;margin-bottom: 8px;}
+#repair.changing-battery section#quartz-watch .brand-wrap li .name{font-size: 1.2rem;line-height: 1;margin-bottom:5px;}
+#repair.changing-battery section#quartz-watch .brand-wrap li .series-model{font-size: 1.05rem; line-height: 1.4;}
+@media screen and (max-width: 320px) {
+#repair.changing-battery section#primary-content .group .cont .name{font-size: 2.2rem;}
+#repair.changing-battery section#primary-content .group .cont .txt1{font-size: 1.3rem;}
+#repair.changing-battery section#primary-content .group .cont .txt3{font-size: 1.6rem;}
+#repair.changing-battery section#quartz-watch >.ttl{font-size: 1.8rem;}
+#repair.changing-battery section#quartz-watch .brand-wrap li .name{line-height: 1.3;}
+}
+
+
+
+/* 他店と比較した買取実績「他店に負けません」
+======================================================= */
+.priceCompareBox{position: relative;}
+.priceCompareBox .anotherShop{position: absolute; top: 69%; left: 35%; display: flex;margin: 0; padding: 0;}
+.priceCompareBox .anotherShop li{display: flex;align-items: flex-end;line-height: 1;margin-right: 6px;}
+.priceCompareBox .anotherShop li .name{background: #a21b3b; color: #fff; font-size: 1rem; padding: 3px 2px 2px;margin-right: 3px;}
+.priceCompareBox .anotherShop li .price{font-size: 1rem;}
+.priceCompareBox .anotherShop li .price .yen{font-size: 1rem; margin-left: 2px;}
+.priceCompareBox .caitolle{position: absolute; bottom: 2%; left: 35%; display: flex;align-items: flex-end;line-height: 1;}
+.priceCompareBox .caitolle .name{background: #a21b3b; color: #ffe800; font-weight: bold;font-size: 1rem; padding: 4px 6px 2px;margin-right: 6px;}
+.priceCompareBox .caitolle .price{font-weight: bold;font-size:1.9rem; color: #a21b3b; background:linear-gradient(transparent 70%, #ffe800 0%);}
+.priceCompareBox .caitolle .price .yen{font-size: 1.2rem; margin-left: 2px;}
+@media screen and (max-width: 320px) {
+.priceCompareBox .anotherShop{left: 33%;}
+.priceCompareBox .anotherShop li{margin-right: 2px;}
+.priceCompareBox .anotherShop li .name{margin-right: 1px; padding: 2px;}
+.priceCompareBox .anotherShop li .price .yen{margin-left: 1px;}
+.priceCompareBox .caitolle{left: 33%;}
+.priceCompareBox .caitolle .name{padding: 3px 3px 1px;}
+.priceCompareBox .caitolle .price{font-size: 1.6rem;}
+.priceCompareBox .caitolle .price .yen{font-size: 1rem; margin-left: 1px;}
+}
+
+
+/* コラム
+======================================================= */
+.single-column .main .mv{margin-bottom: 30px;}
+.single-column .main h1{font-size: 2.2rem; line-height: 1.3; font-weight: bold; padding-bottom: 15px;}
+.single-column .main h2{font-size: 2rem; line-height: 1.3; font-weight: bold; border-bottom: 3px solid #a51839; padding-bottom: 10px;}
+.single-column .main h2 + p{margin-top:20px;}
+.single-column .main h3{font-size: 2rem; line-height: 1.4; font-weight: bold; border-left: 3px solid #a51839; padding-left: 12px;}
+.single-column .main h3 + p{margin-top:15px;}
+.single-column .main h2 + h3{margin-top:30px;}
+.single-column .main p {font-size: 1.3rem; margin-bottom: 20px; line-height: 1.8;}
+.single-column .main p + h2{margin-top:40px;}
+.single-column .main p + h3{margin-top:30px;}
+
+
+
+
+.title-bar{background:#8e785e;color:#fff;font-size:12px;font-weight:bold;height:40px;line-height:40px;}
+.title-bar span{background:#a51739;display:inline-block;padding:0px 10px;margin-right:5px;}
+
+/* 注文情報
+======================================================= */
+.order-title{font-size:20px;font-weight:bold;}
+.order-title span{font-size:14px;font-weight:normal;display:block;}
+.info-content {width:96%;margin:0 auto;}
+.info-rows{vertical-align:top;margin-bottom:20px;}
+.info-rows h3{color:#8e785e;font-weight:bold;font-size:13px;padding:5px 0px;}
+.info-rows table{margin-bottom:10px;}
+.info-table{display:inline-block;width:100%;box-sizing:border-box;padding:20px;background:#f0eeeb;vertical-align: top; font-size:12px;}
+.info-rows tr td:first-child{background:#8e785e;color:#fff;padding:10px;white-space: nowrap;width:100px;}
+.info-rows tr td:last-child{background:#fff;color:#231815;padding:10px;}
+.info-rows tr td{border-bottom:3px solid #f0eeeb;}
+.info-rows .memo{width:100%;height:110px;padding:5px;box-sizing:border-box;background:#fff;margin-bottom:10px;}
+
+
+
+
+
+/*チャット*/
+.chat-content{}
+.chat-avatar , .chat-con{display:inline-block;vertical-align:top;}
+.chat-avatar{margin-right:30px;}
+.chat-avatar img{border-radius:50%;}
+.chat-rows{padding:20px;background:#d9d4cd;overflow-y:scroll;height:400px;}
+.chat-rows .row{margin-bottom:15px;}
+.chat-comment{background:#f0eeeb;padding:20px;}
+#input_content{border:1px solid #98856d;background:#fff;}
+.chat-comment textarea{width: calc(100% - 80px);border:0px;height:100px;padding:10px;font-size:12px;}
+.chat-comment .chat-send{background:#81694c;color:#fff;padding:10px;border-radius:5px;border:0px;font-size:12px;vertical-align:bottom;margin-bottom:5px;}
+
+.chat-con{width:90%;}
+.chat-con .user-name{color:#8e785e;display:block;font-size:12px;font-weight:bold;margin-right:10px;}
+.chat-con .datetime{color:#8e785e;display:block;font-size:12px;}
+
+
+
+.chat-rows .row-left{text-align:left;margin-bottom:15px;}
+.chat-rows .row-right{text-align:right;}
+.chat-rows .row-right . {}
+
+.chat-mess-left{
+	background:#fff9d8;
+	position:relative;
+	border-radius:10px;
+	font-size:12px;
+	padding:20px;
+}
+.chat-mess-left:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: -20px;
+  top: 30px;
+  border-right: 20px solid #fff9d8;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.chat-mess-right{
+	background:#fff;
+	position:relative;
+	text-align:left;
+	border-radius:10px;
+	font-size:16px;
+	padding:20px;
+}
+.chat-mess-right:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  right: -20px;
+  top: 30px;
+  border-left: 20px solid #ffffff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+
+.hilink{color: #8e785e;}
+.hilinkBox{display: flex; margin: 20px 0; padding: 0; flex-wrap: wrap;}
+.hilinkBox li{width: 100%; margin-bottom: 20px;}
+.hilinkBox li a{border: 1px solid #8e785e; background:url(../images/shop/tokei-repair/arw_red.gif) 12px center no-repeat;display: block; text-decoration: none;line-height: 1; padding: 12px 0 12px 2em;}
+
+
+
+
+
+#repair.section-inner{
+    width: 100%;
+}
+#repair .kind-of-repair-wrap .inner{
+    width: auto;
+}
+.section-ja-title{
+	font-size: 2rem;
+    padding-left:1em;
+}
+.shop-info-tab{
+    padding-left:1em;
+}
+#repair .br-pc{
+    display: block;
+}
+.swiper-button-next:after, .swiper-button-prev:after{
+	font-size: 20px;
+}

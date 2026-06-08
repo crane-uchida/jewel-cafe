@@ -1,0 +1,35 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+@use "../component/arrow" as arrow;
+
+.breadcrumbs {
+	margin-bottom: 24px;
+	padding: 13px 0 26px;
+	font-size: var.$base-font-size;
+  background-image: url("../images/common/dot-border-4.png");
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: auto 13px;
+	a {
+		display: inline-block;
+		color: var.$color-black;
+		position: relative;
+		padding-right: 24px;
+		span {
+			@include arrow.arrow-right-black;
+			border-right: solid 1px var.$color-black;
+			border-top: solid 1px var.$color-black;
+		}
+	}
+}
+
+.shop,
+.shop-detail,
+.purchase-page {
+	.breadcrumbs {
+		padding-top: 70px;
+		@include var.mq-up('xl') {
+			padding-top: 120px;
+		}
+	}
+}

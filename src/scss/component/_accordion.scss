@@ -1,0 +1,296 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+@use "../global/typograpy" as typo;
+@use "../component/arrow" as arrow;
+
+.accordion-purchase-ex,
+.shop-detail-faq,
+.accordion-section,
+.tokei-pricetable,
+.brand-pricetable,
+.card-pricetable {
+  .accordion {
+    .accordion-item {
+      border-bottom: 1px solid var.$color-gray;
+      .accordion-head a {
+        position: relative;
+        display: flex;
+        padding: 12px 20px 4px 0;
+        color: var.$color-black;
+        font-size: var.$base-font-size;
+        font-weight: bold;
+        @include var.mq-up("xl") {
+          font-size: typo.rem(16);
+        }
+        &:before,
+        &:after {
+          @include arrow.arrow-bottom-black;
+          transition: 0.2s;
+        }
+      }
+      .accordion-head .accordion-head-text {
+        padding: 12px 20px 4px 0;
+        color: var.$color-black;
+        font-size: var.$base-font-size;
+        font-weight: bold;
+        @include var.mq-up("xl") {
+          font-size: typo.rem(16);
+        }
+      }
+    }
+    .accordion-content {
+      margin-top: 8px;
+      padding: 0 12px;
+      p {
+        margin-bottom: 12px;
+        padding: 12px;
+        font-size: var.$small-font-size;
+        background: var.$color-light-gray;
+        @include var.mq-up("md") {
+          font-size: var.$base-font-size;
+        }
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .accordion-item[data-active] .accordion-head a {
+    &:before {
+      opacity: 0;
+    }
+    &:after {
+      transform: rotate(-135deg);
+    }
+  }
+}
+.shop-detail-faq {
+  .accordion-content p {
+    display: flex;
+  }
+}
+.tokei-pricetable,
+.brand-pricetable,
+.card-pricetable {
+  .accordion {
+    .accordion-content {
+      padding: 0;
+    }
+    table {
+      margin-bottom: 8px;
+      padding: 8px;
+      background: var.$color-light-gray;
+      letter-spacing: var.$ls-01;
+      width: 100%;
+      table-layout: fixed;
+      thead {
+        th {
+          padding: 8px;
+          text-align: left;
+          &:nth-of-type(1) {
+            width: 40%;
+          }
+          &:nth-of-type(2) {
+            width: 45%;
+          }
+          &:nth-of-type(3) {
+            width: 55%;
+          }
+        }
+      }
+      tbody {
+        tr {
+          border-top: 1px solid var.$color-c4-gray;
+        }
+        td {
+          padding: 8px;
+          &:last-of-type {
+            color: var.$color-red;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.tokei-pricetable,
+.card-pricetable{
+	.accordion{
+		.accordion-head{
+			position: relative;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			color: #323232;
+			font-size: 1rem;
+			font-weight: bold;
+			span{
+				padding:10px 0px;
+				&:hover {
+					cursor:pointer;
+					-webkit-transition:all .3s;
+					transition:all .3s;
+					opacity:.6;
+				}
+			}
+			i{
+				position: absolute;
+			  display: inline-block;
+			  top: 50%;
+			  bottom: 0;
+			  right: 8px;
+			  width: 6px;
+			  height: 6px;
+			  margin-top: -3px;
+			  -webkit-transform: translateY(-50%);
+			  -ms-transform: translateY(-50%);
+			  transform: translateY(-50%);
+			  -webkit-transform: rotate(45deg);
+			  -ms-transform: rotate(45deg);
+			  transform: rotate(45deg);
+			  content: "";
+			  border-bottom: solid 2px #323232;
+			  border-right: solid 2px #323232;
+			  -webkit-transition: 0.2s;
+			  transition: 0.2s;
+			}
+		}
+		.accordion-content2{
+			display:none;
+			.accordion-model{
+				padding:0px;
+				margin:0px;
+				position:relative;
+				td{
+					i{
+						position: absolute;
+						display: inline-block;
+						top: 50%;
+						bottom: 0;
+						right: 8px;
+						width: 6px;
+						height: 6px;
+						margin-top: -3px;
+						-webkit-transform: translateY(-50%);
+						-ms-transform: translateY(-50%);
+						transform: translateY(-50%);
+						-webkit-transform: rotate(45deg);
+						-ms-transform: rotate(45deg);
+						transform: rotate(45deg);
+						content: "";
+						border-bottom: solid 2px #323232;
+						border-right: solid 2px #323232;
+						-webkit-transition: 0.2s;
+						transition: 0.2s;
+					}
+					&:hover {
+						cursor:pointer;
+						-webkit-transition:all .3s;
+						transition:all .3s;
+						opacity:.6;
+			  	}
+				}
+			}
+			.model-content{
+				display:none;
+			}
+			table{
+				thead{
+					th{
+						&:nth-of-type(3) {
+							padding-right:40px;
+							text-align:right;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.card-pricetable{
+  .accordion{
+    table{
+      thead{
+        th{
+          &:nth-of-type(1){
+            width:60%;
+            @include var.mq-up("xl") {
+              width:75%;
+            }
+          }
+          &:nth-of-type(2){
+            width:20%;
+            @include var.mq-up("xl") {
+              width:12%;
+            }
+          }
+          &:nth-of-type(3){
+            width:20%;
+            @include var.mq-up("xl") {
+              width:13%;
+            }
+          }
+        }
+      }
+      tbody{
+        td{
+          &:nth-of-type(2){
+            padding-right:20px;
+            @include var.mq-up("xl") {
+              padding-right:40px;
+            }
+          }
+          &:nth-of-type(3){
+            padding-right:20px;
+            @include var.mq-up("xl") {
+              padding-right:40px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.brand-pricetable{
+  .model-content{
+    display: none;
+  }
+  .accordion{
+    table{
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.tokei-pricetable{
+  .accordion{
+    table{
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+
+.accordion-purchase-ex {
+  .accordion-head a {
+    position: relative;
+    display: inline-block;
+    color: var.$color-red;
+    padding: 8px 12px;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid var.$color-red;
+    &:before,
+    &:after {
+      @include arrow.arrow-bottom-red;
+      left: 0;
+      transition: 0.2s;
+    }
+  }
+}

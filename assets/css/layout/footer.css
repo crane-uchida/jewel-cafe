@@ -1,0 +1,140 @@
+.color-white {
+  color: #fff;
+}
+
+.color-black {
+  color: #323232;
+}
+
+.color-red {
+  color: #C80000;
+}
+
+.bg-white {
+  background: #fff;
+}
+
+.bg-red {
+  background: #C80000;
+}
+
+.bg-beige {
+  background: #FCF7F0;
+}
+
+.bg-pink {
+  background: #FEF8f8;
+}
+
+.bg-gray {
+  background: #8F8F8F;
+}
+
+.bg-light-gray {
+  background: #F1F1f1;
+}
+
+.xs-font-size {
+  font-size: 10px;
+}
+
+.small-font-size {
+  font-size: 12px;
+}
+
+.base-font-size {
+  font-size: 14px;
+}
+
+.section-ja-title-size {
+  font-size: 36px;
+}
+
+.section-en-title-size {
+  font-size: 26px;
+}
+
+.price-title-size {
+  font-size: 26px;
+}
+
+.sub-title-size {
+  font-size: 30px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.ls-01 {
+  line-height: 0.01em;
+}
+
+.ls-05 {
+  line-height: 0.05em;
+}
+
+.ls-15 {
+  line-height: 0.15em;
+}
+
+header {
+  background: #fff;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+@media screen and (min-width: 1201px) {
+  header .header-inner {
+    margin: 0 auto;
+    width: 1121px;
+  }
+}
+header .header-inner .header-pc {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 21px 0;
+}
+header .header-inner .header-pc img {
+  width: 247px;
+}
+header .header-inner .header-pc ul li + li {
+  margin-left: 27px;
+}
+header .header-inner .header-pc ul li:nth-of-type(1) a:before {
+  content: url("/assets/images/icon/menu-icon01.svg");
+  margin-right: 8px;
+  vertical-align: middle;
+  width: 21px;
+}
+header .header-inner .header-pc ul li:nth-of-type(2) a:before {
+  content: url("/assets/images/icon/menu-icon02.svg");
+  margin-right: 8px;
+  vertical-align: middle;
+  width: 19px;
+}
+header .header-inner .header-pc ul li:nth-of-type(3) a:before {
+  content: url("/assets/images/icon/menu-icon03.svg");
+  margin-right: 8px;
+  vertical-align: middle;
+  width: 20px;
+}
+header .header-inner .header-pc ul li:nth-of-type(4) a:before {
+  content: url("/assets/images/icon/menu-icon04.svg");
+  margin-right: 8px;
+  vertical-align: middle;
+  width: 14px;
+}
+header .header-inner .header-sp {
+  padding: 16px 16px 16px 24px;
+}
+header .header-inner .header-sp .header-logo-sp {
+  width: 115px;
+}
+header .header-inner .header-sp .menu img {
+  display: block;
+  vertical-align: middle;
+}
+/*# sourceMappingURL=../sourcemaps/layout/footer.css.map */

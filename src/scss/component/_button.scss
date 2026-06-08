@@ -1,0 +1,300 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+@use "../global/typograpy" as typo;
+@use "../component/arrow" as arrow;
+
+.button {
+	align-items: center;
+	color: #fff;
+	display: flex;
+	height: 48px;
+	justify-content: center;
+	max-width: 240px;
+	text-decoration: none;
+	width: 100%;
+	border: 1px solid;
+}
+.arrow {
+	position: relative;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 16px;
+		margin: auto 0;
+		width: 8px;
+		height: 8px;
+		border-top: solid 2px #fff;
+		border-right: solid 2px #fff;
+		box-sizing: border-box;
+		transform: rotate(45deg);
+	}
+}
+
+//button
+.base-btn {
+	position: relative;
+	display: inline-block;
+  padding: 16px 20px;
+	min-width: 200px;
+  border-radius: 30px;
+  color: var.$color-white;
+  font-size: var.$base-font-size;
+  background: var.$color-red;
+	text-align: center;
+	font-weight: bold;
+	@include var.mq-up('xl') {
+		padding: 16px 0;
+		font-size: typo.rem(16);
+	}
+	&.center-right-arrow {
+		&:after {
+			@include mixin.arrow-center-white;
+			width: 8px;
+			height: 13px;
+		}
+	}
+}
+
+//ボタンにつく矢印
+.center-right-arrow {
+	&:after {
+		@include mixin.arrow-center-white;
+		right: 12px;
+		background-size: 4px;
+	}
+}
+.center-right-arrow-small {
+	&:after {
+		@include mixin.arrow-center-white;
+		right: 12px;
+		width: 4px;
+	}
+}
+
+//red-border-button
+.red-bdr-btn {
+	@include mixin.red-bdr-btn;
+	&:after {
+		@include arrow.arrow-right-red;
+	}
+	@include var.mq-range('xs') {
+		font-size: var.$small-font-size;
+	}
+}
+
+//header
+.header {
+	ul {
+		li {
+			&:nth-of-type(1) {
+				a {
+					&:before {
+						width: 21px;
+						content: url("../images/icon/menu-icon01.svg");
+					}
+				}
+			}
+		}
+	}
+}
+
+//main-section
+.main-section {
+	img {
+		width: 100%;
+	}
+}
+
+//tab
+.common-tab {
+	ul {
+		li {
+			position: relative;
+			width: 50%;
+			text-align: center;
+			@include var.mq-up('xl') {
+				width: 25%;
+			}
+			+ li {
+				//border-left: 1px solid var.$color-white;
+				&:before {
+					@include mixin.top-bottom-center;
+					position: absolute;
+					background-color: var.$color-white;
+					height: 26px;
+					width: 1px;
+					left: 0;
+					content: "";
+				}
+			}
+			a.common-tab-01 {
+				&:before {
+					width: 16px;
+					margin-right: 8px;
+					vertical-align: middle;
+					content: url("../images/icon/top-nav-icon-01.svg");
+					@include var.mq-up('xl') {
+						width: 26px;
+					}
+				}
+			}
+			a.common-tab-02 {
+				&:before {
+					width: 14px;
+					margin-right: 8px;
+					vertical-align: middle;
+					content: url("../images/icon/top-nav-icon-02.svg");
+					@include var.mq-up('xl') {
+						width: 23px;
+					}
+				}
+			}
+			a.common-tab-03 {
+				&:before {
+					width: 17px;
+					margin-right: 8px;
+					vertical-align: middle;
+					content: url("../images/icon/top-nav-icon-03.svg");
+					@include var.mq-up('xl') {
+						width: 28px;
+					}
+				}
+			}
+			a.common-tab-04 {
+				&:before {
+					width: 16px;
+					margin-right: 8px;
+					vertical-align: middle;
+					content: url("../images/icon/top-nav-icon-04.svg");
+					@include var.mq-up('xl') {
+						width: 28px;
+					}
+				}
+			}
+			a {
+				display: block;
+				padding: 12px 0;
+				letter-spacing: var.$ls-01;
+				@include var.mq-up('xl') {
+					padding: 17px 0;
+				}
+			}
+		}
+	}
+}
+
+//tag
+.item-tag {
+	display: inline-block;
+	padding: 5px 13px;
+	color: var.$color-black;
+	font-size: var.$small-font-size;
+	text-align: center;
+	background: var.$color-white;
+	border: 1px solid var.$color-black;
+	border-radius: 50px;
+	letter-spacing: var.$ls-01;
+	@include var.mq-range('xs') {
+		font-size: var.$xs-font-size;
+	}
+	@include var.mq-up('xl') {
+		min-width: 75px;
+		padding: 5px 16px;
+		font-size: var.$base-font-size;
+	}
+}
+
+//border-arrow-btn
+a.border-arrow-btn {
+	position: relative;
+	display: inline-block;
+	margin-top: 4px;
+	padding: 16px 28px 10px 8px;
+	color: var.$color-black;
+	font-size: var.$base-font-size;
+	font-weight: bold;
+	@include var.mq-up('xl') {
+		padding: 16px 50px 10px 25px;
+	}
+	&:after {
+		position: absolute;
+		right: 0;
+		bottom: -3px;
+		content: url("../images/common/detail-btn-bottom-sp.svg");
+		@include var.mq-up('xl') {
+			content: url("../images/common/detail-btn-bottom.svg");
+		}
+	}
+}
+
+//page-top-link
+.page-top-link {
+	margin-top: 12px;
+	text-align: center;
+	a {
+		position: relative;
+		display: inline-block;
+		padding: 12px 32px 12px 20px;
+		color: var.$color-red;
+		font-weight: bold;
+		border-radius: 30px;
+		box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+		&:after {
+			@include arrow.arrow-top-red;
+			right: 12px;
+		}
+	}
+}
+
+// black-border-btn
+.black-border-btn {
+position: relative;
+display: inline-block;
+padding: 16px 20px;
+min-width: 200px;
+border-radius: 30px;
+color: var.$color-black;
+font-size: var.$base-font-size;
+background: var.$color-white;
+border: 2px solid var.$color-black;
+text-align: center;
+font-weight: bold;
+	@include var.mq-up('xl') {
+		padding: 16px 0;
+		font-size: typo.rem(16);
+	}
+	&.center-right-arrow {
+		&:after {
+			@include mixin.arrow-center-black;
+			width: 8px;
+			height: 13px;
+		}
+	}
+}
+
+//form-btn
+.form-btn,
+.form-back-btn {
+	max-width: 267px;
+	display: block;
+	margin: 0 auto;
+	padding: 14px 20px;
+	input {
+		border: none;
+		background: none;
+		color: var.$color-white;
+		font-weight: bold;
+		font-size: typo.rem(16);
+	}
+}
+
+.form-btn {
+	border: 2px solid var.$color-red;
+}
+.form-back-btn {
+	input {
+		color: var.$color-black;
+	}
+}

@@ -1,0 +1,103 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+
+//header
+header {
+  position: fixed;
+  width: 100%;
+  background: var.$color-white;
+  box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2);
+  z-index: 100;
+  .header-inner {
+    @include var.mq-up('xl') {
+      width: 1121px;
+      margin: 0 auto;
+    }
+    @include var.mq-range('xxl') {
+  		width: 99vw;
+      padding: 0 20px;
+    }
+    .header-pc {
+      display: flex;
+      padding: 21px 0;
+      justify-content: space-between;
+      align-items: center;
+      img {
+        width: 247px;
+        @include var.mq-range('xxl') {
+          width: 200px;
+        }
+      }
+      ul {
+        li {
+          + li {
+            margin-left: 27px;
+          }
+          &:nth-of-type(1) {
+            a {
+              &:before {
+      					width: 21px;
+                margin-right: 8px;
+                vertical-align: middle;
+      					content: url("../images/icon/menu-icon01.svg");
+      				}
+            }
+    			}
+          &:nth-of-type(2) {
+            a {
+              &:before {
+      					width: 19px;
+                margin-right: 8px;
+                vertical-align: middle;
+      					content: url("../images/icon/menu-icon02.svg");
+      				}
+            }
+    			}
+          &:nth-of-type(3) {
+            a {
+              &:before {
+      					width: 20px;
+                margin-right: 8px;
+                vertical-align: middle;
+      					content: url("../images/icon/menu-icon03.svg");
+      				}
+            }
+    			}
+          &:nth-of-type(4) {
+            a {
+              &:before {
+      					width: 14px;
+                margin-right: 8px;
+                vertical-align: middle;
+      					content: url("../images/icon/menu-icon04.svg");
+      				}
+            }
+    			}
+
+          &:nth-of-type(5) {
+            a {
+              &:before {
+      					width: 14px;
+                margin-right: 8px;
+                vertical-align: middle;
+      					content: url("../images/icon/menu-icon05.svg");
+      				}
+            }
+    			}
+        }
+      }
+    }
+    .header-sp {
+      padding: 16px 16px 16px 24px;
+      .header-logo-sp {
+        width: 115px;
+      }
+      .menu {
+        img {
+          display: block;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}

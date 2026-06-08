@@ -1,0 +1,12 @@
+@use "../global/variables" as var;
+
+.section-inner {
+	width: var.$layout-width-inner;
+	margin: 0 auto;
+  @include var.mq-down('lg') {
+    width: var.$width-main;
+  }
+	@include var.mq-range('xxl') {
+    padding: 0 20px;
+  }
+}

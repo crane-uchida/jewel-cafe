@@ -1,0 +1,339 @@
+<style>
+
+
+
+.accordion-purchase-ex .accordion .accordion-item .accordion-head a:before, .accordion-purchase-ex .accordion .accordion-item .accordion-head a:after, .shop-detail-faq .accordion .accordion-item .accordion-head a:before, .shop-detail-faq .accordion .accordion-item .accordion-head a:after, .accordion-section .accordion .accordion-item .accordion-head a:before, .accordion-section .accordion .accordion-item .accordion-head a:after, .tokei-pricetable .accordion .accordion-item .accordion-head a:before, .tokei-pricetable .accordion .accordion-item .accordion-head a:after, .tokei-pricetable .accordion .accordion-item .accordion-head a:before, .tokei-pricetable .accordion .accordion-item .accordion-head a:after, .card-pricetable .accordion .accordion-item .accordion-head a:before, .card-pricetable .accordion .accordion-item .accordion-head a:after{left:8px;border-bottom:solid 2px #de1122;border-right:solid 2px #de1122;}
+
+
+
+
+.tokei-pricetable .accordion table tbody td:last-of-type, .tokei-pricetable .accordion table tbody td:last-of-type, .card-pricetable .accordion table tbody td:last-of-type{font-weight:normal;color:#202020;}
+
+
+
+.accordion-purchase-ex .accordion .accordion-item, .shop-detail-faq .accordion .accordion-item, .accordion-section .accordion .accordion-item, .tokei-pricetable .accordion .accordion-item, .tokei-pricetable .accordion .accordion-item, .card-pricetable .accordion .accordion-item{border:0px;}
+
+
+
+
+.tokei-pricetable .accordion .accordion-model{
+	
+	position:relative;
+	
+}
+
+
+
+
+
+.tokei-pricetable .accordion .accordion-content2 .accordion-model td i{
+	border-bottom:solid 2px #de1122;border-right:solid 2px #de1122;bottom:0;content:"";
+	position:absolute;
+	left:8px;
+	top:50%;
+	display:inline-block;height:6px;transform:translateY(-50%);transform:rotate(-45deg);transition:.2s;width:6px;
+}
+
+
+
+
+
+
+.tokei-pricetable .accordion .accordion-item .accordion-head a:before{content:"";border:0px;} 
+
+.tokei-pricetable .accordion .accordion-item .accordion-head a:after{content:"";border:0px;}
+
+
+.tokei-pricetable .accordion .accordion-item .accordion-head i{
+	
+	border-bottom:solid 2px #de1122;
+	border-right:solid 2px #de1122;
+	bottom:0;
+	content:"";
+	position:absolute;
+	left:8px;
+	top:50%;
+	display:inline-block;
+	height:6px;
+	transform:translateY(-50%);
+	transform:rotate(-45deg);
+	transition:.2s;
+	width:6px;
+	
+}
+
+
+
+
+
+
+
+
+
+
+.accordion-content2{background:#f1f1f1;padding:10px;}
+
+.accordion-head{padding:0px 10px;border-bottom:1px solid #8f8f8f;}
+
+
+.accordion-purchase-ex .accordion .accordion-item .accordion-head a, .shop-detail-faq .accordion .accordion-item .accordion-head a, .accordion-section .accordion .accordion-item .accordion-head a, .tokei-pricetable .accordion .accordion-item .accordion-head a, .tokei-pricetable .accordion .accordion-item .accordion-head a, .card-pricetable .accordion .accordion-item .accordion-head a{padding-left:25px;}
+
+
+
+
+.model-price{color:#e31424;font-size:16px;font-weight:bold;}
+
+
+.model-title{font-size:12px;}
+
+.tokei-pricetable .accordion .model-content td:first-child{width:60%;vertical-align:middle;}
+
+.tokei-pricetable .accordion .accordion-content2 td:first-child{width:60%;vertical-align:middle;}
+
+
+
+.tokei-pricetable .accordion .model-content td{font-size:12px;}
+
+
+.accordion-model p{padding-left:25px;font-size:15px;}
+
+.accordion-model p:hover{cursor:pointer;}
+
+
+.tokei-pricetable .accordion .model-content td:last-child{text-align:right;padding-right:10px;}
+
+
+.model-title{font-size:9px;}
+
+
+@media (min-width: 800px) {
+
+	.model-title{font-size:11px;}
+
+	.accordion-content2{padding:30px 20px;}
+
+	.accordion-head{padding:0px 20px;border-bottom:1px solid #8f8f8f;}
+
+	.tokei-pricetable .accordion .model-content td:first-child{padding-left:50px;}
+
+	.model-price{color:#e31424;font-size:19px;font-weight:bold;padding-left:1em;}
+
+	.tokei-pricetable .accordion .model-content td{font-size:14px;}
+	
+	.tokei-pricetable .accordion .model-content td:first-child{width:45%;}
+	
+	.tokei-pricetable .accordion .accordion-content2 td:first-child{width:45%;vertical-align:middle;}
+
+
+}
+
+
+</style>
+
+
+
+
+<section class="tokei-pricetable">
+	<div class="common-ttl">
+		<div class="section-inner">
+			<h2 class="shop-title kaitori-title">
+				<span class="common-ttl-sub">ジュエルカフェの</span>
+				<span class="common-ttl-main"><?php the_title();?>買取価格<span class="color-red">相場表</span></span>
+			</h2>
+			<div class="common-ttl-en">Watch PriceTable</div>
+		</div>
+	</div>
+	<div class="section-inner">
+		<div class="accordion">
+			<?php
+				$post_type_slug = 'kaitori';
+				$args = array(
+					'post_type' => $post_type_slug,
+					'posts_per_page' => -1,
+					'post_parent' => $post->ID,
+					'no_found_rows' => true,
+				);
+				$the_query = new WP_Query($args);
+				if($the_query->have_posts()):
+				
+				
+				
+				
+				
+			?>
+			<?php //時計子ページのループ
+			while($the_query->have_posts()): $the_query->the_post();?>
+			
+			
+			<?php
+				if($post->ID == 76147 || $post->post_name == 'shop'){ continue; }			
+			?>
+			
+			
+			
+			<div class="accordion-item">
+				<p class="accordion-head">
+					<i></i>
+					<a href="javascript:void(0);">
+						<span><?php echo get_the_title();?>の買取相場</span>
+					</a>
+				</p>
+
+				<div class="accordion-content2">
+					<table>
+
+							<?php
+								//add field  50
+								for( $i=1; $i<=50; $i++){
+
+									if(get_field('モデル'.$i)){
+
+										$price = str_replace( '¥' , '' ,get_field('買取金額'.$i) );
+
+										echo '<tr>';
+										
+
+										echo '<td>'.get_field('モデル'.$i).'<div class="only-sp model-title">'.get_field('型番_デザイン'.$i).'</div></td>';
+										echo '<td class="only-pc">'.get_field('型番_デザイン'.$i).'</td>';
+										echo '<td align="right"><span class="model-title">新品買取相場価格</span><br  class="only-sp"><span class="model-price">¥'.$price.'</span></td>';
+										
+										echo '</tr>';
+
+									}
+
+								}
+							?>
+
+					</table>
+
+
+
+
+							<?php
+								$post_id = get_the_ID();
+								$temp = $the_query; //子ページのクエリを格納
+								$the_query = null; //孫ページ用に初期化
+
+								$args = array(
+									'post_type' => $post_type_slug,
+									'posts_per_page' => -1,
+									'post_parent' => $post_id,
+									'no_found_rows' => true,
+								);
+								$the_query = new WP_Query($args);
+								if($the_query->have_posts()):
+							?>
+							<?php //時計孫ページのループ
+								while($the_query->have_posts()): $the_query->the_post();?>
+
+							<table class="accordion-model">
+								<?php //孫ページのカスタムフィールド出力
+									if(get_field('モデル1')):
+								?>
+								<tr>
+									<td colspan="3" >
+										<i></i>
+										
+										<p>
+											<?php
+												$filed1 =  get_field('モデル1');
+
+												$filed1 = str_replace('42','',$filed1);
+
+												$filed1 = str_replace('34','',$filed1);
+
+												echo $filed1;
+
+											?>
+										</p>
+										
+									</td>
+								</tr>
+								<?php endif;?>
+							</table>
+
+
+
+							<div class="model-content">
+								<table>
+									<?php
+									
+										//ロレックスのみ 対応
+										
+										$parent_id = $post->post_parent;
+										
+										$parent_title = get_post($parent_id)->post_title;
+										
+							
+										
+										if(get_post($parent_id)->post_name == 'rolex-top'){
+
+											$tokei_ratio = 0.65;
+											
+											if( trim(get_field('ratio')) !== ''){
+												
+												$tokei_ratio = get_field('ratio') * 0.01;
+												
+												
+											}
+									
+										}
+										
+										
+										
+										
+										//add field  50
+										for( $i=1; $i<=85; $i++){
+
+											if(get_field('モデル'.$i)){
+													
+												$price = get_field('買取金額'.$i);	
+													
+													//ロレックスのみ 対応
+													if(get_post($parent_id)->post_name == 'rolex-top'){
+
+														if(trim($price) !== 'ASK'){
+
+															//$price = $price * $tokei_ratio;
+															
+															$price = 0;
+															
+															$price =  number_format(round($price,-4));
+
+														}
+
+													}
+
+
+												$price = str_replace('¥','',$price);
+												
+												
+
+												echo '<tr>';
+												echo '<td>'.get_field('モデル'.$i).'<div class="only-sp model-title">'.get_field('型番_デザイン'.$i).'</div></td>';
+												echo '<td class="only-pc">'.get_field('型番_デザイン'.$i).'</td>';
+												echo '<td align="right"><span class="model-title">新品買取相場価格</span><br  class="only-sp"><span class="model-price">¥'.$price.'</span></td>';
+												echo '</tr>';
+
+											}
+										}
+									?>
+								</table>
+							</div>
+
+
+							<?php endwhile; endif;
+								$the_query = null; //子ページのクエリに戻すため初期化
+								$the_query = $temp; //子ページのクエリに戻す
+							?>
+						</table>
+
+				</div>
+			</div>
+
+			<?php endwhile; wp_reset_postdata(); endif;?>
+		</div>
+			<p class="table-att small-font-size ta-l mt-20">*掲載情報は該当商品の新品もしくは新古品にて算出した価格となります。また、市場価格は随時変動いたしますので、店舗にて実際にお買取させていただく価格とも異なる場合がございます。あらかじめご了承くださいませ。</p>
+	</div>
+
+</section>

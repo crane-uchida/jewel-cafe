@@ -1,0 +1,55 @@
+@use "../global/variables" as var;
+@use "../global/mixin" as mixin;
+
+//right
+@mixin arrow-right-black {
+	@include mixin.arrow;
+	border-top: solid 2px var.$color-black;
+  border-right: solid 2px var.$color-black;
+}
+@mixin arrow-right-red {
+	@include mixin.arrow;
+	border-top: solid 2px var.$color-red;
+  border-right: solid 2px var.$color-red;
+}
+@mixin arrow-right-white {
+	@include mixin.arrow;
+	border-top: solid 2px var.$color-white;
+  border-right: solid 2px var.$color-white;
+}
+
+//left
+@mixin arrow-left-black {
+	@include mixin.arrow;
+	border-bottom: solid 2px var.$color-black;
+  border-left: solid 2px var.$color-black;
+}
+@mixin arrow-left-red {
+	@include mixin.arrow;
+	border-bottom: solid 2px var.$color-red;
+  border-left: solid 2px var.$color-red;
+}
+@mixin arrow-left-white {
+	@include mixin.arrow;
+	border-bottom: solid 2px var.$color-white;
+  border-left: solid 2px var.$color-white;
+}
+
+//top
+@mixin arrow-top-red {
+	@include mixin.arrow;
+	border-top: solid 2px var.$color-red;
+  border-left: solid 2px var.$color-red;
+}
+
+//bottom
+@mixin arrow-bottom-black {
+	@include mixin.arrow;
+	border-bottom: solid 2px var.$color-black;
+  border-right: solid 2px var.$color-black;
+}
+@mixin arrow-bottom-red {
+	@include mixin.arrow;
+	border-bottom: solid 2px var.$color-red;
+  border-right: solid 2px var.$color-red;
+}

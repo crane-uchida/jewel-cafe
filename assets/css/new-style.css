@@ -1,0 +1,2768 @@
+#js-body .wrap-inner > *:not(header) {
+	/*
+	font-family: "Yu Gothic Medium", "游ゴシック Medium","游ゴシック体",YuGothic,"游ゴシック","Yu Gothic","メイリオ","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+	*/	
+	font-family: "游ゴシック Medium","Yu Gothic Medium","游ゴシック体","YuGothic","游ゴシック","Yu Gothic","メイリオ","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+
+}
+
+
+
+
+
+.selectWrap{
+  position: relative;
+  display: inline-block;
+
+}
+
+.selectWrap::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border: 0px;
+  border-bottom: solid 2px #9A854A;
+  border-right: solid 2px #9A854A;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  margin-top: -4px;
+  z-index:999;
+}
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fcf7f0;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #9A854A;
+  border-radius: 2px;
+  color:#9A854A;
+  font-size:18px;
+  font-weight:bold;
+  padding:17px;
+}
+select::-ms-expand {
+    display: none;
+}
+
+
+.kaitori-goldtool{
+	
+	color:#9A854A;
+	
+}
+
+.kaitori-goldtool .goldtool-title{
+	
+	border-left:2px solid #C80000;
+	color:#323232;
+	font-size:27px;
+	margin-top:50px;
+	padding:10px 18px;
+	
+}
+
+
+.kaitori-goldtool .goldtool-weight{
+	
+	font-size:18px;
+	background:#fcf7f0;
+	padding:16px;
+	max-width:150px;
+	color:#9b864c;
+	border:1px solid #9a854a;
+	border-radius:0px;
+	
+}
+
+
+
+.kaitori-goldtool .goldtool-price{
+	
+	border-bottom:1px solid #9A854A;
+	padding:10px 20px;
+	display:flex;
+	align-items:end;
+	
+}
+
+
+
+.kaitori-goldtool .weight-label{
+	
+	display:flex;
+    justify-content: space-between;
+    align-items: end;
+	margin-right:50px;
+	
+}
+
+
+
+
+
+#souba_price{
+	
+	display:inline-block;
+	font-size:32px;
+	font-weight:bold;
+	width:180px;
+	padding:0px 5px;
+	text-align:right;
+	border:0px;
+	color:#9a854a;
+	
+}
+
+
+
+.kaitori-goldtool .goldtool-label{
+	
+	color:#9A854A;
+	font-size:18px;
+	font-weight:bold;
+	
+}
+
+
+.kaitori-goldtool .goldtool-label p{
+	
+	margin-bottom:10px;
+	
+}
+
+
+
+.kaitori-goldtool .goldtool-label .dli-close {
+
+  display: block;
+  vertical-align: middle;
+  color: #9a854a;
+  line-height: 1;
+  width: 1em;
+  height: 0.1em;
+  background: currentColor;
+  border-radius: 0.1em;
+  position: relative;
+  transform: rotate(45deg);
+  margin:10px 10px 25px 10px;
+  
+}
+
+
+.kaitori-goldtool .goldtool-label .dli-close::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: inherit;
+  transform: rotate(90deg);
+}
+
+
+
+
+
+
+.kaitori-goldtool .goldtool-inner{
+	
+	font-size:18px;
+	padding:30px 0px;
+	display:flex;
+	justify-content:flex-start;
+	align-items:end;
+	flex-wrap:wrap;
+	
+}
+
+
+
+.gold-sb-title{
+	
+	background:#C80000;
+	font-size:28px;
+	color:#fff;
+	padding:22px 38px;
+	line-height:1.2;
+	letter-spacing: 0px;
+}
+
+.gold-sb-con{
+	
+	font-size:16px;
+	color:#323232;
+	letter-spacing: 0px;
+}
+
+.gold-sb-con h2{
+	
+	font-size:28px;
+	font-weight:bold;
+	padding:17px 0px;
+	border-bottom:2px solid #C80000;
+	
+}
+
+.gold-sb-con h3{
+	
+	font-size:20px;
+	font-weight:bold;
+	border-left:2px solid #C80000;
+	padding-left:15px;
+
+}
+
+.gold-sb-con img{
+
+	margin:20px 0px;
+
+}
+
+
+
+
+
+
+.kaitori section {
+	padding-bottom: 0;
+	margin-bottom: 0
+}
+
+
+.common-kaitori-resuluts {
+	background: transparent
+}
+
+.animated {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both
+}
+
+@-webkit-keyframes slideDown {
+	0% {
+		opacity: 1;
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px)
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0)
+	}
+}
+
+@keyframes slideDown {
+	0% {
+		opacity: 1;
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px)
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0)
+	}
+}
+
+.slide-down {
+	-webkit-animation-name: slideDown;
+	animation-name: slideDown
+}
+
+@-webkit-keyframes slideUp {
+	0% {
+		-webkit-transform: translateY(20px);
+		transform: translateY(20px)
+	}
+
+	100% {
+		-webkit-transform: translateY(0px);
+		transform: translateY(0px)
+	}
+}
+
+@keyframes slideUp {
+	0% {
+		-webkit-transform: translateY(20px);
+		transform: translateY(20px)
+	}
+
+	100% {
+		-webkit-transform: translateY(0px);
+		transform: translateY(0px)
+	}
+}
+
+.slide-up {
+	-webkit-animation-name: slideUp;
+	animation-name: slideUp
+}
+
+.lh-10 {
+	line-height: 1
+}
+
+.lh-20 {
+	line-height: 1.8
+}
+
+.p-r {
+	position: relative
+}
+
+.kaitori .intro-title {
+	font-size: 40px;
+	margin-bottom: 40px
+}
+
+.kaitori .intro-txt {
+	font-size: 18px;
+	letter-spacing: .6px
+}
+
+.kaitori-market-price .slide-down .kaitori-price-table {
+	height: 100%;
+	padding-bottom: 0;
+	overflow: hidden
+}
+
+.note {
+	font-size: 10px;
+	margin-top: 10px
+}
+
+.common-kaitori-resuluts {
+	margin-bottom: 20px
+}
+
+.kaitori-voice .voice-list2 .voice-txt .more:after {
+	content: "";
+	transform: none;
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	top: 50%;
+	transform: rotate(45deg);
+	border-top: solid 2px #404040;
+	border-right: solid 2px #404040;
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg)
+}
+
+.kaitori-voice .voice-list2 .voice-txt .more.is-active:after {
+	transform: rotate(315deg);
+	-webkit-transform: rotate(315deg)
+}
+
+
+
+.common-kaitori-resuluts .slide-down .item-list {
+	height: 100%;
+	padding-bottom: 0;
+	overflow: hidden
+}
+
+
+
+
+.kaitori .kaitori-intro {
+	margin-bottom: 20px
+}
+
+.kaitori .kaitori-search-model {
+	margin-bottom: 20px;
+}
+
+.kaitori-intro .intro-title {
+	font-size: 40px
+}
+
+.color-red2 {
+	color: #c20006
+}
+
+.color-red3 {
+	color: #C80000
+}
+
+
+
+.kaitori .pink_bg {
+	background: #ffdad2;
+	padding-top: 60px;
+	padding-bottom: 65px
+}
+
+.kaitori .gray_bg {
+	background: #e7e7e7;
+	padding-top: 60px;
+	padding-bottom: 65px
+}
+
+
+
+.kaitori .kaitori-blog {
+	padding:30px 0px 0px 0px;
+}
+
+.kaitori .kaitori-accordion {
+	
+	padding:30px 0px;
+}
+
+.kaitori .kaitori-ways {
+	padding:30px 0px;
+}
+
+.kaitori .kaitori-how-to-sell {
+	padding:30px 0px;
+}
+
+.kaitori .kaitori-faq {
+	padding:30px 0px;
+}
+
+.kaitori .kaitori-voice {
+	padding:30px 0px;
+}
+
+.kaitori .kaitori-kinds {
+	padding:30px 0px;
+}
+.kaitori .kaitori-kinds.letter-top{
+	margin-top:45px;
+}
+@media (max-width: 990px){
+	.kaitori .kaitori-kinds.letter-top{
+		margin-top:20px;
+	}
+}
+
+.kaitori .kaitori-rank {
+	padding:30px 0px;
+}
+
+
+.kaitori .kaitori-purchase {
+	padding:50px 0px;
+}
+
+
+
+
+.arrow_r {
+	position: relative;
+	display: inline-block
+}
+
+.arrow_r::after {
+	content: '';
+	width: 6px;
+	height: 6px;
+	border: 0;
+	border-top: solid 2px #fff;
+	border-right: solid 2px #fff;
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	margin-top: -4px;
+	transform: rotate(45deg)
+}
+
+.half {
+	width: 50%
+}
+
+.arrow_r_icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 20px
+}
+
+.arrow_r_icon img {
+	max-width: 30px
+}
+
+.section-title {
+	margin-bottom: 37px;
+	max-width: 550px;
+	position: relative;
+	padding: 10px 0
+}
+
+.section-ttl-sub {
+	font-size: 25px;
+	font-weight: bold;
+	letter-spacing: 0
+}
+
+.section-ttl-main {
+	font-size: 33px;
+	font-weight: bold;
+	margin-bottom: 33px
+}
+
+.section-ttl-con {
+	font-size: 15px;
+	margin-bottom: 40px
+}
+
+.kaitori-kinds .section-ttl-main {
+	font-size: 33px;
+	letter-spacing: 0;
+	margin-bottom: 45px
+}
+
+.banner-ttl-con {
+	padding: 45px 0;
+	font-size: 18px;
+	letter-spacing: -0.6px
+}
+
+.brbr-archive-link {
+	color: #fff;
+	font-size: 23px;
+	font-weight: 700;
+	background: #c80000;
+	display: inline-block;
+	margin: 0 auto;
+	padding: 14px 150px 14px 105px;
+	border-radius: 50px;
+	position: relative
+}
+
+.brbr-archive-link:before {
+	position: absolute;
+	padding: 10px 0;
+	bottom: 0;
+	top: 50%;
+	right: 24px;
+	width: 12px;
+	height: 12px;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	-webkit-transform: translateY(-50%) rotate(-45deg);
+	transform: translateY(-50%) rotate(-45deg);
+	margin: 0 auto
+}
+
+
+
+
+
+.point-title{
+	
+	display:flex;
+	margin-bottom:40px;
+	
+}
+
+.point-title .point-kuma{
+	margin-bottom:10px;
+}
+
+
+
+.point-title p{
+
+	color:#FFA102;
+	font-size:18px;
+	
+}
+
+.point-title h2 , .point-title{
+	font-size:17px;
+	font-weight:bold;
+	line-height:1.3;
+}
+
+@media (min-width: 800px) {
+	.point-title h2 , .point-title{
+		font-size:35px;
+		font-weight:bold;
+	}
+	
+}
+
+.point-title .point-bg{
+	
+	background:#c80000;
+	border-radius:10px;
+	color:#fff;
+	padding:10px 15px;
+	position:relative;
+	margin-left:20px;
+	
+}
+
+.point-title .point-bg:before {
+	position: absolute;
+	content: '';
+	border: 5px solid transparent;
+	border-right: 20px solid #c80000;
+	top: 50%;
+	left: -20px;
+	-webkit-transform: translate(0%, -50%);
+	transform: translate(0%, -50%);	
+}
+
+
+
+
+
+
+@media (max-width: 800px) {
+
+	.point-title{display:block;}
+		
+	.point-title .point-bg:before {
+		position: absolute;
+		content: '';
+		border: 5px solid transparent;
+		border-bottom: 20px solid #c80000;
+		left: 60px;
+		top: -15px;
+		-webkit-transform: translate(-50%, 0%);
+		transform: translate(-50%, 0%);	
+	}
+	
+	.point-title-inner{
+		
+		width:100%;
+		
+	}
+	
+	.point-title .point-bg{
+		
+		margin:0px;
+		
+	}
+	
+	.point-title .point-title-inner{
+		
+		font-size:15px;
+		font-weight:bold;
+		
+	}
+	
+	.point-title .point-bg h2 , .point-title{
+		font-size:17px;
+		letter-spacing:-0.5px;
+		
+	}
+	
+	.point-title .point-kuma{
+		
+		margin-right:10px;
+		
+	}
+	
+
+}
+
+
+
+
+
+
+
+
+.point-bar {
+	height: 50px;
+	align-items: center;
+	line-height: 1.2
+}
+
+.point-bar::before {
+	position: absolute;
+	padding: 10px 0;
+	bottom: 0;
+	width: 84px;
+	height: 120%;
+	display: block;
+	background-image: url(/wp-content/themes/jewelcafe_replace/assets/images/icon/point_minami.png);
+	content: "";
+	background-size: cover;
+	background-repeat: no-repeat
+}
+
+.point-bar .point-bar-title {
+	margin-left: 84px;
+	font-size: 21px;
+	font-weight: bold;
+	letter-spacing: -0.8px
+}
+
+.point-bar span {
+	font-size: 31px;
+	padding: 0 10px;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	border-left: 1px solid #fff;
+	transform: translate(0,-50%);
+	-webkit-transform: translate(0,-50%);
+	-ms-transform: translate(0,-50%);
+	font-family: "Noto Sans JP",sans-serif
+}
+
+.red-bar {
+	position: relative
+}
+
+.red-bar::before {
+	position: absolute;
+	padding: 10px 0;
+	bottom: 0;
+	width: 146px;
+	height: 120%;
+	display: block;
+	content: "";
+	background-size: contain;
+	background-repeat: no-repeat
+}
+
+.red-bar .red-bar-title {
+	margin-left: 160px;
+	padding: 30px 0;
+	font-size: 32px
+}
+@media screen and (max-width:767px){
+	.red-bar .red-bar-title{
+		margin-left: 133px;
+	}
+}
+
+.column-title::before {
+	background-image: url(//jewel-cafe.jp/wp-content/themes/jewelcafe_replace/assets/images/static/column-youko.png);
+	background-position: bottom
+}
+
+.mame-title::before {
+	background-image: url(//jewel-cafe.jp/wp-content/themes/jewelcafe_replace/assets/images/static/mame-youko.png);
+	background-position: bottom
+}
+
+.column-title {
+	font-size: 33px
+}
+
+.red-bar-by {
+	font-size: 17px
+}
+
+.ways90 {
+	width: 90%
+}
+
+
+
+.kaitori .policies {
+	padding: 35px 25px
+}
+
+.policies .policies-wrap {
+	margin-bottom: 15px
+}
+
+.policies .policies-img {
+	margin-right: 15px
+}
+
+.policies .policies-img img {
+	max-width: 280px
+}
+
+.policies .policies-num {
+	padding: 10px;
+	display: inline-block;
+	font-size: 12px
+}
+
+.policies .policies-title {
+	font-size: 20px;
+	color: #404040;
+	letter-spacing: 0
+}
+
+.kaitori_btn {
+	background: #C80000;
+	border-radius: 10px
+}
+
+.kaitori-img {
+	width: 30%
+}
+
+.kaitori-img img {
+	width: 100%;
+	display: block
+}
+
+.kaitori-name-info {
+	color: #fff;
+	margin: 0 auto
+}
+
+.kaitori-type-txt {
+	letter-spacing: -1.2px
+}
+
+.kaitori-how-to-inner {
+	justify-content: space-between
+}
+
+.kaitori-type-info {
+	margin-bottom: 7px
+}
+
+.kaitori-type-list {
+	width: 32.5%
+}
+
+.kaitori-type-img {
+	margin-right: 7px
+}
+
+.kaitori-name {
+	font-size: 37px
+}
+
+.kaitori-name2 {
+	font-size: 14px
+}
+
+.kaitori-name {
+	position: relative
+}
+
+.kaitori-name:before {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	background-image: url(//jewel-cafe.jp/wp-content/themes/jewelcafe_replace/assets/images/common/arrow-right-red.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 9px 15px;
+	vertical-align: middle;
+	content: "";
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background-color: #fff
+}
+
+.count-area {
+	padding: 10px 55px;
+	border: 1px solid #9f9f9f
+}
+
+.count-rev {
+	font-size: 10px;
+	font-weight: bold;
+	color: #3f3f3f;
+	display: block
+}
+
+.kaitori-voice .voice-list2 {
+	background: #fff;
+	padding: 0
+}
+
+.kaitori-voice-title {
+	justify-content: space-between
+}
+
+.kaitori-voice .voice-list2 .voice-list-item .voice-default .voice-ttl {
+	font-size: 20px
+}
+
+.kaitori-voice .voice-list2 .voice-txt .voiceBox {
+	font-size: 18px;
+	letter-spacing: -0.4px;
+	line-height: 1.8
+}
+
+.kaitori-voice .voice-rating .count-ranting {
+	justify-content: center
+}
+
+.kaitori-kinds-list li .kaitori-kinds-label {
+
+}
+
+.kaitori-kinds-list li .kaitori-kinds-label h3 {
+
+}
+
+.kaitori-column-wrapper {
+	margin-top: 60px
+}
+
+.kaitori-kinds-list li {
+	width: 18%
+}
+@media screen and (max-width: 990px) {
+	.kaitori-kinds-list.column4 li{
+		width: 47%;
+	}
+	.kaitori-kinds-list.column9 li{
+		width: 24%;
+	}
+}
+@media screen and (min-width: 1000px) {
+	.kaitori-kinds-list.column4 li{
+		width: 23%;
+	}
+	.kaitori-kinds-list.column9 li{
+		width: 10%;
+	}
+}
+
+.kaitori-inner-ways {
+	background: #fff;
+	padding: 40px 30px;
+	letter-spacing:
+}
+
+.kaitori-inner-ways .kaitori-ways-num {
+	display: inline-block;
+	padding: 10px 15px;
+	font-weight: bold
+}
+
+.kaitori-inner-ways h3 {
+	font-size: 24px;
+	margin: 20px 0;
+	position:relative;
+}
+
+.kaitori-inner-ways h3:hover {
+	
+	cursor:pointer;
+
+}
+
+
+
+
+
+
+
+.kaitori-inner-ways p {
+	margin-bottom: 30px;
+	font-size: 18px;
+	color: #404040
+}
+
+.kaitori-model-search {
+	border-radius: 10px;
+	padding: 25px 50px
+}
+
+.kaitori-model-search .model-search-title {
+	font-size: 22px;
+	white-space: nowrap
+}
+
+.kaitori-model-search .model-search-hot {
+	font-size: 16px;
+	color: #fff
+}
+
+.kaitori-model-search .model-search-form {
+	margin-top: 10px;
+	width: 48%
+}
+
+.kaitori-model-search .model-search-keyword {
+	margin-top: 10px;
+	width: 48%;
+	margin-left: 30px
+}
+
+.kaitori-model-search .model-search-keyword ul {
+	flex-wrap: wrap
+}
+
+.kaitori-model-search .model-search-keyword li:nth-child(2),.kaitori-model-search .model-search-keyword li:nth-child(5) {
+	margin: 0 5px
+}
+
+.kaitori-model-search .model-search-keyword li a {
+	display: block;
+	color: #fff;
+	padding: 5px;
+	font-size: 16px;
+	border: 1px solid #fff;
+	border-radius: 100px;
+	margin-bottom: 5px
+}
+
+.kaitori-model-search .model-search-input {
+	border-radius: 10px 0 0 10px;
+	width: 100%;
+	border: 0;
+	padding: 0;
+	padding-left: 10px;
+	height: 64px;
+	line-height: 64px
+}
+
+placeholder{
+
+	line-height:64px;
+	
+}
+
+
+.kaitori-model-search .model-search-btn {
+	background: #ffa101;
+	border: 0;
+	color: #fff;
+	line-height: 110%;
+	border-radius: 0 10px 10px 0;
+	min-width: 110px;
+	font-size: 20px;
+	padding: 10px 0;
+	position: relative;
+	right: 5px
+}
+
+.kaitori-model-search .model-search-btn:hover {
+	cursor: pointer
+}
+
+.maket-more {
+	position: relative
+}
+
+.kaitori-price-img {
+	width: 45%;
+	align-items: flex-start
+}
+
+.kaitori-price-list {
+	justify-content: flex-start;
+	letter-spacing: -0.5px;
+	border-top: 1px solid #424242;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 50px
+}
+
+.kaitori-price-list .old-year {
+	background: #737373;
+	padding: 5px 10px;
+	font-size: 10px;
+	margin-right: 7px;
+	white-space: nowrap
+}
+
+.kaitori-price-list .new-year {
+	background: #c80000;
+	padding: 5px 10px;
+	font-size: 17px;
+	margin-right: 7px;
+	white-space: nowrap
+}
+
+.kaitori-price-list .old-price {
+	min-width: 260px;
+	font-size: 22px;
+	letter-spacing: -0.5px
+}
+
+.kaitori-price-list .new-price {
+	font-size: 30px;
+	color: #C80000;
+	letter-spacing: -0.5px
+}
+
+.main-banner {
+	max-width: 1000px;
+	margin: 0 auto
+}
+
+.main-banner img {
+	width: 100%
+}
+
+.ex-purchase .ex-purchase-img {
+	width: 50%
+}
+
+.ex-purchase ul.ex-purchase-list li {
+	padding: 20px;
+	width: 48%
+}
+
+.ex-purchase ul.ex-purchase-list li .ex-purchase-sub {
+	width: 100%
+}
+
+.ex-purchase ul.ex-purchase-list li .ex-purchase-label {
+	min-width: 48%;
+	max-width: 164px
+}
+
+.ex-purchase ul.ex-purchase-list li .ex-purchase-comparison {
+	margin-top: 20px
+}
+
+.ex-purchase ul.ex-purchase-list li .ex-purchase-comparison .ex-purchase-price {
+	padding: 0;
+	padding-top: 11px
+}
+
+.ex-purchase ul.ex-purchase-list li .ex-purchase-label .ex-purchase-price {
+	position: relative;
+	justify-content: normal
+}
+
+.ex-purchase ul.ex-purchase-list li .ex-purchase-label .ex-purchase-price .ex-purchase-value {
+	font-size: 32px;
+	font-family: "Arial";
+	letter-spacing: 0;
+	width: 100%;
+	text-align: center
+}
+
+.ex-purchase-info {
+	letter-spacing: 0
+}
+
+.ex-purchase-info .index {
+	font-size: 27px
+}
+
+.ex-purchase ul.ex-purchase-list li .ex-purchase-sub {
+	font-size: 20px;
+	font-weight: bold
+}
+
+.ex-purchase-title-info {
+	position: absolute;
+	top: -15px;
+	left: 10px;
+	padding: 3px 6px;
+	background: #f99c20;
+	font-size: 13px;
+	letter-spacing: 0
+}
+
+.ex-purchase-title-info .index h3 {
+	font-size: 24px;
+	letter-spacing: -1px
+}
+
+.ex-price-yen {
+	font-size: 17px;
+	display: inline-block
+}
+
+.ex-purchase ul.ex-purchase-list li table tr th {
+	padding: 0 10px;
+	font-size: 17px;
+	font-weight: bold;
+	background: #fff;
+	border: 1px solid #707070;
+	color: #323232;
+	letter-spacing: -0.5px;
+	vertical-align: middle
+}
+
+.ex-purchase ul.ex-purchase-list li table tr td {
+	font-family: "Arial";
+	font-size: 27px;
+	font-weight: bold;
+	letter-spacing: -1px
+}
+
+.ex-purchase ul.ex-purchase-list li .ex-purchase-comparison {
+	margin-top: 15px
+}
+
+.kaitori-column-img {
+	width: 180px;
+	min-width: 180px;
+	max-width: 180px;
+	margin-right: 10px;
+	overflow: hidden;
+	position: relative;
+	max-height: 140px
+}
+
+.kaitori-column-img img {
+	object-fit: cover;
+	width: 180px;
+	height: 135px
+}
+
+.kaitori-column .kaitori-ttl {
+	font-size: 16px
+}
+
+.kaitori-info {
+	position: relative;
+	width: 100%
+}
+
+.kaitori-info h3 {
+	line-height: 1.2
+}
+
+.kaitori-column-list {
+	flex-wrap: wrap;
+	justify-content: space-between
+}
+
+.kaitori-column-content {
+	width: 47%;
+	margin-bottom: 30px
+}
+
+.kaitori-txt {
+	position: absolute;
+	bottom: 0;
+	right: 0
+}
+
+.kaitori-column .kaitori-column-btn {
+	padding: 8px 20px;
+	background: #c80000;
+	border-radius: 100px;
+	display: inline-block;
+	color: #fff;
+	font-size: 14px;
+	border: 0
+}
+
+.kaitori-faq .kaitori-faq-list {
+	margin-bottom: 0
+}
+
+.kaitori-faq .kaitori-faq-list dt .faq-txt {
+	font-size: 24px;
+	width: 90%
+}
+
+.kaitori-faq .kaitori-faq-list dd .faq-txt {
+	padding: 10px 0;
+	letter-spacing: 1px
+}
+
+.kaitori-faq-list dt {
+	padding: 32px 0;
+	border-top: 1px solid #9f9f9f
+}
+
+.kaitori-faq-list:last-child dt {
+	border-bottom: 1px solid #9f9f9f
+}
+
+.kaitori-faq-list dt:hover {
+	cursor: pointer
+}
+
+.kaitori-faq-list dd {
+	display: none
+}
+
+.blog-archive-list li .blog-archive-content {
+	background: #C80000;
+	border-radius: 0 0 4px 4px
+}
+
+.blog-archive-list li .blog-catch-img .blog-archive-date {
+	background: #fff;
+	color: #C80000;
+	border-radius: 0;
+	bottom: -5px;
+	left: 5px
+}
+
+.blog-archive-list li .blog-archive-category {
+	color: #ffa100;
+	font-weight: bold
+}
+
+.blog-archive-list li .blog-archive-category2 {
+	color: #fff;
+	font-weight: bold;
+	font-size: 12px;
+	margin-bottom: 5px
+}
+
+.blog-archive-list li .blog-archive-ttl {
+	color: #fff;
+	min-height: 35px
+}
+
+.blog-archive-list li .blog-archive-shop {
+	color: #fff
+}
+
+.kaitori-rank-inner {
+	justify-content: space-between
+}
+
+.kaitori-ranking .kaitori-rank-list {
+	min-height: 290px;
+	box-shadow: none;
+	background: #f7f7f7;
+	border: 1px solid #7f7f7f;
+	border-radius: 10px;
+	padding: 15px;
+	margin-top: 0;
+	width: 32%
+}
+
+.kaitori-ranking .kaitori-rank-list .kaitori-rank-txt {
+	padding: 0;
+	margin-top: 10px;
+	letter-spacing: -0.2px;
+	color: #000;
+	line-height: 1.8
+}
+
+.kaitori-ranking .kaitori-rank-list img {
+	width: 100%
+}
+
+.kaitori-rank-item {
+	letter-spacing: 0;
+	font-size: 21px;
+	font-weight: bold;
+	margin-left: 12px;
+	margin-top: 20px
+}
+
+.kaitori-rank-txt {
+	font-size: 15px
+}
+
+.kaitori-rank .kaitori-rank-list+.kaitori-rank-list {
+	margin-top: 0
+}
+
+header .header-inner .header-sp .header-logo-sp {
+	width: 178px
+}
+
+
+
+.header-txt {
+	margin-bottom: 10px
+}
+
+
+
+
+
+
+
+
+
+
+.icon-bar {
+	background: #c20006;
+	margin-bottom: 9px;
+	height: 3px
+}
+
+#footer {
+	margin-top: 0;
+	background: #fbf6f6;
+	padding: 20px 0
+}
+
+#footer .section-inner img.footer-logo {
+	width: 90%;
+	max-width: 500px;
+	margin: 30px 0
+}
+
+#footer .section-inner {
+	padding: 0
+}
+
+#footer-kaitori-type {
+	width: 100%;
+	position: none;
+	bottom: 0;
+	z-index: 999
+}
+
+.fixed {
+	position: fixed;
+	transition-duration: 200ms
+}
+
+.shop-ja-wrapper {
+	margin: 35px 0
+}
+
+.footer-shop-list {
+	flex-wrap: wrap;
+	margin-top: 10px;
+	margin-bottom: 30px
+}
+
+.footer-shop-list li:after {
+	content: "|";
+	padding: 0 5px
+}
+
+.footer-shop-list li:last-child after {
+	content: "";
+	padding: 0
+}
+
+.footer-shop-list li:last-child:after {
+	content: ""
+}
+
+.shop-pc-area {
+	margin-top: 50px
+}
+
+.footer-shop-list a {
+	color: #404040;
+	font-size: 14px
+}
+
+.ft-nav {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center
+}
+
+.ft-nav li {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: top
+}
+
+.ft-nav li:after {
+	content: "|";
+	padding: 0 20px;
+	display: block
+}
+
+.ft-nav a {
+	display: block;
+	padding-bottom: 25px
+}
+
+.result-btn-a {
+	display: block
+}
+
+.result-btn {
+	position: relative;
+	border-radius: 10px;
+	background: #C80000;
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 20px 0 35px 0;
+	color: #fff;
+	width: 100%;
+	padding: 10px 0;
+	padding-left: 128px;
+	border-radius: 10px;
+	font-size: 19px
+}
+
+.result-btn:before {
+	background-image: url(/wp-content/themes/jewelcafe_replace/assets/images/icon/staff.png);
+	position: absolute;
+	width: 108px;
+	left: 0;
+	bottom: 0;
+	height: 120%;
+	content: "";
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: -10px 0
+}
+
+.result-btn:after {
+	border-bottom: 2px solid #fff;
+	border-right: 2px solid #fff;
+	content: "";
+	height: 9px;
+	position: absolute;
+	right: 24px;
+	top: 50%;
+	transform: translateY(-50%) rotate(-45deg);
+	width: 9px
+}
+
+.kaitori-rank-ttl-main {
+	font-size: 39px
+}
+
+.kaitori-rank-ttl-sub {
+	font-size: 27px
+}
+
+.kaitori-rank-bar {
+	position: relative;
+	padding: 0 30px;
+	display: inline-block;
+	margin-bottom: 30px
+}
+
+.kaitori-rank-bar:before {
+	position: absolute;
+	padding: 10px 0;
+	bottom: 0;
+	width: 30px;
+	left: -30px;
+	content: "";
+	height: 100%;
+	display: block;
+	background: url(/wp-content/themes/jewelcafe_replace/assets/images/icon/rank-l.png);
+	background-size: contain;
+	background-repeat: no-repeat
+}
+
+.kaitori-rank-bar:after {
+	position: absolute;
+	padding: 10px 0;
+	bottom: 0;
+	content: "";
+	width: 30px;
+	right: -30px;
+	height: 100%;
+	display: block;
+	background: url(/wp-content/themes/jewelcafe_replace/assets/images/icon/rank-r.png);
+	background-size: contain;
+	background-repeat: no-repeat
+}
+
+.sp-search {
+	border-top: 1px solid #fff
+}
+
+.kaitori .kaitori-howto .kaitori-howto-txt {
+	letter-spacing: -0.4px;
+	color: #404040;
+	
+}
+
+
+.kaitori .kaitori-howto .kaitori-howto-txt .accordion.child{
+	font-weight: bold;
+	font-size:20px;
+	padding:15px 0px;
+	
+}
+
+
+
+.kaitori .kaitori-howto-tips {
+	margin-bottom: 38px
+}
+
+
+.kaitori-howto-tips .more {
+	border-top: solid 2px #323232;
+	border-right: solid 2px #323232;
+	content: "";
+	-webkit-transform: rotate(135deg);
+	transform: rotate(135deg);
+	width: 6px;
+	height: 6px;
+	position: absolute;
+	right: 0;
+	display: inline-block;
+	cursor: pointer
+}
+
+.kaitori-howto-tips .more.is-active {
+	transform: rotate(320deg);
+	-webkit-transform: rotate(320deg)
+}
+
+
+
+.kaitori .kaitori-howto-item-title {
+	color: #404040;
+	margin-top: 45px;
+	margin-bottom: 40px;
+	font-size: 20px;
+	font-size: 33px
+}
+
+#kaitori-bg-policy,#kaitori-bg-ways {
+	margin-bottom: 20px
+}
+
+.common-kaitori-resuluts .item-list li .ttl {
+	font-weight: normal
+}
+
+
+
+
+@media screen and (max-width:990px) {
+	#footer-kaitori-type .kaitori-method ul {
+		padding-bottom: 0
+	}
+
+	#souba_price{
+		
+		font-size:24px;
+		
+	}
+	
+	.selectWrap , .select{width:100%;}
+		
+	
+
+	.select{
+		
+		padding:13px;	
+		
+	}
+	
+	
+	.kaitori-goldtool .goldtool-inner{
+		
+		flex-wrap:nowrap;
+		padding-bottom:20px;
+		
+	}
+	
+	.kaitori-goldtool .goldtool-label p{
+		
+		margin-bottom:5px;
+		
+	}
+	
+	
+	.kaitori-goldtool .goldtool-label , .select{
+		
+		font-size:15px;
+		
+	}
+	
+	.kaitori-goldtool .goldtool-weight{
+		
+		width:100px;
+		padding:12px;
+		
+	}
+	
+	
+	.kaitori-goldtool .weight-label{
+		
+		margin-right:0px;
+		
+	}
+	
+	.kaitori-goldtool .goldtool-title{
+	
+		font-size:20px;
+		margin-top:35px;
+		padding:0px 18px;
+	
+	}
+	
+
+	.kaitori-goldtool .goldtool-price{
+		
+		width:90%;
+		padding:5px 10px;
+		margin:0 auto;
+		justify-content:center;
+		
+	}
+	
+	.gold-sb-title{
+		
+		padding:16px 11px;
+		font-size:17px;		
+	}
+	
+	.gold-sb-con{
+		
+		font-size:15px;
+		
+	}
+
+	.gold-sb-con h2{
+		
+		font-size:20px;
+		padding:10px 0;
+		
+	}
+	
+	.gold-sb-con h3{
+		
+		font-size:18px;
+		
+	}
+	
+	.gold-sb-con img{
+
+		width:100%;
+
+	}
+	
+	.kaitori-column-img img {
+		width: 120px;
+		height: 90px
+	}
+
+
+
+	.kaitori .pink_bg {
+		background: #ffdad2;
+		padding-top: 30px;
+		padding-bottom: 30px
+	}
+
+	.kaitori .gray_bg {
+		padding-top: 35px;
+		padding-bottom: 45px
+	}
+
+
+
+	/*
+	.kaitori .kaitori-accordion {
+		padding-top: 37px;
+		padding-bottom: 31px
+	}
+
+	.kaitori .kaitori-faq {
+		padding-top: 35px;
+		padding-bottom: 0
+	}
+
+	.kaitori .kaitori-search-model {
+		margin-bottom: 38px
+	}
+
+	.kaitori .kaitori-boroboro {
+		padding-top: 38px;
+		padding-bottom: 35px
+	}
+
+	.kaitori .kaitori-how-to-sell {
+		padding-top: 45px;
+		padding-bottom: 45px
+	}
+
+	.kaitori .kaitori-voice {
+		padding-top: 40px;
+		padding-bottom: 30px
+	}
+
+	.kaitori .kaitori-kinds {
+		padding-top: 40px;
+		padding-bottom: 40px
+	}
+
+	.kaitori-column-wrapper {
+		margin-top: 30px
+	}
+
+	.kaitori .kaitori-rank {
+		padding-top: 35px;
+		padding-bottom: 40px
+	}
+
+	.kaitori .kaitori-intro {
+		margin-bottom: 15px
+	}
+
+	.kaitori .kaitori-purchase {
+		padding-top: 36px;
+		padding-bottom: 38px
+	}
+	
+	*/
+	
+	
+	
+	
+
+	.kaitori .kaitori-boroboro .section-ttl-sub {
+		font-size: 19px
+	}
+
+	.section-title {
+		max-width: 100%;
+		margin-bottom: 25px
+	}
+
+	
+
+	.kaitori .intro-title {
+		font-size: 28px;
+		margin-bottom: 25px
+	}
+
+	.kaitori .intro-txt {
+		font-size: 15px;
+		letter-spacing: .2px
+	}
+
+	.kaitori-model-search {
+		padding: 20px 25px;
+		border-radius: 0
+	}
+
+	.kaitori-model-search .model-search-form {
+		width: 100%
+	}
+
+	.kaitori-model-search .model-search-keyword {
+		width: 100%;
+		margin-left: 0
+	}
+
+	.kaitori-model-search .model-search-title {
+		font-size: 21px;
+		white-space: normal
+	}
+
+	.kaitori-model-search .model-search-keyword li a {
+		font-size: 11px;
+		padding: 5px 8px
+	}
+
+	.kaitori-model-inner {
+		display: block
+	}
+
+	.section-ttl-sub {
+		font-size: 19px
+	}
+
+	.section-ttl-main {
+		font-size: 25px;
+		letter-spacing: 0
+	}
+
+	.ex-purchase-info .index {
+		font-size: 22px
+	}
+
+	.ex-purchase ul.ex-purchase-list li .ex-purchase-sub {
+		font-size: 16px
+	}
+
+	.ex-purchase ul.ex-purchase-list li {
+		width: 100%
+	}
+
+	.ex-purchase ul.ex-purchase-list li table tr th {
+		font-size: 11px
+	}
+
+	.ex-purchase ul.ex-purchase-list li table tr td {
+		font-size: 18px
+	}
+
+	.ex-purchase ul.ex-purchase-list li .ex-purchase-label .ex-purchase-price .ex-purchase-value {
+		font-size: 23px
+	}
+
+	.ex-purchase-title-info {
+		font-size: 11px;
+		top: -10px;
+		left: 3px
+	}
+
+	.ex-price-yen {
+		font-size: 12px
+	}
+
+	.kaitori .policies {
+		padding: 25px
+	}
+
+	.policies .policies-num {
+		letter-spacing: 0;
+		margin-top: 10px;
+		padding-left: 10px;
+		padding-right: 0
+	}
+
+	.policies div {
+		display: block;
+		width: 100%
+	}
+
+	.policies .policy-text {
+		font-size: 15px;
+		display: none
+	}
+
+	.policies .policy-title {
+		position: relative
+	}
+
+	.policies .policy-title:after {
+		content: "";
+		background-image: url(//jewel-cafe.jp/wp-content/themes/jewelcafe_replace/assets/images/kaitori/ways-youko.png) no-repeat;
+		width: 50%;
+		display: block
+	}
+
+	.kaitori-how-to-inner {
+		display: block
+	}
+
+	.kaitori-type-list {
+		width: 100%
+	}
+
+	.kaitori-voice-title {
+		display: block
+	}
+
+	.count-area {
+		margin-top: 10px;
+		padding: 10px 0
+	}
+
+	.kaitori-kinds-list li {
+		width: 47%
+	}
+
+	.section-ttl-main {
+		font-size: 19px;
+		letter-spacing: -1px
+	}
+
+	.red-bar .red-bar-title {
+		font-size: 18px;
+		letter-spacing: -0.8px;
+		white-space: nowrap
+	}
+
+	.red-bar .red-bar-by {
+		font-size: 15px
+	}
+
+	.kaitori-column-content {
+		width: 100%
+	}
+
+	.kaitori-howto-txt {
+		font-size: 15px;
+		margin-top: 0
+	}
+
+	.kaitori-column .red-bar .red-bar-title {
+		padding: 17px 0
+	}
+
+	.kaitori-howto .red-bar .red-bar-title {
+		padding: 17px 0
+	}
+
+	.kaitori-ranking .kaitori-rank-list {
+		width: 100%;
+		margin-bottom: 20px
+	}
+
+	.kaitori-rank-inner {
+		display: block
+	}
+
+	.kaitori-model-search .model-search-btn {
+		font-size: 16px
+	}
+
+	.kaitori-model-search .model-search-input {
+		height: 54px;
+		line-height: 57px
+	}
+
+	.ft-nav {
+		display: block
+	}
+
+	.ft-nav li {
+		width: 100%;
+		display: block
+	}
+
+	.ft-nav li:after {
+		content: ""
+	}
+
+	.ft-nav a {
+		font-size: 18px;
+		font-weight: bold
+	}
+
+	.result-btn {
+		font-size: 19px
+	}
+
+	.footer-shop-list {
+		justify-content: center
+	}
+
+	.footer-shop-list a {
+		color: #404040;
+		font-size: 12px
+	}
+
+	.footer-shop-list li {
+		text-align: center
+	}
+
+	.kaitori-rank-bar:before {
+		left: -10px
+	}
+
+	.kaitori-rank-bar:after {
+		right: -10px
+	}
+
+	.kaitori-faq .kaitori-faq-list .faq-icon,.kaitori-faq .kaitori-faq-list .faq-txt {
+		font-size: 20px
+	}
+
+	.kaitori-faq .kaitori-faq-list dt .faq-txt {
+		font-size: 20px;
+		width: 90%
+	}
+
+	.kaitori-faq .kaitori-faq-list dd .faq-txt {
+		padding: 10px 0;
+		font-size: 15px
+	}
+
+	.kaitori-faq .kaitori-faq-list dt {
+		padding: 21px 0
+	}
+
+	.kaitori-inner-ways {
+		padding: 20px
+	}
+
+	.kaitori-inner-ways h3 {
+		font-size: 20px;
+		margin: 10px 0
+	}
+
+	.kaitori-inner-ways p {
+		display: none;
+		font-size: 15px
+	}
+
+	.kaitori-model-inner {
+		justify-content: space-between
+	}
+
+	.kaitori-model-search .section-inner {
+		width: 100%
+	}
+
+	#kaitori-search-model {
+		width: 100%
+	}
+
+
+	..kaitori-price-img {
+		width: 50%
+	}
+
+	.kaitori-price-img .item img {
+		width: 50px
+	}
+
+	.kaitori-price-img .brand_name {
+		font-size: 12px
+	}
+
+	.kaitori-price-img .code {
+		font-size: 10px
+	}
+
+	.kaitori-price-content {
+		display: block;
+		letter-spacing: -0.5px;
+		width: 55%
+	}
+
+	.kaitori-price-list {
+		justify-content: space-between;
+		padding-left: 0
+	}
+
+	.kaitori-price-list .old-year {
+		background: #737373;
+		padding: 3px 4px;
+		font-size: 10px;
+		margin-right: 0
+	}
+
+	.kaitori-price-list .new-year {
+		font-size: 12px;
+		background: #c80000;
+		padding: 3px 4px;
+		font-size: 12px;
+		margin-right: 10px
+	}
+
+	.kaitori-price-list .old-price {
+		min-width: 100%;
+		font-size: 15px;
+		font-weight: bold;
+		justify-content: space-between;
+		letter-spacing: -1.3px
+	}
+
+	.kaitori-price-list .new-price {
+		font-size: 18px;
+		font-weight: bold;
+		letter-spacing: -1.3px
+	}
+
+	.kaitori-price-list .arrow_r_icon {
+		padding: 0
+	}
+
+	#footer {
+		margin-top: 0;
+		background: #fbf6f6;
+		padding: 20px 0;
+		margin-bottom: 82px
+	}
+
+	.kaitori-market-price .kaitori-price-table {
+		height: auto;
+		padding-bottom: 0;
+		overflow: hidden
+	}
+
+	#footer .section-inner .footer-txt {
+		font-size: 11px;
+		letter-spacing: -0.5px
+	}
+
+	#footer .section-inner img.footer-logo {
+		margin: 10px 0
+	}
+
+	.blog-archive-list li .blog-archive-category {
+		font-size: 10px
+	}
+
+	.blog-archive-list li .blog-archive-category2 {
+		font-size: 10px;
+		color: #fff
+	}
+
+	.blog-archive-list li .blog-archive-ttl {
+		font-size: 11px
+	}
+
+	.policies .policies-img {
+		margin-right: 0
+	}
+
+	.policies .policies-img img {
+		width: 100%;
+		max-width: 100%
+	}
+
+	.kaitori .kaitori-howto-item-title {
+		margin-top: 40px;
+		margin-bottom: 30px;
+		font-size: 25px;
+		letter-spacing: 1px
+	}
+
+	.kaitori .kaitori-howto .kaitori-howto-txt {
+		letter-spacing: -0.2px;
+		position: relative
+	}
+
+	.kaitori .kaitori-rank-ttl-main {
+		font-size: 25px;
+		letter-spacing: -0.5px
+	}
+
+	.kaitori .kaitori-rank-ttl-sub {
+		font-size: 16px
+	}
+
+	.point-bar {
+		height: auto;
+		align-items: center;
+		line-height: 1.2
+	}
+
+	.section-title {
+		padding: 7px 0
+	}
+
+	.point-bar::before {
+		position: absolute;
+		padding: 10px 0;
+		bottom: 0;
+		width: 75px;
+		height: 120%;
+		display: block;
+		background-image: url(/wp-content/themes/jewelcafe_replace/assets/images/icon/point_minami.png);
+		content: "";
+		background-size: contain;
+		background-repeat: no-repeat
+	}
+
+	.point-bar .point-bar-title {
+		margin-left: 75px;
+		font-size: 15px;
+		font-weight: bold;
+		letter-spacing: -0.8px
+	}
+
+	.brbr-archive-link {
+		width: 100%;
+		display: block;
+		font-size: 16px;
+		padding: 10px 0
+	}
+
+	.banner-ttl-con {
+		padding-top: 31px;
+		padding-bottom: 23px;
+		font-size: 15px;
+		letter-spacing: .4px
+	}
+
+	.kaitori-kinds .section-ttl-main {
+		font-size: 22px;
+		margin-bottom: 24px
+	}
+
+	.kaitori .ways-youko {
+		position: relative;
+		background: url(/wp-content/themes/jewelcafe_replace/assets/images/kaitori/ways-youko.png) no-repeat
+	}
+
+	.common-kaitori-resuluts .item-list li .kaitoriName {
+		letter-spacing: -0.5px
+	}
+
+	.common-kaitori-resuluts .more-btn {
+		background: linear-gradient(to bottom,rgba(255,255,255,0) 0,rgba(255,221,212,1) 60%)
+	}
+
+	.common-kaitori-resuluts .close-btn {
+		background: transition
+	}
+
+	.kaitori-inner-ways .kaitori-ways-num {
+		width: 100%
+	}
+
+	.count-rev {
+		margin-top: 10px
+	}
+
+	.kaitori-voice .voice-list2 .voice-txt .voiceBox {
+		font-size: 15px;
+		line-height: 1.7
+	}
+
+	.kaitori-column-img {
+		min-width: 120px;
+		width: 120px;
+		max-height: 110px;
+		overflow: hidden
+	}
+
+	.kaitori-type-txt {
+		letter-spacing: 0;
+		font-size: 15px;
+		line-height: 1.2
+	}
+
+	#kaitori-bg-ways {
+		padding: 27px 0;
+		background: url(//jewel-cafe.jp/wp-content/themes/jewelcafe_replace/assets/images/kaitori/ways-youko.png) no-repeat right;
+		background-size: contain
+	}
+
+	#kaitori-bg-policy {
+		padding: 17px 0;
+		background: url(//jewel-cafe.jp/wp-content/themes/jewelcafe_replace/assets/images/kaitori/policy-youko.png) no-repeat right bottom;
+		background-size: contain;
+		margin-bottom: 0
+	}
+
+	#kaitori-bg-ways {
+		margin-bottom: 0
+	}
+
+	.kaitori-ranking .kaitori-rank-list .kaitori-rank-txt {
+		min-height: auto
+	}
+
+	.kaitori-column .kaitori-column-btn {
+		padding: 5px 18px;
+		background: #c80000;
+		border-radius: 100px;
+		display: inline-block;
+		color: #fff;
+		font-size: 12px;
+		border: 0
+	}
+	
+
+}
+
+
+
+
+
+
+  .new-item-list li .kaitoriName{
+
+	  color:#ccc;
+	  font-size:10px;
+	  text-align:left;
+	  height:25px;
+	  margin-bottom:10px;
+
+
+  }
+
+
+
+
+
+  .common-kaitori-resuluts .new-item-list .priceBox .left{
+
+	  font-size:12px;
+	  margin-bottom:0px;
+	  width:100%;
+	  text-align:left;
+
+  }
+
+
+  .common-kaitori-resuluts .new-item-list .priceBox .right{
+
+	  font-size:20px;
+	  width:100%;
+	  text-align:right;
+	  letter-spacing:-0.3px;
+
+  }
+
+  .common-kaitori-resuluts .new-item-list .ttl{
+
+		font-size:10px;
+		min-height:58px;
+		text-align:left;
+  }
+
+
+
+  .common-kaitori-resuluts .new-item-list .priceBox .right .small{
+
+	  font-size:10px;
+
+  }
+
+
+
+
+
+
+
+  @media (min-width: 800px) {
+
+
+
+
+
+
+
+	.common-kaitori-resuluts .item-list li .priceBox .left{width:100%;margin-bottom:10px;}
+
+	.common-kaitori-resuluts .item-list li .priceBox .right{width:100%;}
+
+  }
+
+
+
+
+
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+
+
+
+
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+		width:80%;
+		display:block;
+
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+
+
+
+.blog-archive-category{text-align:left;}
+
+
+.blogSwiper{overflow:hidden;}
+
+
+.blog-archive-list li .blog-archive-category{font-size:10px;}
+
+
+.blog-archive-list li .blog-archive-ttl{text-align:left;}
+
+.blog-archive-list li .blog-archive-shop{text-align:left;}
+
+
+@media screen and (min-width: 800px) {
+
+/*
+	.blog-archive-list{flex-wrap:wrap;}
+
+	.blog-archive-category{text-align:center;}
+
+	.blog-archive-category{font-size:12px;}
+	*/
+
+}
+
+/*
+.blog-archive-list li .blog-catch-img img{height:120px;}
+.blog-archive-category{text-align:left;}
+*/
+
+			
+
+
+
+
+
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes slideDown {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes slideDown {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+.slide-down {
+  -webkit-animation-name: slideDown;
+  animation-name: slideDown;
+}
+@-webkit-keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+@keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+.slide-up {
+  -webkit-animation-name: slideUp;
+  animation-name: slideUp;
+}
+
+
+@media screen and (min-width: 800px) {
+
+	.content-wrap {
+	  overflow: hidden;
+	  position: relative;
+	  margin: 0;
+	}
+
+}
+
+
+
+
+
+
+.kaitori-column .slide-up {
+  height: 450px;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 800px) {
+
+	.kaitori-column .slide-up {
+	  height: 650px;
+	  padding-bottom: 0;
+	  overflow: hidden;
+	}
+
+}
+
+
+.slide-down {
+  height: auto;
+  overflow: visible;
+
+}
+
+
+
+
+
+.more-btn p:hover{
+	opacity:0.6;
+	transition:all .3s;
+}
+
+
+.close-btn {
+  padding:0;
+}
+.close-btn p {
+  background: #aaa;
+}
+
+
+
+
+
+
+
+/*
+	accordion s
+*/
+
+
+
+.tokei-pricetable .accordion table tbody td:last-of-type, .tokei-pricetable .accordion table tbody td:last-of-type, .card-pricetable .accordion table tbody td:last-of-type{font-weight:normal;color:#202020;}
+
+
+
+
+
+
+
+.tokei-pricetable .accordion .accordion-content2 .accordion-model td i{
+	border-bottom:solid 2px #C80000;border-right:solid 2px #C80000;bottom:0;content:"";
+	position:absolute;
+	left:8px;
+	top:50%;
+	display:inline-block;height:6px;transform:translateY(-50%);transform:rotate(-45deg);transition:.2s;width:6px;
+}
+
+
+
+.tokei-pricetable .accordion .accordion-item .accordion-head a{font-size:18px;}
+
+
+
+
+
+.tokei-pricetable .accordion .accordion-item .accordion-head a:before{content:"";border:0px;} 
+
+.tokei-pricetable .accordion .accordion-item .accordion-head a:after{content:"";border:0px;}
+
+
+.tokei-pricetable .accordion .accordion-item .accordion-head i{
+	
+	border-bottom:solid 2px #C80000;
+	border-right:solid 2px #C80000;
+	bottom:0;
+	content:"";
+	position:absolute;
+	left:8px;
+	top:55%;
+	display:inline-block;
+	height:6px;
+	transform:translateY(-50%);
+	transform:rotate(-45deg);
+	transition:.2s;
+	width:6px;
+	
+}
+
+
+
+
+
+
+.accordion-content2{background:#f1f1f1;padding:10px;border-top:1px solid #8f8f8f;}
+
+.accordion-head{padding:0px 10px;}
+
+
+.accordion-purchase-ex .accordion .accordion-item .accordion-head a, .shop-detail-faq .accordion .accordion-item .accordion-head a, .accordion-section .accordion .accordion-item .accordion-head a, .tokei-pricetable .accordion .accordion-item .accordion-head a, .tokei-pricetable .accordion .accordion-item .accordion-head a, .card-pricetable .accordion .accordion-item .accordion-head a{padding-left:25px;}
+
+
+
+
+.model-price{color:#e31424;font-weight:bold;font-family:'Helvetica';letter-spacing:-1px;font-size:22px;}
+
+
+.model-title{font-size:12px;margin-right:10px;letter-spacing:-0.5px;}
+
+
+
+.tokei-pricetable .accordion .model-content td{font-size:12px;}
+
+
+.accordion-model p{padding-left:25px;font-size:15px;}
+
+.accordion-model p:hover{cursor:pointer;}
+
+
+.rolex-td{display:block;}
+
+.rolex-td div{width:100%;}
+
+
+
+.graph-grid{display:flex;flex-wrap:wrap;max-width:1000px;margin:0 auto;justify-content:space-between;}
+
+.graph-wrap{border:1px solid #000;border-radius:10px;padding:10px;width:48.5%;margin-bottom:10px;font-family: "Noto Sans JP", sans-serif;letter-spacing:0px;}
+
+.graph-wrap h3,.graph-wrap h4 ,.graph-wrap h5{font-size:16px;font-weight:bold;}
+
+.graph-wrap h3 a{color:#000000;font-weight:bold;}
+
+.graph-wrap h4 a{color:#C80000;font-weight:bold;}
+
+.graph-wrap h5{margin-bottom:10px;font-weight:bold;}
+
+.graph-wrap .graph-info{display:flex;justify-content:space-between;align-items:center;}
+
+.graph-wrap .graph-info p{text-align:right;}
+
+.graph-wrap .graph-name , .graph-wrap .graph-comparison{font-size:10px;color:#000;}
+
+.graph-wrap .graph-price{font-family:'Helvetica';font-size:22px;font-weight:bold;color:#E31424;}
+
+.graph-wrap .graph-tokei-img img{max-width:40px;}
+
+
+
+
+
+@media (min-width: 800px) {
+	
+	
+	.graph-wrap{width:24%;}
+	
+	
+	
+	.graph-wrap .graph-price{font-size:25px;font-weight:bold;color:#E31424}
+	
+	.graph-wrap .graph-tokei-img img{max-width:56px;}
+	
+	.rolex-td{display:flex;align-items:center;justify-content: space-between;}
+	
+	.rolex-td div{width:30%;}
+	
+	.rolex-td .purchase_price{width:40%;}
+	
+	
+	
+	.tokei-pricetable .accordion .accordion-item .accordion-head a{font-size:25px;}
+	
+	.model-title{font-size:12px;display:inline-block;}
+
+	.accordion-content2{padding:30px 20px;}
+
+	.accordion-head{padding:0px 20px;}
+
+	.tokei-pricetable .accordion .model-content td:first-child{padding-left:50px;}
+
+	.model-price{color:#e31424;font-size:25px;font-weight:bold;}
+
+	.tokei-pricetable .accordion .model-content td{font-size:14px;}
+	
+	.tokei-pricetable .accordion .model-content td:first-child{width:35%;}
+
+	.tokei-pricetable .accordion .accordion-content2 td:first-child{width:35%;vertical-align:middle;}
+	
+}
+
+
+
+
+/*
+	accordion e
+*/
