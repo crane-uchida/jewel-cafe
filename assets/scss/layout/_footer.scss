@@ -241,6 +241,44 @@ footer {
       display: none !important;
     }
   }
+
+
+
+  .country-name {
+    color: #c80000;
+    font-weight: bold;
+  }
+  .store-count {
+    font-weight: bold;
+  }
+  .store-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(12px, 1.4vw, 16px);
+    font-weight: 700;
+    line-height: 2;
+    @media (max-width: 640px){
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+      justify-content: start;
+      font-size: clamp(13px, 3.8vw, 16px);
+    }
+    .item{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+      & + .item::before{
+        content: '｜';
+        padding: 0 0.6em;
+        @media (max-width: 640px){
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 .footer-shop-nav {

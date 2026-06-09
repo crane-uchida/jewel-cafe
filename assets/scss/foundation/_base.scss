@@ -402,6 +402,15 @@ $z-indexList: 0, 1, 2, 3, 4, 5, 10, 20, 30, 50, 100, 9999;
     display: block;
   }
 }
+.pc-inline-block{
+  @media screen and (max-width: 767px){
+    display: none;
+  }
+  @media screen and (min-width: 768px){
+    display: inline-block;
+  }
+}
+
 @media (min-width: 751px) {
   a[href*="tel:"] {
     pointer-events: none;
