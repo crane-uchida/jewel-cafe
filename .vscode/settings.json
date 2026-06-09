@@ -1,4 +1,5 @@
 {
   "dartsass.sassWorkingDirectory": "assets/scss",
-  "dartsass.targetDirectory": "assets/css"
+  "dartsass.targetDirectory": "assets/css",
+  "task.allowAutomaticTasks": "on"
 }

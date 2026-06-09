@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Sass Watch",
+      "type": "shell",
+      "command": "sass --watch assets/scss/main.scss:assets/css/main.css",
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

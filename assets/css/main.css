@@ -1867,6 +1867,17 @@ a:hover {
   }
 }
 
+@media screen and (max-width: 767px) {
+  .pc-inline-block {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) {
+  .pc-inline-block {
+    display: inline-block;
+  }
+}
+
 @media (min-width: 751px) {
   a[href*="tel:"] {
     pointer-events: none;
@@ -2398,6 +2409,45 @@ footer .section-inner .copyright {
   }
   footer .only-sp {
     display: none !important;
+  }
+}
+footer .country-name {
+  color: #c80000;
+  font-weight: bold;
+}
+footer .store-count {
+  font-weight: bold;
+}
+footer .store-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(12px, 1.4vw, 16px);
+  font-weight: 700;
+  line-height: 2;
+}
+@media (max-width: 640px) {
+  footer .store-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    justify-content: start;
+    font-size: clamp(13px, 3.8vw, 16px);
+  }
+}
+footer .store-list .item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+footer .store-list .item + .item::before {
+  content: "｜";
+  padding: 0 0.6em;
+}
+@media (max-width: 640px) {
+  footer .store-list .item + .item::before {
+    display: none;
   }
 }
 
