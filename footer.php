@@ -731,9 +731,8 @@ if (!function_exists('jc_footer_get_shop_info_cached')) {
 	
 	
 	
-			
+<?php /* ?>
 			<h2 class="ft-shop-title">
-		
 				<?php
 					if( $post->post_type == 'kaitori' && $post->post_parent < 1 ){
 						
@@ -751,11 +750,25 @@ if (!function_exists('jc_footer_get_shop_info_cached')) {
 
 				?>
 			</h2>
+<?php */ ?>
 
-<?php if ( current_user_can('administrator') ): ?>
-<h2 class="ft-shop-title">ジュエルカフェ <mark>ただいま全国<span class="big">336</span>店舗</mark></h2>
-<p class="">有名ショッピングセンターや駅近商店街など、あなたの街のジュエルカフェでお待ちしています!</p>
-<?php endif; ?>
+
+<?php
+
+global $wpdb;
+
+$japan_shop_count = $wpdb->get_var("
+    SELECT COUNT(*)
+    FROM {$wpdb->prefix}shop_admin
+");
+
+?>
+
+
+	<h2 class="ft-shop-title">ジュエルカフェ <br class="sp"><mark>ただいま全国<span class="big"><?php echo $japan_shop_count;?></span>店舗</mark></h2>
+	<p class="shop-list-lead ta-c bold mb-20">有名ショッピングセンターや駅近商店街など、<br class="sp">あなたの街のジュエルカフェでお待ちしています!</p>
+
+
 
 
 
@@ -1969,38 +1982,82 @@ if ($area_terms && is_array($area_terms)) {
 ?>
 
 
+<?php
+global $wpdb;
 
+$table = $wpdb->prefix . 'shop_count_logs';
 
-<?php if ( current_user_can('administrator') ): ?>
-<h2 class="ft-shop-title">ジュエルカフェは海外でも大好評！ ただいま<mark>世界<span class="big">10</span>ヵ国・<span class="big">82</span>店舗</mark></h2>
+$countries = [
+    '台湾' => 'https://jewel-cafe.tw/',
+    '香港' => 'https://jewel-cafe.hk/',
+    'マレーシア' => 'https://jewel-cafe.my/',
+    'タイ' => 'https://jewel-cafe.co.th/',
+    'シンガポール' => 'https://jewel-cafe.sg/',
+    'フィリピン' => 'https://jewel-cafe.ph/',
+    'インドネシア' => 'https://jewel-cafe.id/',
+    'カンボジア' => 'https://jewelcafe-kh.com/',
+    'オーストラリア' => '',
+    'ベトナム' => '',
+];
 
-<?php endif; ?>
+$shop_counts = [];
+$total_count = 0;
 
+foreach ($countries as $country => $url) {
+    $row = $wpdb->get_row(
+        $wpdb->prepare(
+            "
+            SELECT shop_count, updated_at
+            FROM {$table}
+            WHERE country = %s
+            ORDER BY target_date DESC, updated_at DESC
+            LIMIT 1
+            ",
+            $country
+        )
+    );
 
+    $shop_counts[$country] = $row;
 
-			<div class="other-jc">
-				<div>海外のジュエルカフェ</div>
-				<a href="https://jewel-cafe.tw/" target="_blank">台湾</a>
-				<a href="https://jewel-cafe.hk/" target="_blank">香港</a>
-				<a href="https://jewel-cafe.my/" target="_blank">マレーシア</a>
-				<a href="https://jewel-cafe.co.th/" target="_blank">タイ</a><br class="sp">
-				<a href="https://jewel-cafe.sg/" target="_blank">シンガポール</a>
-				<a href="https://jewel-cafe.ph/" target="_blank">フィリピン</a><br class="pc">
-				<a href="https://jewel-cafe.id/" target="_blank">インドネシア</a><br class="sp">
-				<a href="https://jewelcafe-kh.com/" target="_blank">カンボジア</a>
-				<a style="pointer-events: none;" href="#" target="_blank">オーストラリア</a>
-				<a style="pointer-events: none;" href="#" target="_blank">ベトナム</a>
+    if ($row) {
+        $total_count += (int) $row->shop_count;
+    }
+}
+?>
+
+<section class="overseas-store-information">
+    <div class="ft-shop-title">
+        <span class="pc-inline-block">ジュエルカフェは</span>海外でも大好評！
+        <br class="sp">
+        <mark>
+            ただいま世界<span class="big">10</span>ヵ国・<span class="big"><?php echo esc_html($total_count); ?></span>店舗
+        </mark>
+    </div>
+
+    <div class="store-list">
+        <?php foreach ($countries as $country => $url): ?>
+            <?php $row = $shop_counts[$country]; ?>
+			<div class="item">
+                <span class="country-name">
+					<?php if (!empty($url)): ?>
+						<a class="" href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener">
+					<?php else: ?>
+						<a style="pointer-events: none;" href="#">
+					<?php endif; ?>
+						<?php echo esc_html($country); ?>
+						</a>
+				</span>
+
+                <?php if ($row): ?>
+                    &nbsp;<span class="store-count"><?php echo esc_html($row->shop_count); ?> 店舗</span>
+				<?php else: ?>
+					&nbsp;<span class="store-count"></span>
+                <?php endif; ?>
 			</div>
+        <?php endforeach; ?>
+    </div>
+</section>
 
-
-
-<?php /* ?>
-		<?php if(!(is_single('junk-rolex'))): ?>
-			<section class="page-top-link mb-20">
-				<a href="#page-top">このページの先頭へ</a>
-			</section>
-		<?php endif;?>
-<?php */ ?>
 
 
 			<div class="footer-logo ta-c">
