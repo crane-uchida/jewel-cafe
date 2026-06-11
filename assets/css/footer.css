@@ -677,18 +677,28 @@ transform: rotate(-45deg);
 .result-btn{max-width:750px;font-size:23px;padding-top:25px;padding-bottom:25px;}
 
 
-.ft-shop-title{font-size:29px;color:#C80000;margin:35px 0px 30px 0px;text-align:center;font-weight:bold;}
-
+.ft-shop-title{font-size:29px;color:#C80000;margin:35px 0px 15px 0px;text-align:center;font-weight:bold;}
+.overseas-store-information{margin-bottom: 30px;}
 
 .ft-area-list{flex-wrap: wrap;
     row-gap: 10px;
     column-gap: 10px;}
-
+@media screen and (min-width: 901px){
+	.ft-area-list{
+		width: 75%;margin: 0 auto; justify-content: center;
+	}
+}
 
 
 .ft-area-list li{width:24%;}
+@media screen and (min-width: 901px){
+	.ft-area-list li{width:20%;}
+}
 
-.ft-area-list a{opacity: 1;background:#C80000;color:#fff;display:block;font-size:20px;padding:7px 0px;white-space:nowrap;border-radius:5px;text-align:center;font-weight:bold;}
+
+
+
+.ft-area-list a{opacity: 1;background:#C80000;color:#fff;display:block;font-size:24px;padding:7px 0px;white-space:nowrap;border-radius:5px;text-align:center;font-weight:bold;}
 
 .ft-area-list .active{background:#C80000;}
 
@@ -1080,18 +1090,23 @@ footer .section-inner .footer-txt{
 	
 	.ft-area-list a{
 		
-		 font-size:13px;
+		 font-size:20px;
 		
 		
 	}
 
-
+	.overseas-store-information{
+		margin-bottom: 50px;
+	}
 	.ft-shop-title{
 		
-		font-size:22px;
+		font-size:20px;
 		margin-top:28px;
 		margin-bottom:16px;
 
+	}
+	.shop-list-lead{
+		font-size: 15px;
 	}
 
 	

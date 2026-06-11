@@ -245,8 +245,10 @@ footer {
 
 
   .country-name {
-    color: #c80000;
-    font-weight: bold;
+    a{
+      color: #c80000;
+      font-weight: bold;
+    }
   }
   .store-count {
     font-weight: bold;

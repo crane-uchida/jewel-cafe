@@ -2411,7 +2411,7 @@ footer .section-inner .copyright {
     display: none !important;
   }
 }
-footer .country-name {
+footer .country-name a {
   color: #c80000;
   font-weight: bold;
 }
@@ -9905,7 +9905,6 @@ body.drawer-opened #overlay {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  font-family: "Meiryo", "Hiragino Kaku Gothic Pro", "Arial", sans-serif;
 }
 .gold_souba_banner .content {
   width: 100%;
@@ -10319,7 +10318,6 @@ body.drawer-opened #overlay {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  font-family: "Meiryo", "Hiragino Kaku Gothic Pro", "Arial", sans-serif;
   /* .contentは後で削除 */
 }
 .gold_souba_banner_top .banner-wrapper {
@@ -10363,15 +10361,15 @@ body.drawer-opened #overlay {
 }
 .gold_souba_banner_top .main-title {
   position: absolute;
-  top: 26%;
-  left: 11%;
+  top: 23%;
+  left: 13%;
   right: 50%;
   display: flex;
   align-items: center;
   gap: 1%;
 }
 .gold_souba_banner_top .main-title .kinkaitori {
-  font-size: clamp(97px, 15.5vw, 155px);
+  font-size: clamp(97px, 15.5vw, 145px);
   font-weight: 900;
   color: #fff;
   line-height: 1;
@@ -10381,7 +10379,7 @@ body.drawer-opened #overlay {
 .gold_souba_banner_top .price-section {
   position: absolute;
   top: 57%;
-  left: 20.3%;
+  left: 21.3%;
   right: 50%;
   transform: translateY(-10%);
 }
@@ -10394,7 +10392,6 @@ body.drawer-opened #overlay {
   padding: 6px 8px;
   line-height: 1;
   border-radius: 9999px;
-  margin-bottom: 2%;
   margin-left: 8%;
   white-space: nowrap;
 }
@@ -10422,7 +10419,7 @@ body.drawer-opened #overlay {
 .gold_souba_banner_top .prev-day-badge {
   position: absolute;
   top: 0px;
-  right: -52%;
+  right: -45%;
   background: #f99c20;
   color: #ffffff;
   font-weight: 900;
@@ -10588,7 +10585,6 @@ body.drawer-opened #overlay {
   font-size: clamp(12px, 4.4vw - 2px, 26px);
   padding: 1px 6px;
   border-radius: 9999px;
-  margin-bottom: 2%;
   margin-left: 5%;
   white-space: nowrap;
 }
@@ -10669,7 +10665,7 @@ body.drawer-opened #overlay {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 3%;
+  gap: 5px;
   border-top: 2px dotted rgba(255, 255, 255, 0.7);
   flex: 1;
   margin-right: 7%;
