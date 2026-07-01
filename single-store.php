@@ -273,10 +273,10 @@ $today_result = $wpdb->get_results($today_sql);
 
 				<?php
 				$now = new DateTime('now', new DateTimeZone('Asia/Tokyo'));
-				$cutoff = new DateTime('2026-07-01 00:00:00', new DateTimeZone('Asia/Tokyo'));
+				$cutoff = new DateTime('2026-08-01 00:00:00', new DateTimeZone('Asia/Tokyo'));
 				?>
 				<?php if ($now < $cutoff): ?>
-					<!-- 6月末まで表示するコンテンツ -->
+					<!-- 7月末まで表示するコンテンツ -->
 					<?php if ( is_single('chigasaki') ) :?>
 						<style>
 							.special-text::before {
@@ -315,10 +315,53 @@ $today_result = $wpdb->get_results($today_sql);
 								}
 							}
 						</style>
-						<p class="special-text">茅ヶ崎店限定! 2026年6月末まで</p>
+						<p class="special-text">茅ヶ崎店限定! 2026年7月末まで</p>
 						<picture>
 							<source srcset="<?php echo esc_url(get_template_directory_uri());?>/assets/images/shop/chigasaki_kouka_pc.jpg" media="(min-width: 501px)" width="100%">
 							<img src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/shop/chigasaki_kouka_sp.jpg" alt="" width="100%" class="special-img">
+						</picture>
+					<?php elseif ( is_single('crossgarden-kawasaki') ) :?>
+						<style>
+							.special-text::before {
+								content: "＼";
+								color: #c80000; 
+							}
+
+							.special-text::after {
+								content: "／"; 
+								color: #c80000;
+							}
+							@media screen and (min-width: 768px) {
+								.special-text{
+									font-size: 40px;
+									text-align: center;
+									color: #c80000;
+									margin-bottom: 10px;
+									margin-top: 30px;
+									font-weight:bold;
+								}
+							}
+							@media screen and (max-width: 767px) {
+								.special-text{
+									font-size: 14px;
+									text-align: center;
+									color: #c80000;
+									margin-bottom: 5px;
+									margin-top: 30px;
+									font-weight:bold;
+								}
+								.special-img{
+									width: 100vw;
+									margin-left: calc(50% - 50vw);
+									margin-right: calc(50% - 50vw);
+									display: block;
+								}
+							}
+						</style>
+						<p class="special-text">クロスガーデン川崎店限定! 2026年7月末まで</p>
+						<picture>
+							<source srcset="<?php echo esc_url(get_template_directory_uri());?>/assets/images/shop/xgarden_kouka_pc.jpg" media="(min-width: 501px)" width="100%">
+							<img src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/shop/xgarden_kouka_sp.jpg" alt="" width="100%" class="special-img">
 						</picture>
 					<?php else :?>
 						<?php /* ?> 生活雑貨プレゼントバナー <?php */ ?>
@@ -333,7 +376,7 @@ $today_result = $wpdb->get_results($today_sql);
 					<?php endif;?>
 
 				<?php else: ?>
-					<!-- 7月以降に表示するコンテンツ -->
+					<!-- 8月以降に表示するコンテンツ -->
 					<?php /* ?> 生活雑貨プレゼントバナー <?php */ ?>
 					<picture>
 						<source srcset="<?php echo esc_url(get_template_directory_uri());?>/assets/images/shop/shop_tokuten_bnr.webp" media="(min-width: 501px)" type="image/webp" width="100%">

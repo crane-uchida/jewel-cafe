@@ -10388,7 +10388,7 @@ body.drawer-opened #overlay {
   background: #f99c20;
   color: #ffffff;
   font-weight: 900;
-  font-size: clamp(16px, 2.5vw, 25px);
+  font-size: clamp(12px, 12px + 8 * (100vw - 641px) / 359, 20px);
   padding: 6px 8px;
   line-height: 1;
   border-radius: 9999px;
@@ -10582,7 +10582,7 @@ body.drawer-opened #overlay {
   background: #f99c20;
   color: #ffffff;
   font-weight: 900;
-  font-size: clamp(12px, 4.4vw - 2px, 26px);
+  font-size: clamp(12px, 12px + 8 * (100vw - 375px) / 265, 20px);
   padding: 1px 6px;
   border-radius: 9999px;
   margin-left: 5%;

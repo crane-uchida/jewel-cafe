@@ -1,3 +1,8 @@
+<?php 
+	$kaitori_area_parent_id = $post->post_parent;
+	$custom_title = get_post( $kaitori_area_parent_id)->post_title;
+?>
+
 
 <div class="mincho pos-r">
 
@@ -6,12 +11,8 @@
 
 
 	<h1 class="intro-title">
-		<span class="intro-sub"><?php the_title();?>を売りたいお客様へ</span>
-		<span class="intro-appeal color-red">全国<?php echo get_option('shop'); ?>店舗展開の</span>
-		<span class="intro-main color-red">
-			ジュエルカフェに<br class="only-sp">
-			お任せください。
-		</span>
+		<span class="intro-appeal color-red"><?php echo $post->post_title;?>買取なら</span>
+		<span class="intro-main color-red">ジュエルカフェへ！</span>
 	</h1>
 
 	

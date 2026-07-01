@@ -28,7 +28,7 @@
 				<?php if (!empty($args[0]->item)) { // itemがある場合（品目用店舗ページで表示） ?>
 								<span class="common-ttl-sub" id="shop_info"><?php echo $args[0]->shop_name;?>での</span>
 								
-								<span class="common-ttl-main"><span class="common-ttl-sub"><?php echo $args[0]->item;?>買取・査定の</span><span class="color-red">ご案内</span></span>
+								<span class="common-ttl-main"><span class="common-ttl-sub"><?php echo str_replace('・貴金属','',$args[0]->item);?>買取・査定の</span><span class="color-red">ご案内</span></span>
 				<?php } else {  // itemがない場合（通常店舗ページで表示）?>
 								<span class="common-ttl-sub" id="shop_info"><?php echo $args[0]->shop_name;?>の</span>
 								<span class="common-ttl-main">店舗<span class="color-red">案内</span></span>

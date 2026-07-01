@@ -159,6 +159,292 @@ if (!function_exists('jc_footer_get_shop_info_cached')) {
 		return $shop_info;
 	}
 }
+
+if (!function_exists('jc_footer_is_blog_area_link_context')) {
+	function jc_footer_is_blog_area_link_context() {
+		$request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
+		$request_path = rtrim((string) parse_url($request_uri, PHP_URL_PATH), '/');
+
+		return strpos($request_path, '/blog/') === 0 && $request_path !== '/blog';
+	}
+}
+
+if (!function_exists('jc_footer_get_blog_prefecture_base_path')) {
+	function jc_footer_get_blog_prefecture_base_path($category_slug = '') {
+		$category_slug = sanitize_title((string) $category_slug);
+
+		if ($category_slug !== '') {
+			return '/blog/' . $category_slug . '/';
+		}
+
+		return '/blog/';
+	}
+}
+
+if (!function_exists('jc_footer_get_blog_category_slug')) {
+	function jc_footer_get_blog_category_slug($blog_base_path = '') {
+		$candidate_paths = array(
+			trim((string) parse_url((string) $blog_base_path, PHP_URL_PATH), '/'),
+			trim((string) parse_url((string) (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : ''), PHP_URL_PATH), '/'),
+		);
+
+		foreach ($candidate_paths as $path) {
+			if ($path === '') {
+				continue;
+			}
+
+			$segments = array_values(array_filter(explode('/', $path), 'strlen'));
+
+			if (!isset($segments[0]) || $segments[0] !== 'blog' || empty($segments[1])) {
+				continue;
+			}
+
+			return sanitize_title($segments[1]);
+		}
+
+		return '';
+	}
+}
+
+if (!function_exists('jc_footer_get_blog_kaitori_base_path')) {
+	function jc_footer_get_blog_kaitori_base_path($blog_base_path = '') {
+		$category_slug = jc_footer_get_blog_category_slug($blog_base_path);
+		$mapping = array(
+			'gold' => '/kaitori/gold',
+			'diamond' => '/kaitori/diamond',
+			'jewelry' => '/kaitori/jewelry',
+			'card' => '/kaitori/card',
+			'letter-top' => '/kaitori/letter-top',
+			'vuitton' => '/kaitori/brand/vuitton',
+		);
+
+		return isset($mapping[$category_slug]) ? $mapping[$category_slug] : '';
+	}
+}
+
+if (!function_exists('jc_footer_get_area_link_href')) {
+	function jc_footer_get_area_link_href($term, $is_blog_context = false, $blog_base_path = '/blog/') {
+		if (!$is_blog_context || !is_object($term) || empty($term->slug)) {
+			return 'javascript:;';
+		}
+
+		$kaitori_base_path = jc_footer_get_blog_kaitori_base_path($blog_base_path);
+
+		if ($kaitori_base_path === '' || empty($term->parent)) {
+			return '#';
+		}
+
+		$parent_term = get_term((int) $term->parent, 'area');
+
+		if (!$parent_term || is_wp_error($parent_term) || empty($parent_term->slug)) {
+			return '#';
+		}
+
+		$relative_path = trailingslashit(
+			trim($kaitori_base_path, '/') . '/shop/' . $parent_term->slug . '/' . $term->slug
+		);
+
+		return home_url('/' . $relative_path);
+	}
+}
+
+if (!function_exists('jc_footer_render_area_city_group')) {
+	function jc_footer_render_area_city_group($parent_ids, $args = array()) {
+		$defaults = array(
+			'skip_term_ids' => array(),
+			'label_overrides' => array(),
+			'active_indexes' => array(),
+			'active_term_ids' => array(),
+			'line_break_every' => 0,
+			'line_break_skip_term_ids' => array(),
+			'separator_skip_term_ids' => array(),
+			'is_blog_context' => false,
+			'blog_base_path' => '/blog/',
+		);
+
+		$args = function_exists('wp_parse_args') ? wp_parse_args($args, $defaults) : array_merge($defaults, $args);
+		$terms = jc_footer_get_child_area_terms($parent_ids);
+		$visible_terms = array_values(array_filter($terms, function ($term) use ($args) {
+			return !in_array((int) $term->term_id, $args['skip_term_ids'], true);
+		}));
+		$visible_count = count($visible_terms);
+
+		foreach ($visible_terms as $index => $term) {
+			$term_id = (int) $term->term_id;
+			$classes = array();
+
+			if (in_array($index, $args['active_indexes'], true) || in_array($term_id, $args['active_term_ids'], true)) {
+				$classes[] = 'active-a';
+			}
+
+			$label = isset($args['label_overrides'][$term_id]) ? $args['label_overrides'][$term_id] : $term->name;
+
+			printf(
+				'<a href="%1$s" data-area="%2$d"%3$s>%4$s</a>',
+				esc_url(jc_footer_get_area_link_href($term, $args['is_blog_context'], $args['blog_base_path'])),
+				$term_id,
+				empty($classes) ? '' : ' class="' . esc_attr(implode(' ', $classes)) . '"',
+				esc_html($label)
+			);
+
+			if ($index >= $visible_count - 1) {
+				continue;
+			}
+
+			$should_line_break = $args['line_break_every'] > 0
+				&& (($index + 1) % $args['line_break_every'] === 0)
+				&& !in_array($term_id, $args['line_break_skip_term_ids'], true);
+
+			if ($should_line_break) {
+				echo '<span class="sp-line">　|　</span><br class="only-sp" />';
+				continue;
+			}
+
+			if (!in_array($term_id, $args['separator_skip_term_ids'], true)) {
+				echo '<span>　|　</span>';
+			}
+		}
+	}
+}
+
+if (!function_exists('jc_footer_get_shop_relative_permalink')) {
+	function jc_footer_get_shop_relative_permalink($post_id, $category_prefix = '') {
+		$post_id = (int) $post_id;
+
+		if ($post_id <= 0) {
+			return '';
+		}
+
+		$permalink = get_permalink($post_id);
+
+		if (!$permalink) {
+			return '';
+		}
+
+		if (function_exists('wp_make_link_relative')) {
+			$permalink = wp_make_link_relative($permalink);
+		} else {
+			$path = (string) parse_url($permalink, PHP_URL_PATH);
+			$query = (string) parse_url($permalink, PHP_URL_QUERY);
+			$permalink = $path !== '' ? $path : $permalink;
+
+			if ($query !== '') {
+				$permalink .= '?' . $query;
+			}
+		}
+
+		$category_prefix = trim((string) $category_prefix);
+
+		if ($category_prefix !== '') {
+			$permalink = untrailingslashit($category_prefix) . $permalink;
+		}
+
+		return $permalink;
+	}
+}
+
+if (!function_exists('jc_footer_get_shop_area_heading_term')) {
+	function jc_footer_get_shop_area_heading_term($post_id) {
+		$area_terms = get_the_terms((int) $post_id, 'area');
+
+		if (empty($area_terms) || is_wp_error($area_terms)) {
+			return null;
+		}
+
+		$area_terms = array_values($area_terms);
+		$primary_term = $area_terms[0] ?? null;
+		$secondary_term = $area_terms[1] ?? null;
+
+		if ($secondary_term && isset($secondary_term->parent) && (int) $secondary_term->parent < 1) {
+			return $primary_term ?: $secondary_term;
+		}
+
+		return $secondary_term ?: $primary_term;
+	}
+}
+
+if (!function_exists('jc_footer_get_shop_card_data')) {
+	function jc_footer_get_shop_card_data($term, $category_prefix = '') {
+		if (!is_object($term) || empty($term->slug)) {
+			return null;
+		}
+
+		$shop_post = jc_footer_get_shop_page_by_path_cached($term->slug);
+
+		if (!$shop_post || empty($shop_post->ID)) {
+			return null;
+		}
+
+		$shop_info = jc_footer_get_shop_info_cached($term->slug);
+		$shop_row = is_array($shop_info) && isset($shop_info[0]) ? $shop_info[0] : null;
+
+		return array(
+			'name' => (string) $term->name,
+			'heading_term' => jc_footer_get_shop_area_heading_term($shop_post->ID),
+			'permalink' => jc_footer_get_shop_relative_permalink($shop_post->ID, $category_prefix),
+			'address' => $shop_row && isset($shop_row->shop_add) ? (string) $shop_row->shop_add : '',
+			'tel' => $shop_row && isset($shop_row->shop_tel) ? (string) $shop_row->shop_tel : '',
+		);
+	}
+}
+
+if (!function_exists('jc_footer_get_shop_tel_link_html')) {
+	function jc_footer_get_shop_tel_link_html($tel) {
+		$tel = trim((string) $tel);
+
+		if ($tel === '') {
+			return '<a href="javascript:;" class="ftshop_tel"></a>';
+		}
+
+		return sprintf(
+			'<a href="tel:%1$s" class="ftshop_tel">TEL %2$s</a>',
+			esc_attr($tel),
+			esc_html($tel)
+		);
+	}
+}
+
+if (!function_exists('jc_footer_render_shop_card')) {
+	function jc_footer_render_shop_card($card_data) {
+		if (empty($card_data['name']) || empty($card_data['permalink'])) {
+			return;
+		}
+
+		$button_icon = '<svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869"><path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/></svg>';
+
+		printf(
+			'<div class="ftshop_list" data-name="%1$s"><h4 class="ftshop_name">ジュエルカフェ %2$s</h4><div class="ftshop_add">%3$s</div><div class="ftshop_info">%4$s<a href="%5$s" class="ftshop_btn">%6$s店舗詳細ページへ</a></div></div>',
+			esc_attr($card_data['name']),
+			esc_html($card_data['name']),
+			wp_kses_post($card_data['address']),
+			jc_footer_get_shop_tel_link_html($card_data['tel']),
+			esc_url($card_data['permalink']),
+			$button_icon
+		);
+	}
+}
+
+if (!function_exists('jc_footer_render_prefecture_shop_cards')) {
+	function jc_footer_render_prefecture_shop_cards($area_parent_id, $category_prefix = '', $render_heading = true) {
+		$rows = jc_footer_get_child_area_terms((int) $area_parent_id);
+		$has_heading = false;
+
+		foreach ($rows as $row) {
+			$card_data = jc_footer_get_shop_card_data($row, $category_prefix);
+
+			if (!$card_data) {
+				continue;
+			}
+
+			if ($render_heading && !$has_heading && !empty($card_data['heading_term']->name)) {
+				echo '<h3 class="d-n">' . esc_html($card_data['heading_term']->name) . '</h3>';
+				$has_heading = true;
+			}
+
+			jc_footer_render_shop_card($card_data);
+		}
+	}
+}
 ?>
 
 <div id="drawernav" class="hidden-md hidden-lg">
@@ -302,6 +588,8 @@ if (!function_exists('jc_footer_get_shop_info_cached')) {
 
 
 
+
+
         <div class="drawer-ttl mt-24">
           <h3 class="bg-pink2 bold color-red ptb-8 ta-c base-font-size">選べる3つの買取方法</h3>
         </div>
@@ -328,9 +616,6 @@ if (!function_exists('jc_footer_get_shop_info_cached')) {
             </a>
           </li>
         </ul>
-			  
-			  
-
 
 
 	<?php
@@ -729,29 +1014,6 @@ if (!function_exists('jc_footer_get_shop_info_cached')) {
 			</a>
 	
 	
-	
-	
-<?php /* ?>
-			<h2 class="ft-shop-title">
-				<?php
-					if( $post->post_type == 'kaitori' && $post->post_parent < 1 ){
-						
-						echo $post->post_title.'買取 ジュエルカフェの店舗案内';
-						
-					}else if( $post->post_type == 'kaitori' && $post->post_parent > 1 ){
-						
-						echo '全国のジュエルカフェの店舗案内';;
-												
-					}else{
-
-						echo '買取専門店ジュエルカフェの<br class="only-sp">店舗案内';
-					
-					}
-
-				?>
-			</h2>
-<?php */ ?>
-
 
 <?php
 
@@ -759,13 +1021,13 @@ global $wpdb;
 
 $japan_shop_count = $wpdb->get_var("
     SELECT COUNT(*)
-    FROM {$wpdb->prefix}shop_admin
+    FROM {$wpdb->prefix}shop_admin where shop_pre_open != '1'
 ");
 
 ?>
 
 
-	<h2 class="ft-shop-title">ジュエルカフェ <br class="sp"><mark>ただいま全国<span class="big"><?php echo $japan_shop_count;?></span>店舗</mark></h2>
+	<h2 class="ft-shop-title">ジュエルカフェ <br class="sp"><mark>ただいま日本全国<span class="big"><?php echo $japan_shop_count;?></span>店舗</mark></h2>
 	<p class="shop-list-lead ta-c bold mb-20">有名ショッピングセンターや駅近商店街など、<br class="sp">あなたの街のジュエルカフェでお待ちしています!</p>
 
 
@@ -1177,699 +1439,140 @@ $segments = explode('/', $uri);
 
 <?php
 	if( $post->post_type == 'shop' && count($segments) >= 3 ) { }else{
+
+	$footer_area_tab_labels = array('北海道', '東北', '関東', '中部･北陸', '関西', '中国･四国', '九州', '沖縄');
+	$footer_current_post_name = isset($post->post_name) ? $post->post_name : '';
+	$footer_is_blog_context = jc_footer_is_blog_area_link_context();
+	$footer_blog_category_slug = '';
+
+	if (isset($parent_post) && !empty($parent_post->post_name)) {
+		$footer_blog_category_slug = $parent_post->post_name;
+	} elseif (isset($category_link) && $category_link !== '') {
+		$footer_blog_category_slug = $category_link;
+	}
+
+	$footer_blog_base_path = jc_footer_get_blog_prefecture_base_path($footer_blog_category_slug);
+	$footer_area_groups = array(
+		array(
+			'parent_ids' => 357,
+			'options' => array(
+				'label_overrides' => array(504 => '北海道'),
+			),
+		),
+		array(
+			'parent_ids' => 359,
+			'options' => array(
+				'skip_term_ids' => array(552, 553),
+			),
+		),
+		array(
+			'parent_ids' => 5,
+			'options' => array(
+				'active_indexes' => $footer_current_post_name !== 'tokei-repair-matsuegakuendori' ? array(0) : array(),
+				'line_break_every' => 4,
+			),
+		),
+		array(
+			'parent_ids' => array(370, 556),
+			'options' => array(
+				'skip_term_ids' => array(555),
+				'line_break_every' => 4,
+				'line_break_skip_term_ids' => array(403),
+			),
+		),
+		array(
+			'parent_ids' => 339,
+			'options' => array(
+				'line_break_every' => 4,
+			),
+		),
+		array(
+			'parent_ids' => array(406, 557),
+			'options' => array(
+				'active_indexes' => $footer_current_post_name === 'tokei-repair-matsuegakuendori' ? array(2) : array(),
+				'line_break_every' => 4,
+			),
+		),
+		array(
+			'parent_ids' => 438,
+			'options' => array(
+				'line_break_every' => 4,
+			),
+		),
+		array(
+			'parent_ids' => 237,
+			'options' => array(
+				'label_overrides' => array(240 => '沖縄'),
+			),
+		),
+	);
 ?>
 
 	<div class="area_tab">
-		<ul class="d-f ai-c ft-area-list">	
-			<li><a href="javascript:;" data-area="0">北海道</a></li>
-			<li><a href="javascript:;" data-area="1">東北</a></li>
-			<li><a href="javascript:;" data-area="2">関東</a></li>
-			<li><a href="javascript:;" data-area="3">中部･北陸</a></li>
-			<li><a href="javascript:;" data-area="4">関西</a></li>
-			<li><a href="javascript:;" data-area="5">中国･四国</a></li>
-			<li><a href="javascript:;" data-area="6">九州</a></li>
-			<li><a href="javascript:;" data-area="7">沖縄</a></li>
+		<ul class="d-f ai-c ft-area-list">
+			<?php foreach ($footer_area_tab_labels as $area_index => $area_label) : ?>
+				<li><a href="javascript:;" data-area="<?php echo esc_attr($area_index); ?>"><?php echo esc_html($area_label); ?></a></li>
+			<?php endforeach; ?>
 		</ul>
 		<div class="area-city">
-			<div class="area-city2">
-				<?php
-					$rows = jc_footer_get_child_area_terms(357);
-					foreach($rows as $key=>$value){
-						$term_id =  $value->term_id;
-						$rows2 = array($value);
-						echo '<a href="javascript:;" data-area="'.$term_id.'"/>北海道</a>';
-					}
-				?>
-			</div>
-			<div class="area-city2">
-				<?php
-					$rows = jc_footer_get_child_area_terms(359);
-					foreach($rows as $key=>$value){
-						$term_id =  $value->term_id;
-						if($term_id == 552 || $term_id == 553){continue;}
-						$rows2 = array($value);
-						echo '<a href="javascript:;" data-area="'.$term_id.'"/>'.$rows2[0]->name.'</a>';
-						if($key < 3){
-							echo '<span>　|　</span>';
-						}
-					}
-				?>
-			</div>
-			<div class="area-city2">
-				<?php
-					$rows = jc_footer_get_child_area_terms(5);
-					foreach($rows as $key=>$value){
-						$term_id =  $value->term_id;
-						$rows2 = array($value);
-						if($key < 1 && $post->post_name !== 'tokei-repair-matsuegakuendori' ){
-							$class_name ='active-a';
-						}else{
-							$class_name = '';
-						}
-						echo '<a href="javascript:;" data-area="'.$term_id.'" class="'.$class_name.'"/>'.$rows2[0]->name.'</a>';
-						if(($key+1) % 4 == 0 && count($rows) > $key+1){
-							echo '<span class="sp-line">　|　</span>';
-							echo '<br class="only-sp" />';
-						}else if(count($rows) > $key+1){
-							echo '<span>　|　</span>';
-						}
-					}
-				?>
-			</div>
-			<div class="area-city2">
-				<?php
-					$rows = jc_footer_get_child_area_terms(array(370, 556));
-					foreach($rows as $key=>$value){
-						$term_id =  $value->term_id;
-						if($term_id == 555){continue;}
-						$rows2 = array($value);
-						echo '<a href="javascript:;" data-area="'.$term_id.'"/>'.$rows2[0]->name.'</a>';
-							if(($key+1) % 4 == 0 && count($rows) > $key+1){
-								if($term_id == 403){continue;}
-								echo '<span class="sp-line">　|　</span>';
-								echo '<br class="only-sp" />';
-							}else if(count($rows) > $key+1){
-								echo '<span>　|　</span>';
-							}
-					}
-				?>
-			</div>
-			<!-- 関西 !-->
-			<div class="area-city2">
-				<?php
-					$rows = jc_footer_get_child_area_terms(339);
-					foreach($rows as $key=>$value){
-						$term_id =  $value->term_id;
-						if($term_id == 554){continue;}
-						$rows2 = array($value);
-						echo '<a href="javascript:;" data-area="'.$term_id.'"/>'.$rows2[0]->name.'</a>';
-						if(($key+1) % 4 == 0 && count($rows) > $key+1){
-							echo '<span class="sp-line">　|　</span>';
-							echo '<br class="only-sp" />';
-						}else if(count($rows) > $key+1){
-							if($term_id == 354){continue;}
-							echo '<span>　|　</span>';
-						}
-					}
-				?>
-			</div>
-			<div class="area-city2">
-				<?php
-					$rows = jc_footer_get_child_area_terms(array(406, 557));
-					foreach($rows as $key=>$value){
-						$term_id =  $value->term_id;
-						$rows2 = array($value);
-						if($key == 2 && $post->post_name == 'tokei-repair-matsuegakuendori' ){
-							$class_name ='active-a';
-						}else{
-							$class_name = '';
-						}
-						echo '<a href="javascript:;" data-area="'.$term_id.'" class="'.$class_name.'"/>'.$rows2[0]->name.'</a>';								
-						if(($key+1) % 4 == 0 && count($rows) > $key+1){
-							echo '<span class="sp-line">　|　</span>';
-							echo '<br class="only-sp" />';
-						}else if(count($rows) > $key+1){
-							echo '<span>　|　</span>';
-						}
-					}
-				?>
-			</div>
-			<div class="area-city2">
-				<?php
-					$rows = jc_footer_get_child_area_terms(438);
-					foreach($rows as $key=>$value){
-						$term_id =  $value->term_id;
-						$rows2 = array($value);
-						echo '<a href="javascript:;" data-area="'.$term_id.'"/>'.$rows2[0]->name.'</a>';
-						if(($key+1) % 4 == 0 && count($rows) > $key+1){
-							echo '<span class="sp-line">　|　</span>';
-							echo '<br class="only-sp" />';
-						}else if(count($rows) > $key+1){
-							echo '<span>　|　</span>';
-						}
-					}
-				?>
-			</div>
-			<div class="area-city2">
-				<?php
-					$rows = jc_footer_get_child_area_terms(237);
-					foreach($rows as $key=>$value){
-						$term_id =  $value->term_id;
-						$rows2 = array($value);
-						echo '<a href="javascript:;" data-area="'.$term_id.'" class="active-a" >沖縄</a>';
-					}
-				?>
-			</div>
+			<?php foreach ($footer_area_groups as $group) : ?>
+				<div class="area-city2">
+					<?php
+					jc_footer_render_area_city_group(
+						$group['parent_ids'],
+						array_merge(
+							$group['options'],
+							array(
+								'is_blog_context' => $footer_is_blog_context,
+								'blog_base_path' => $footer_blog_base_path,
+							)
+						)
+					);
+					?>
+				</div>
+			<?php endforeach; ?>
 		</div>
 	</div>
 
 
 	
+	<?php if (!$footer_is_blog_context) : ?>
 	<div class="active-city" style="display:none;"></div>
 
 
 	<div class="area-wrapper">
 		<?php
-			$hokkaido = [504];
-			$tohoku = [360,362,365,367,552,553];
-			$kanto = [6,261,293,305,319,325,329,336];
-			$chubu = [371,379,382,384,392,395,397,403,555];
-			$kansai = [340,346,349,352,354,554];
-			$shikoku = [407,416,422,427,434,526,532,537,544];
-			$kyusyu = [439,451,455,458,465,473,475];
-			$okinawa = [240];
-			jc_footer_get_child_area_terms(array_merge($hokkaido, $tohoku, $kanto, $chubu, $kansai, $shikoku, $kyusyu, $okinawa));
-			
-			foreach($hokkaido as $key=>$v){
-				echo '<div class="city3-wrap area-'.$v.' ">';
-				echo '<div class="area-city3">';
-				$rows = jc_footer_get_child_area_terms($v);
-				
-	
-				
-				foreach($rows as $key=>$value){
-					$term_id =  $value->term_id;
-					$rows2 = array($value);
+			$footer_area_shop_groups = array(
+				array(504),
+				array(360, 362, 365, 367, 552, 553),
+				array(6, 261, 293, 305, 319, 325, 329, 336),
+				array(371, 379, 382, 384, 392, 395, 397, 403, 555),
+				array(340, 346, 349, 352, 354, 554),
+				array(407, 416, 422, 427, 434, 526, 532, 537, 544),
+				array(439, 451, 455, 458, 465, 473, 475),
+				array(240),
+			);
+			$footer_category_prefix = isset($ex1_city) ? (string) $ex1_city : '';
+			$footer_all_area_term_ids = array();
 
-
-					$post_data = jc_footer_get_shop_page_by_path_cached($rows2[0]->slug);
-					
-					$permalink = get_permalink( $post_data->ID );
-					
-					$permalink = str_replace('https://jewel-cafe.jp', '', $permalink);
-
-					if( isset($ex1_city) && $ex1_city !=='' ){ $permalink = $ex1_city.$permalink; }
-
-			
-	
-					if($key < 1){
-						$area_terms = get_the_terms($post_data->ID, 'area');
-						if($area_terms[1]->parent < 1 ){
-							echo '<h3 class="d-n">'.$area_terms[0]->name.'</h3>';
-						}else{
-							echo '<h3 class="d-n">'.$area_terms[1]->name.'</h3>';
-						}
-					}
-					if($post_data->ID){
-							
-			
-						
-						$shop_info = jc_footer_get_shop_info_cached( $rows2[0]->slug );
-
-							
-						$add_values = $shop_info[0]->shop_add;
-						
-						$tel_values = $shop_info[0]->shop_tel;
-					
-					
-					
-						
-							
-						
-							echo '<div class="ftshop_list" data-name="'.$rows2[0]->name.'">';
-							echo '<h4 class="ftshop_name">ジュエルカフェ '.$rows2[0]->name.'</h4>';
-							echo '<div class="ftshop_add">'.$add_values.'</div>';
-							if(trim($tel_values) !== ''){
-								$tel_str = '<a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a>';
-							}else{
-								$tel_str = '<a href="javascript:;" class="ftshop_tel"></a>';
-							}									
-							echo '<div class="ftshop_info">'.$tel_str.'<a href="'.$permalink.'" class="ftshop_btn"><svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869">
-	<path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/>
-	</svg>店舗詳細ページへ</a></div>';
-						echo '</div>';
-					}
-				}
-				echo '</div>';
-	
-				echo '</div>';
+			foreach ($footer_area_shop_groups as $footer_area_term_ids) {
+				$footer_all_area_term_ids = array_merge($footer_all_area_term_ids, $footer_area_term_ids);
 			}
-			
-			foreach($tohoku as $key=>$v){
-				echo '<div class="city3-wrap area-'.$v.' ">';
-				echo '<div class="area-city3">';
-				$rows = jc_footer_get_child_area_terms($v);
-				
-				
-				foreach($rows as $key=>$value){
-					$term_id =  $value->term_id;
-					$rows2 = array($value);
-					
 
-					$post_data = jc_footer_get_shop_page_by_path_cached($rows2[0]->slug);
-					
-					$permalink = get_permalink( $post_data->ID );
-					
-					$permalink = str_replace('https://jewel-cafe.jp', '', $permalink);
-					
-		
-					if( isset($ex1_city) && $ex1_city !=='' ){ $permalink = $ex1_city.$permalink; }
-
-
-					
-					if($key < 1){
-						$area_terms = get_the_terms($post_data->ID, 'area');
-						if($area_terms[1]->parent < 1 ){
-							echo '<h3 class="d-n">'.$area_terms[0]->name.'</h3>';
-						}else{
-							echo '<h3 class="d-n">'.$area_terms[1]->name.'</h3>';
-						}
-					}
-					
-					
-					
-					
-					if($post_data->ID){
-
-						
-						$shop_info = jc_footer_get_shop_info_cached( $rows2[0]->slug );
-
-							
-						$add_values = $shop_info[0]->shop_add;
-						
-						$tel_values = $shop_info[0]->shop_tel;
-					
-						
-						
-						echo '<div class="ftshop_list" data-name="'.$rows2[0]->name.'">';
-							echo '<h4 class="ftshop_name">ジュエルカフェ '.$rows2[0]->name.'</h4>';
-							echo '<div class="ftshop_add">'.$add_values.'</div>';
-							if(trim($tel_values) !== ''){
-								$tel_str = '<a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a>';
-							}else{
-								$tel_str = '<a href="javascript:;" class="ftshop_tel"></a>';
-							}
-							echo '<div class="ftshop_info">'.$tel_str.'<a href="'.$permalink.'" class="ftshop_btn"><svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869">
-	<path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/>
-	</svg>店舗詳細ページへ</a></div>';
-						echo '</div>';
-					}
-				}
-				echo '</div>';
-				
-				
-				echo '</div>';
-			}
-			//関東
-			foreach($kanto as $key=>$v){
-				echo '<div class="city3-wrap area-'.$v.' ">';
-				echo '<div class="area-city3">';
-				$rows = jc_footer_get_child_area_terms($v);
-				foreach($rows as $key=>$value){
-					$term_id =  $value->term_id;
-					$rows2 = array($value);
-					
-					
-					$post_data = jc_footer_get_shop_page_by_path_cached($rows2[0]->slug);
-					
-					$permalink = get_permalink( $post_data->ID );
-					
-					$permalink = str_replace('https://jewel-cafe.jp', '', $permalink);
-
-					if( isset($ex1_city) && $ex1_city !=='' ){ $permalink = $ex1_city.$permalink; }
-
-
-					
-					if($key < 1){
-						$area_terms = get_the_terms($post_data->ID, 'area');
-						if($area_terms[1]->parent < 1 ){
-							echo '<h3 class="d-n">'.$area_terms[0]->name.'</h3>';
-						}else{
-							echo '<h3 class="d-n">'.$area_terms[1]->name.'</h3>';
-						}
-					}						
-					if($post_data->ID){
-						
-						$shop_info = jc_footer_get_shop_info_cached( $rows2[0]->slug );
-
-							
-						$add_values = $shop_info[0]->shop_add;
-						
-						$tel_values = $shop_info[0]->shop_tel;
-					
-						
-						
-						if(trim($tel_values) !== ''){
-							$tel_str = '<a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a>';
-						}else{
-							$tel_str = '<a href="javascript:;" class="ftshop_tel"></a>';
-						}
-						echo '<div class="ftshop_list" data-name="'.$rows2[0]->name.'">';
-							echo '<h4 class="ftshop_name">ジュエルカフェ '.$rows2[0]->name.'</h4>';
-							echo '<div class="ftshop_add">'.$add_values.'</div>';
-							echo '<div class="ftshop_info">'.$tel_str.'<a href="'.$permalink.'" class="ftshop_btn"><svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869">
-	<path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/>
-	</svg>店舗詳細ページへ</a></div>';
-						echo '</div>';
-					}
-				}
-				echo '</div>';
-
-				
-				echo '</div>';
-			}
-			
-			
-			//中部
-			foreach($chubu as $key=>$v){
-				echo '<div class="city3-wrap area-'.$v.' ">';
-				echo '<div class="area-city3">';
-				$rows = jc_footer_get_child_area_terms($v);
-				foreach($rows as $key=>$value){
-					$term_id =  $value->term_id;
-					$rows2 = array($value);
-					
-					
-					$post_data = jc_footer_get_shop_page_by_path_cached($rows2[0]->slug);
-					
-					$permalink = get_permalink( $post_data->ID );
-					
-					$permalink = str_replace('https://jewel-cafe.jp', '', $permalink);
-
-					if( isset($ex1_city) && $ex1_city !=='' ){ $permalink = $ex1_city.$permalink; }
-
-					
-					
-					if($key < 1 && isset($post_data)){
-
-						$area_terms = get_the_terms($post_data->ID, 'area');
-						if($area_terms[1]->parent < 1 ){
-							echo '<h3 class="d-n">'.$area_terms[0]->name.'</h3>';
-						}else{
-							echo '<h3 class="d-n">'.$area_terms[1]->name.'</h3>';
-						}
-
-					}
-					
-					
-					if (isset($post_data->ID) && $post_data->ID) {	
-						
-											
-
-						$shop_info = jc_footer_get_shop_info_cached( $rows2[0]->slug );
-
-							
-						$add_values = $shop_info[0]->shop_add;
-						
-						$tel_values = $shop_info[0]->shop_tel;
-					
-						
-						
-						if(trim($tel_values) !== ''){
-							$tel_str = '<a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a>';
-						}else{
-							$tel_str = '<a href="javascript:;" class="ftshop_tel"></a>';
-						}
-							
-						echo '<div class="ftshop_list" data-name="'.$rows2[0]->name.'">';
-							echo '<h4 class="ftshop_name">ジュエルカフェ '.$rows2[0]->name.'</h4>';
-							echo '<div class="ftshop_add">'.$add_values.'</div>';
-							echo '<div class="ftshop_info">'.$tel_str.'<a href="'.$permalink.'" class="ftshop_btn"><svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869">
-	<path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/>
-	</svg>店舗詳細ページへ</a></div>';
-						echo '</div>';
-					}
-				}
-				echo '</div>';
-				
-if ($area_terms && is_array($area_terms)) {
-    if (isset($area_terms[1]) && isset($area_terms[1]->parent) && $area_terms[1]->parent < 1) {
-        $area_name_terms = $area_terms[0];
-    } else {
-        $area_name_terms = $area_terms[1] ?? $area_terms[0] ?? null;
-    }
-} else {
-    $area_name_terms = null;
-}
-
-				
-				echo '</div>';
-			}
-			//関西
-			foreach($kansai as $key=>$v){
-				echo '<div class="city3-wrap area-'.$v.' ">';
-				echo '<div class="area-city3">';
-				$rows = jc_footer_get_child_area_terms($v);
-				foreach($rows as $key=>$value){
-					$term_id =  $value->term_id;
-					$rows2 = array($value);
-					
-					
-					$post_data = jc_footer_get_shop_page_by_path_cached($rows2[0]->slug);
-					
-					$permalink = get_permalink( $post_data->ID );
-					
-					$permalink = str_replace('https://jewel-cafe.jp', '', $permalink);
-
-					if( isset($ex1_city) && $ex1_city !=='' ){ $permalink = $ex1_city.$permalink; }
-					
-					
-					if($key < 1){
-						$area_terms = get_the_terms($post_data->ID, 'area');
-						if($area_terms[1]->parent < 1 ){
-							echo '<h3 class="d-n">'.$area_terms[0]->name.'</h3>';
-						}else{
-							echo '<h3 class="d-n">'.$area_terms[1]->name.'</h3>';
-						}
-					}
-					if($post_data->ID){
-						
-						
-						
-						$shop_info = jc_footer_get_shop_info_cached( $rows2[0]->slug );
-
-							
-						$add_values = $shop_info[0]->shop_add;
-						
-						$tel_values = $shop_info[0]->shop_tel;
-					
-						
-						
-						
-						echo '<div class="ftshop_list" data-name="'.$rows2[0]->name.'">';
-							echo '<h4 class="ftshop_name">ジュエルカフェ '.$rows2[0]->name.'</h4>';
-							echo '<div class="ftshop_add">'.$add_values.'</div>';
-							if(trim($tel_values) !== ''){
-								$tel_str = '<a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a>';
-							}else{
-								$tel_str = '<a href="javascript:;" class="ftshop_tel"></a>';
-							}
-							echo '<div class="ftshop_info"><a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a><a href="'.$permalink.'" class="ftshop_btn"><svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869">
-	<path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/>
-	</svg>店舗詳細ページへ</a></div>';
-						echo '</div>';
-					}
-				}
-				echo '</div>';
-				if($area_terms[1]->parent < 1 ){
-					$area_name_terms = $area_terms[0];
-				}else{
-					$area_name_terms = $area_terms[1];
-				}
-				
-				echo '</div>';
-			}
-			//四国
-			foreach($shikoku as $key=>$v){
-				echo '<div class="city3-wrap area-'.$v.' ">';
-				echo '<div class="area-city3">';
-				$rows = jc_footer_get_child_area_terms($v);
-				foreach($rows as $key=>$value){
-					$term_id =  $value->term_id;
-					$rows2 = array($value);
-
-
-					$post_data = jc_footer_get_shop_page_by_path_cached($rows2[0]->slug);
-					
-					$permalink = get_permalink( $post_data->ID );
-					
-					$permalink = str_replace('https://jewel-cafe.jp', '', $permalink);
-
-					if( isset($ex1_city) && $ex1_city !=='' ){ $permalink = $ex1_city.$permalink; }
-
-
-					
-					if($key < 1){
-						$area_terms = get_the_terms($post_data->ID, 'area');
-						if($area_terms[1]->parent < 1 ){
-							echo '<h3 class="d-n">'.$area_terms[0]->name.'</h3>';
-						}else{
-							echo '<h3 class="d-n">'.$area_terms[1]->name.'</h3>';
-						}
-					}
-					if($post_data->ID){
-
-						
-						$shop_info = jc_footer_get_shop_info_cached( $rows2[0]->slug );
-
-							
-						$add_values = $shop_info[0]->shop_add;
-						
-						$tel_values = $shop_info[0]->shop_tel;
-					
-						
-						echo '<div class="ftshop_list" data-name="'.$rows2[0]->name.'">';
-							echo '<h4 class="ftshop_name">ジュエルカフェ '.$rows2[0]->name.'</h4>';
-							echo '<div class="ftshop_add">'.$add_values.'</div>';
-							if(trim($tel_values) !== ''){
-								$tel_str = '<a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a>';
-							}else{
-								$tel_str = '<a href="javascript:;" class="ftshop_tel"></a>';
-							}
-							echo '<div class="ftshop_info">'.$tel_str.'<a href="'.$permalink.'" class="ftshop_btn"><svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869">
-	<path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/>
-	</svg>店舗詳細ページへ</a></div>';
-						echo '</div>';
-						
-						
-						
-					}
-				}
-				echo '</div>';
-				if($area_terms[1]->parent < 1 ){
-					$area_name_terms = $area_terms[0]->name;
-				}else{
-					$area_name_terms = $area_terms[1]->name;
-				}
-				if($area_terms[1]->parent < 1 ){
-					$area_name_terms = $area_terms[0];
-				}else{
-					$area_name_terms = $area_terms[1];
-				}
-				echo '</div>';
-			}
-			//九州
-			foreach($kyusyu as $key=>$v){
-				echo '<div class="city3-wrap area-'.$v.' ">';
-				echo '<div class="area-city3">';
-				$rows = jc_footer_get_child_area_terms($v);
-				foreach($rows as $key=>$value){
-					$term_id =  $value->term_id;
-					$rows2 = array($value);
-					
-					
-					$post_data = jc_footer_get_shop_page_by_path_cached($rows2[0]->slug);
-					
-
-					if ( isset($post_data) && ! empty($post_data->ID) ) {
-						
-						$permalink = get_permalink( $post_data->ID );
-					
-					}
-					
-					$permalink = str_replace('https://jewel-cafe.jp', '', $permalink);
-
-					if( isset($ex1_city) && $ex1_city !=='' ){ $permalink = $ex1_city.$permalink; }
-
-		
-					
-					if($key < 1){
-						$area_terms = get_the_terms($post_data->ID, 'area');
-						if($area_terms[1]->parent < 1 ){
-							echo '<h3 class="d-n">'.$area_terms[0]->name.'</h3>';
-						}else{
-							echo '<h3 class="d-n">'.$area_terms[1]->name.'</h3>';
-						}
-					}
-					
-					
-					if(isset($post_data)){
-						
-						
-						$shop_info = jc_footer_get_shop_info_cached( $rows2[0]->slug );
-
-							
-						$add_values = $shop_info[0]->shop_add;
-						
-						$tel_values = $shop_info[0]->shop_tel;
-
-						
-						echo '<div class="ftshop_list" data-name="'.$rows2[0]->name.'">';
-							echo '<h4 class="ftshop_name">ジュエルカフェ '.$rows2[0]->name.'</h4>';
-							echo '<div class="ftshop_add">'.$add_values.'</div>';
-							if(trim($tel_values) !== ''){
-								$tel_str = '<a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a>';
-							}else{
-								$tel_str = '<a href="javascript:;" class="ftshop_tel"></a>';
-							}
-							echo '<div class="ftshop_info"> '.$tel_str.'<a href="'.$permalink.'" class="ftshop_btn"><svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869">
-	<path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/>
-	</svg>店舗詳細ページへ</a></div>';
-						echo '</div>';
-					}
-				}
-				echo '</div>';
-				
-				if(isset($area_terms[0]) && $area_terms[1]->parent < 1 ){
-					$area_name_terms = $area_terms[0];
-				}else if(isset($area_terms[1])){
-					$area_name_terms = $area_terms[1];
-				}
-				
-				echo '</div>';
-			}
-			
-			
-			
-			//沖縄
-			foreach($okinawa as $key=>$v){
-				echo '<div class="city3-wrap area-'.$v.' ">';
-				echo '<div class="area-city3">';
-				$rows = jc_footer_get_child_area_terms($v);
-				foreach($rows as $key=>$value){
-					$term_id =  $value->term_id;
-					$rows2 = array($value);
-					
-					
-					$post_data = jc_footer_get_shop_page_by_path_cached($rows2[0]->slug);
-					
-					$permalink = get_permalink( $post_data->ID );
-					
-					$permalink = str_replace('https://jewel-cafe.jp', '', $permalink);
-
-					if( isset($ex1_city) && $ex1_city !=='' ){ $permalink = $ex1_city.$permalink; }
-
-		
-					
-					if($key < 1){
-						$area_terms = get_the_terms($post_data->ID, 'area');
-						if($area_terms[1]->parent < 1 ){
-							echo '<h3 class="d-n">'.$area_terms[0]->name.'</h3>';
-						}else{
-							echo '<h3 class="d-n">'.$area_terms[1]->name.'</h3>';
-						}
-					}
-					if($post_data->ID){
-
-						$shop_info = jc_footer_get_shop_info_cached( $rows2[0]->slug );
-
-							
-						$add_values = $shop_info[0]->shop_add;
-						
-						$tel_values = $shop_info[0]->shop_tel;
-					
-						
-						
-						echo '<div class="ftshop_list" data-name="'.$rows2[0]->name.'">';
-							echo '<h4 class="ftshop_name">ジュエルカフェ '.$rows2[0]->name.'</h4>';
-							echo '<div class="ftshop_add">'.$add_values.'</div>';
-							if(trim($tel_values) !== ''){
-								$tel_str = '<a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a>';
-							}else{
-								$tel_str = '<a href="javascript:;" class="ftshop_tel"></a>';
-							}
-							echo '<div class="ftshop_info">'.$tel_str.'<a href="'.$permalink.'" class="ftshop_btn"><svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869">
-	<path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/>
-	</svg>店舗詳細ページへ</a></div>';
-						echo '</div>';
-					}
-				}
-				echo '</div>';
-				
-				echo '</div>';
-			}
+			jc_footer_get_child_area_terms($footer_all_area_term_ids);
 		?>
+
+		<?php foreach ($footer_area_shop_groups as $footer_area_term_ids) : ?>
+			<?php foreach ($footer_area_term_ids as $footer_area_term_id) : ?>
+				<div class="city3-wrap area-<?php echo esc_attr($footer_area_term_id); ?>">
+					<div class="area-city3">
+						<?php jc_footer_render_prefecture_shop_cards($footer_area_term_id, $footer_category_prefix); ?>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		<?php endforeach; ?>
 	</div>
+	<?php endif; ?>
 	<?php }?>
 
 <?php endif;?>
@@ -1884,93 +1587,28 @@ if ($area_terms && is_array($area_terms)) {
 	if( $post->post_type == 'shop' && count($segments) >= 3 ):
 
 
-	$area_terms = get_the_terms($post->ID, 'area');
-	
-	if($area_terms[1]->parent < 1 ){
-		
-		$area_terms_name =  $area_terms[0]->name;
-		$area_terms_slug =  $area_terms[0]->slug;
-		$area_terms_id =  $area_terms[0]->term_taxonomy_id;
+	$footer_shop_area_term = jc_footer_get_shop_area_heading_term($post->ID);
 
-		
-	}else{
-		
-		$area_terms_name =  $area_terms[1]->name;
-		$area_terms_slug =  $area_terms[1]->slug;
-		$area_terms_id =  $area_terms[1]->term_taxonomy_id;
-		
-	}	
+	if ($footer_shop_area_term):
+	$footer_shop_area_term_id = !empty($footer_shop_area_term->term_id)
+		? (int) $footer_shop_area_term->term_id
+		: (int) $footer_shop_area_term->term_taxonomy_id;
 ?>	
 	
 	
 	<h3 class="active-city">
 
-		<?php echo $area_terms_name;?>
+		<?php echo esc_html($footer_shop_area_term->name);?>
 		
 	</h3>
 
 
 
-	<div class="city3-wrap area-6 " bis_skin_checked="1" style="display: block;">
+	<div class="city3-wrap area-<?php echo esc_attr($footer_shop_area_term_id); ?>" style="display: block;">
 
-		<div class="area-city3" bis_skin_checked="1">
+		<div class="area-city3">
 
-		<?php
-
-
-				$rows = jc_footer_get_child_area_terms($area_terms_id);
-				foreach($rows as $key=>$value){
-					$term_id =  $value->term_id;
-					$rows2 = array($value);
-					
-					
-					$post_data = jc_footer_get_shop_page_by_path_cached($rows2[0]->slug);
-					
-					if( isset($post_data->ID) ){
-					
-					$permalink = get_permalink( $post_data->ID );
-					
-					}
-					
-					$permalink = str_replace('https://jewel-cafe.jp', '', $permalink);
-
-					if( isset($ex1_city) && $ex1_city !=='' ){ $permalink = $ex1_city.$permalink; }
-
-
-												
-					$shop_info = jc_footer_get_shop_info_cached( $rows2[0]->slug );
-
-					
-					if( isset($shop_info[0]->shop_add) && isset($shop_info[0]->shop_tel) ){
-					
-					$add_values = $shop_info[0]->shop_add;
-					
-					$tel_values = $shop_info[0]->shop_tel;
-					
-					}
-				
-					
-					echo '<div class="ftshop_list" data-name="'.$rows2[0]->name.'">';
-						echo '<h4 class="ftshop_name">ジュエルカフェ '.$rows2[0]->name.'</h4>';
-						echo '<div class="ftshop_add">'.$add_values.'</div>';
-						if(trim($tel_values) !== ''){
-							$tel_str = '<a href="tel:'.$tel_values.'" class="ftshop_tel">TEL '.$tel_values.'</a>';
-						}else{
-							$tel_str = '<a href="javascript:;" class="ftshop_tel"></a>';
-						}
-						echo '<div class="ftshop_info">'.$tel_str.'<a href="'.$permalink.'" class="ftshop_btn"><svg xmlns="http://www.w3.org/2000/svg" width="18.077" height="15.869" viewBox="0 0 18.077 15.869">
-	<path id="パス_1" data-name="パス 1" d="M2.7,9.472H9.2v4.909H2.7Zm13.91-1.488h0ZM2.232,4.464H15.846l.768,3.521H1.463ZM1.091,2.976,0,7.985V9.472H1.216v6.4h9.473v-6.4h4.686v6.4h1.488v-6.4h1.215V7.985L16.986,2.976Zm0-1.488h15.92V0H1.091Z" transform="translate(0 -0.001)" fill="#c70000"/>
-	</svg>店舗詳細ページへ</a></div>';
-					echo '</div>';
-
-
-
-
-				
-				
-				}
-					
-		?>
+		<?php jc_footer_render_prefecture_shop_cards($footer_shop_area_term_id, isset($ex1_city) ? (string) $ex1_city : '', false); ?>
 
 
 		</div>
@@ -1978,6 +1616,7 @@ if ($area_terms && is_array($area_terms)) {
 	</div>
 	
 <?php	
+	endif;
 	endif;
 ?>
 
@@ -2312,6 +1951,75 @@ jQuery(function(){
         });
 });
 
+var footerAreaUsesBlogLinks = <?php echo !empty($footer_is_blog_context) ? 'true' : 'false'; ?>;
+var footerAreaDefaultCities = {
+	'0': '504',
+	'1': '360',
+	'2': '6',
+	'3': '371',
+	'4': '340',
+	'5': '407',
+	'6': '439',
+	'7': '240'
+};
+
+function jcFooterShowPrefecture(prefectureAreaId, options) {
+	var $ = jQuery;
+	var settings = options || {};
+	var $prefectureLink = $('.area-city2 a[data-area="' + prefectureAreaId + '"]').first();
+
+	if (!$prefectureLink.length) {
+		return;
+	}
+
+	$('.area-city2 .active-a').removeClass('active-a');
+	$prefectureLink.addClass('active-a');
+
+	var isFirst = $('.active-city').html() === '';
+	var shouldAnimate = typeof settings.animate === 'boolean' ? settings.animate : isFirst;
+
+	$('.active-city').html($prefectureLink.html()).show();
+	$('.city3-wrap').hide();
+
+	if (shouldAnimate) {
+		$('.area-' + prefectureAreaId).slideDown('slow');
+	} else {
+		$('.area-' + prefectureAreaId).css('display', 'block');
+	}
+}
+
+function jcFooterShowArea(areaIndex, options) {
+	var $ = jQuery;
+	var settings = options || {};
+	var areaKey = String(areaIndex);
+	var areaIndexNumber = parseInt(areaIndex, 10);
+	var $areaLink = $('.ft-area-list a[data-area="' + areaKey + '"]').first();
+
+	if (!$areaLink.length || isNaN(areaIndexNumber)) {
+		return;
+	}
+
+	$('.ft-area-list .active').removeClass('active');
+	$areaLink.addClass('active');
+
+	var $cityGroup = $('.area-city2').hide().eq(areaIndexNumber).show();
+	$cityGroup.find('a').show();
+
+	if (areaKey === '0' || areaKey === '7') {
+		$cityGroup.find('.active-a').hide();
+	}
+
+	if (settings.activateDefaultPrefecture === false) {
+		return;
+	}
+
+	if (footerAreaDefaultCities[areaKey]) {
+		jcFooterShowPrefecture(footerAreaDefaultCities[areaKey], {
+			animate: settings.animate
+		});
+	}
+}
+
 
 
 
@@ -2383,7 +2091,7 @@ jQuery(function($){
 		'osaka': ['4','349'],
 		'hyogo': ['4','346'],
 		'nara': ['4','352'],
-		'wakayama': ['4','349'],
+		'wakayama': ['4','554'],
 
 
 		'tottori': ['5','434'],
@@ -2411,18 +2119,16 @@ jQuery(function($){
 	}
 
 
-		
+	
 		if( city[city_name][0] == ''){
 
-			$('.ft-area-list a[data-area="2"]').click();
-
-			$('.area-city2 a[data-area="6"]').click();
+			jcFooterShowArea('2', { activateDefaultPrefecture: false, animate: false });
+			jcFooterShowPrefecture('6', { animate: false });
 
 		}else{
 			
-			$('.ft-area-list a[data-area="'+city[city_name][0]+'"]').click();
-			
-			$('.area-city2 a[data-area="'+city[city_name][1]+'"]').click();
+			jcFooterShowArea(city[city_name][0], { activateDefaultPrefecture: false, animate: false });
+			jcFooterShowPrefecture(city[city_name][1], { animate: false });
 
 		}
 		
@@ -2440,111 +2146,28 @@ jQuery(function($){
 
 $(function() {
 
-	
+	$('.ft-area-list a').click(function(event) {
+		event.preventDefault();
 
-
-	$('.ft-area-list a').click(function() {
-		
-		$('.ft-area-list .active').removeClass();
-		
-		$(this).addClass("active");
-		
-		var city_key = $(this).data('area');
-		
-		$('.area-city2').hide();
-
-		$('.area-city2').eq(city_key).show();
-		
-
-		if( $(this).data('area') == '0' || $(this).data('area') == '7' ){ $('.area-city2').eq(city_key).find('.active-a').hide(); }
-	
-	
-		//北海道
-		if( $(this).data('area') == 0 ){
-			
-			$('.area-city2 a[data-area="504"]').click();
-		
-		//東北
-		}else if( $(this).data('area') == 1 ){
-			
-			$('.area-city2 a[data-area="360"]').click();
-			
-		//関東
-		}else if( $(this).data('area') == 2 ){
-			
-			$('.area-city2 a[data-area="6"]').click();
-		
-		//中部･北陸
-		}else if( $(this).data('area') == 3 ){
-			
-			$('.area-city2 a[data-area="371"]').click();
-		
-		//関西
-		}else if( $(this).data('area') == 4 ){
-		
-			$('.area-city2 a[data-area="340"]').click();
-		
-		//中国･四国
-		}else if( $(this).data('area') == 5 ){
-		
-			$('.area-city2 a[data-area="407"]').click();
-		
-		//九州
-		}else if( $(this).data('area') == 6 ){
-		
-			$('.area-city2 a[data-area="439"]').click();
-		
-		//沖縄
-		}else if( $(this).data('area') == 7 ){
-			
-			$('.area-city2 a[data-area="240"]').click();
-			
-		}
-
-
+		jcFooterShowArea($(this).data('area'), {
+			activateDefaultPrefecture: !footerAreaUsesBlogLinks
+		});
 	});
 
-
-	
-	
-	
 	//店舗リスト
-	$('.area-city2 a').click(function() {
-		
-		
-		$('.area-city2 .active-a').removeClass();
-		
-		$(this).addClass("active-a");
+	$('.area-city2 a').click(function(event) {
+		var href = $(this).attr('href');
+		var shouldNavigate = footerAreaUsesBlogLinks && href && href !== '#';
 
-		var is_first = false;
-
-		if( $('.active-city').html() == '' ){ is_first = true;}
-		
-
-		$('.active-city').html($(this).html());
-		
-		$('.active-city').show();
-		
-
-		var city_key = $(this).data('area');
-		
-		
-		$('.city3-wrap').hide();
-		
-		
-		if( is_first ){
-		
-			$('.area-'+city_key).slideDown("slow");
-		
-		}else{
-			
-
-			$('.area-'+city_key).css('display','block'); 
-			
+		if (!shouldNavigate) {
+			event.preventDefault();
 		}
 
+		if (shouldNavigate) {
+			return;
+		}
 
-	
+		jcFooterShowPrefecture($(this).data('area'));
 	});
 	
 
