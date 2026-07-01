@@ -111,20 +111,35 @@ Template Name: TOP
 
 
 
+<?php /* ?> // 通常のキャンペーン 
+  <?php if(wp_is_mobile()): // スマホ・タブレットの場合の処理を記述 ?>
+    <h4 class="section-inner">
+      <img class="w-100per" src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/top/top-catch-bnr-03_sp.jpg" alt="ジュエルカフェの査定プレゼント" width="100%" height="100%">
+    </h4>
+  <?php else: // PCの場合の処理を記述 ?>
+    <ul class="d-f slider">
+      <li><h4><img src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/top/top-catch-bnr-03.jpg" alt="ジュエルカフェの査定プレゼント" width="100%" height="100%"></h4></li>
+      <li><h4><img src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/top/top-catch-bnr-02.jpg" alt="ジュエルカフェのロレックス買取特典" width="100%" height="100%"></h4></li>
+      <li><h4><img src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/top/top-catch-bnr-01.png" alt="ジュエルカフェのブランド買取特典" width="100%" height="100%"></h4></li>
+    </ul>
+  <?php endif; ?>
+<?php */ ?>
+
+
 <?php /* ?> // 通常のキャンペーン <?php */ ?>
-<?php if(wp_is_mobile()): // スマホ・タブレットの場合の処理を記述 ?>
-  <h4 class="section-inner">
-    <img class="w-100per" src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/top/top-catch-bnr-03_sp.jpg" alt="ジュエルカフェの査定プレゼント" width="100%" height="100%">
-  </h4>
-<?php else: // PCの場合の処理を記述 ?>
+<!-- SP用(CSSで出し分け) -->
+<h4 class="section-inner sp">
+  <img class="w-100per" src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/top/top-catch-bnr-03_sp.jpg" alt="ジュエルカフェの査定プレゼント" width="100%" height="100%">
+</h4>
+
+<!-- PC用(CSSで出し分け) -->
+<div class="pc">
   <ul class="d-f slider">
     <li><h4><img src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/top/top-catch-bnr-03.jpg" alt="ジュエルカフェの査定プレゼント" width="100%" height="100%"></h4></li>
     <li><h4><img src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/top/top-catch-bnr-02.jpg" alt="ジュエルカフェのロレックス買取特典" width="100%" height="100%"></h4></li>
     <li><h4><img src="<?php echo esc_url(get_template_directory_uri());?>/assets/images/top/top-catch-bnr-01.png" alt="ジュエルカフェのブランド買取特典" width="100%" height="100%"></h4></li>
   </ul>
-<?php endif; ?>
-
-
+</div>
 
 
 

@@ -41,7 +41,7 @@
 <meta name="twitter:title" content="全国展開の買取専門店 ジュエルカフェ【公式】">
 <meta name="twitter:description" content="全国展開の買取専門店 ジュエルカフェ【公式】 | 金・時計・金券・ブランド買取を日本全国対応いたします。全国300店舗以上で高価買取実施中。お気軽に無料査定をご利用ください！">
 
-<?php //検索結果にサムネイル画像を表示させる設定（メタタグと構造化データ）
+<?php //検索結果にサムネイル画像を表示させる設定（メタタグ）
 	$slug = '';
 	$target_slugs = ['gold', 'brand', 'tokei'];
 	foreach ( $target_slugs as $s ) {
@@ -52,22 +52,8 @@
 	}
 	if ( !empty($slug) ) :
 		$img_url = get_stylesheet_directory_uri() . "/assets/images/thumbnails/{$slug}-thumbnail.jpg";
-		$desc = get_post_meta( get_the_ID(), '_aioseo_description', true );
 ?>
     <meta name="thumbnail" content="<?php echo esc_url( $img_url ); ?>" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "<?php echo esc_url( get_permalink() ); ?>"
-      },
-      "image": "<?php echo esc_url( $img_url ); ?>",
-      "name": "<?php echo esc_js( wp_get_document_title() ); ?>",
-      "description": "<?php echo esc_js( wp_strip_all_tags( $desc ) ); ?>"
-    }
-    </script>
 <?php endif; ?>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -115,28 +101,55 @@
 
 <script type="application/ld+json">
 {
-"@context": "https://schema.org",
-"@type": "Organization",
-"url": "https://www.crane-a.co.jp",
-"sameAs": ["https://www.instagram.com/crane_inc_official/",
-"https://www.facebook.com/crane.inc",
-"https://twitter.com/crane__inc",
-"https://www.tiktok.com/@crane__official"],
-"logo": "https://www.crane-a.co.jp/wp-content/themes/crane-a/assets/img/common/logo.svg",
-"name": "株式会社クレイン",
-"description": "「買取を身近なものに。気軽に足を運べる場所に」業界最大級の買取専門店ジュエルカフェをはじめ、国内・海外に幅広い事業と拠点を持つ株式会社クレイン",
-"email": "kantei@jewel-cafe.jp",
-"telephone": "",
-"address": {
-"@type": "PostalAddress",
-"streetAddress": "南青山5-6-26 青山246ビル5F",
-"addressLocality": "港区",
-"addressCountry": "JP",
-"addressRegion": "東京都",
-"postalCode": "1070062"
-},
-"vatID": "",
-"iso6523Code": ""
+	"@context": "https://schema.org",
+	"@id": "<?php echo esc_url( home_url( '/' ) ); ?>#organization",
+	"@type": "Organization",
+	"url": "https://www.crane-a.co.jp",
+	"sameAs": ["https://www.instagram.com/crane_inc_official/",
+	"https://www.facebook.com/crane.inc",
+	"https://x.com/crane__inc",
+	"https://www.tiktok.com/@crane__official"],
+	"logo": "https://www.crane-a.co.jp/wp-content/themes/crane-a/assets/img/common/logo.svg",
+	"name": "株式会社クレイン",
+	"description": "「買取を身近なものに。気軽に足を運べる場所に」業界最大級の買取専門店ジュエルカフェをはじめ、国内・海外に幅広い事業と拠点を持つ株式会社クレイン",
+	"email": "kantei@jewel-cafe.jp",
+	"address": {
+		"@type": "PostalAddress",
+		"streetAddress": "南青山5-6-26 青山246ビル5F",
+		"addressLocality": "港区",
+		"addressCountry": "JP",
+		"addressRegion": "東京都",
+		"postalCode": "107-0062"
+	},
+	"foundingDate": "2000",
+	"areaServed": "JP",
+	"hasOfferCatalog": {
+		"@type": "OfferCatalog",
+		"name": "買取サービス",
+		"itemListElement": [
+			{
+				"@type": "Offer",
+				"itemOffered": {
+					"@type": "Service",
+					"name": "金買取"
+				}
+			},
+			{
+				"@type": "Offer",
+				"itemOffered": {
+					"@type": "Service",
+					"name": "プラチナ買取"
+				}
+			},
+			{
+				"@type": "Offer",
+				"itemOffered": {
+					"@type": "Service",
+					"name": "シルバー買取"
+				}
+			}
+		]
+	}
 }
 </script>
 

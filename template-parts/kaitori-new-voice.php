@@ -1432,6 +1432,7 @@ if ($is_gold_path && isset($voices_data[$current_slug])) {
 		});
 	</script>
 
+
 <?php else:?>
 
 				<div class="section-inner">

@@ -8,6 +8,23 @@
 
 <?php
 
+$gold_chart_datasets = isset($args['gold_chart_datasets']) && is_array($args['gold_chart_datasets'])
+    ? $args['gold_chart_datasets']
+    : array(
+        '1m'  => array('prices' => array(), 'dates' => array()),
+        '1y'  => array('prices' => array(), 'dates' => array()),
+        '5y'  => array('prices' => array(), 'dates' => array()),
+        '10y' => array('prices' => array(), 'dates' => array()),
+    );
+
+$gold_chart_price_config = isset($args['gold_chart_price_config']) && is_array($args['gold_chart_price_config'])
+    ? $args['gold_chart_price_config']
+    : array('label' => '金相場価格');
+
+$gold_expert_comments = isset($args['getgoldcoment']) && is_array($args['getgoldcoment'])
+    ? $args['getgoldcoment']
+    : array();
+
 $date = new DateTime();
 $date->modify('-2 years');
 
@@ -1286,64 +1303,121 @@ for ($i = 1; $i < count($rows); $i++):
 						のリアルタイム相場 推移グラフ
 						
 					</h2>
+					
+					<?php /*?>
                     <div class="period fs_10"><?php echo date('Y年m月d日',strtotime("-30 day")); ?> ~ <?php echo date('Y年m月d日');?></div>
+					<?php */?>
+					
                 </div>
             </div>
-            <div class="body">
-				<div class="chartjs-size-monitor">
-					<div class="chartjs-size-monitor-expand"><div class=""></div></div>
-					<div class="chartjs-size-monitor-shrink"><div class=""></div></div>
-				</div>
-                <canvas id="myChart" width="716" height="358" style="display: block; width: 716px; height: 358px;" class="chartjs-render-monitor"></canvas>
-                <div class="chart-txt">※土日・祝日を除く税込小売価格の推移です。</div>
-            </div>
-			<div class="gold-line">
-				<div class="gold-title">
-					その他の相場グラフはこちらから
-				</div>
-				<div class="selectWrap">
-					<select id="graph-select" class="select form-control">
-						<option value="">選択してください</option>
-						<optgroup label="金">
-						  <option value="k24_price" <?php if( $post->post_name == 'k24' ){ echo 'selected'; }?>>K24</option>
-						  <option value="k23_price" <?php if( $post->post_name == 'k23' ){ echo 'selected'; }?>>K23</option>
-						  <option value="k22_price" <?php if( $post->post_name == 'k22' ){ echo 'selected'; }?>>K22</option>
-						  <option value="k21_6_price" <?php if( $post->post_name == 'k21_6' ){ echo 'selected'; }?>>K21.6</option>
-						  <option value="k20_price" <?php if( $post->post_name == 'k20' ){ echo 'selected'; }?>>K20</option>
-						  <option value="k18_price" <?php if( $post->post_name == 'k18' ){ echo 'selected'; }?>>K18</option>
-						  <option value="k14_price" <?php if( $post->post_name == 'k14' ){ echo 'selected'; }?>>K14</option>
-						  <option value="k12_price" <?php if( $post->post_name == 'k12' ){ echo 'selected'; }?>>K12</option>
-						  <option value="k10_price" <?php if( $post->post_name == 'k10' ){ echo 'selected'; }?>>K10</option>
-						  <option value="k9_price" <?php if( $post->post_name == 'k9' ){ echo 'selected'; }?>>K9</option>
-						  <option value="k8_price" <?php if( $post->post_name == 'k8' ){ echo 'selected'; }?>>K8</option>
-						</optgroup>
-						<optgroup label="プラチナ">
-						<option value="pt1000_price">Pt1000</option>
-						<option value="pt950_price">Pt950</option>
-						<option value="pt900_price">Pt900</option>
-						<option value="pt850_price">Pt850</option>
-						</optgroup>
-						<optgroup label="銀">
-						  <option value="sv1000ig_price">Sv1000IG</option>
-						  <option value="sv1000_price">Sv1000</option>
-						  <option value="sv970_price">Sv970</option>
-						  <option value="sv950_price">Sv950</option>
-						  <option value="sv925_price">Sv925</option>
-						</optgroup>
-						<optgroup label="パラジウム">
-						<option value="gold_combi_price">金ベースコンビ</option>
-						<option value="half_combi">ハーフコンビ</option>
-						<option value="pt900_k18_combi">Pt900ベース/K18コンビ</option>
-						<option value="pt850_k18_combi">Pt850ベース/K18コンビ</option>
-						<option value="palladium">パラジウム</option>
-						<option value="ruthenium">ルテニウム</option>
-						</optgroup>
-					</select>
-				</div>
-			</div>
+			
 		</section>
 
 
+
+<section id="gold-market-chart" class="section-inner">
+	<div class="toolbar">
+		<button id="btn_1m">1ヶ月</button>
+		<button id="btn_1y">1年</button>
+		<button id="btn_5y">5年</button>
+		<button id="btn_10y" class="active">10年</button>
+	</div>
+	<div id="gold-chart"></div>
+</section>
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    var goldChartDatasets = <?php echo wp_json_encode($gold_chart_datasets); ?>;
+    var goldChartSeriesName = <?php echo wp_json_encode($gold_chart_price_config['label']); ?>;
+    var defaultPeriod = '10y';
+    var defaultData = goldChartDatasets[defaultPeriod] || { prices: [], dates: [] };
+    var chartElement = document.querySelector('#gold-chart');
+
+    if (chartElement && window.ApexCharts) {
+      var options = {
+        chart: {
+          type: 'area',
+          height: 350,
+          animations: { enabled: true },
+          toolbar: { show: false }
+        },
+        colors: ['#D4AF37'],
+        series: [{
+          name: goldChartSeriesName,
+          data: defaultData.prices
+        }],
+        xaxis: {
+          categories: defaultData.dates
+        },
+        yaxis: {
+          labels: {
+            formatter: function (val) {
+              return val.toLocaleString() + ' \u5186';
+            }
+          }
+        },
+        stroke: { curve: 'smooth', width: 3 },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val.toLocaleString() + ' \u5186 / g';
+            }
+          }
+        },
+        noData: {
+          text: 'No data'
+        }
+      };
+
+      var chart = new ApexCharts(chartElement, options);
+      chart.render();
+
+      function updateChartData(periodKey, buttonId) {
+        var nextData = goldChartDatasets[periodKey];
+
+        if (!nextData) {
+          return;
+        }
+
+        Array.prototype.forEach.call(
+          document.querySelectorAll('#gold-market-chart .toolbar button'),
+          function (button) {
+            button.classList.remove('active');
+          }
+        );
+
+        var activeButton = document.getElementById(buttonId);
+
+        if (activeButton) {
+          activeButton.classList.add('active');
+        }
+
+        chart.updateOptions({
+          series: [{ data: nextData.prices }],
+          xaxis: { categories: nextData.dates }
+        });
+      }
+
+      [
+        { id: 'btn_1m', key: '1m' },
+        { id: 'btn_1y', key: '1y' },
+        { id: 'btn_5y', key: '5y' },
+        { id: 'btn_10y', key: '10y' }
+      ].forEach(function (buttonConfig) {
+        var button = document.getElementById(buttonConfig.id);
+
+        if (!button) {
+          return;
+        }
+
+        button.addEventListener('click', function () {
+          updateChartData(buttonConfig.key, buttonConfig.id);
+        });
+      });
+    }
+  </script>
+
+		
 		
 		
 		<section class="mt-40">
@@ -1444,7 +1518,7 @@ foreach ($years as $year) {
 		</section>
 
 		<section class="mt-40">
-			<?php get_template_part('template-parts/gold-expert' ,null , $args); ?>
+			<?php get_template_part('template-parts/gold-expert' ,null , $gold_expert_comments); ?>
 		</section>
  
 
@@ -1756,7 +1830,7 @@ echo (isset($today_result[0]->gold_price) && is_numeric($today_result[0]->gold_p
 		
 <?php if(is_single(['k24', 'k22', 'k20', 'k18', 'k14', 'k10'])):?>
 	<section class="mt-80">
-		<?php get_template_part('template-parts/gold-expert' ,null , $args); ?>
+		<?php get_template_part('template-parts/gold-expert' ,null , $gold_expert_comments); ?>
 	</section>
 <?php endif;?>
 

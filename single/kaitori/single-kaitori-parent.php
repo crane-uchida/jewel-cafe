@@ -301,7 +301,7 @@ Template Name: 品目詳細ページ
 				
 				if($parent === 0):
 			?>
-				<section class="intro section-inner">
+				<section class="intro section-inner mb-32">
 					<?php get_template_part( 'template-parts/intro-kaitori-parents' );
 					?>
 				</section>

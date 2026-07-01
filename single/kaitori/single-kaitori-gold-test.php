@@ -11,10 +11,11 @@ Template Name: 品目詳細ページ 金 専用
 <?php
 
 
+					$gold_chart_table = $wpdb->prefix . 'goldchart';
 					$today_sql = "
 (
   SELECT *
-  FROM `wp_goldchart`
+  FROM `{$gold_chart_table}`
   WHERE DATE(STR_TO_DATE(`gold_time`, '%Y-%m-%d %H:%i:%s')) = CURDATE()
   ORDER BY STR_TO_DATE(`gold_time`, '%Y-%m-%d %H:%i:%s') DESC
   LIMIT 1
@@ -22,7 +23,7 @@ Template Name: 品目詳細ページ 金 専用
 UNION ALL
 (
   SELECT *
-  FROM `wp_goldchart`
+  FROM `{$gold_chart_table}`
   WHERE DATE(STR_TO_DATE(`gold_time`, '%Y-%m-%d %H:%i:%s')) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)
   ORDER BY STR_TO_DATE(`gold_time`, '%Y-%m-%d %H:%i:%s') DESC
   LIMIT 1
@@ -31,6 +32,456 @@ ORDER BY STR_TO_DATE(`gold_time`, '%Y-%m-%d %H:%i:%s') DESC
 ";
 
 $today_result = $wpdb->get_results($today_sql);
+
+if (!function_exists('jewelcafe_normalize_gold_chart_price')) {
+	function jewelcafe_normalize_gold_chart_price($value) {
+		if (!is_scalar($value)) {
+			return null;
+		}
+
+		$normalized = preg_replace('/[^\d.\-]/', '', (string) $value);
+
+		if ($normalized === '' || !is_numeric($normalized)) {
+			return null;
+		}
+
+		return (float) $normalized;
+	}
+}
+
+if (!function_exists('jewelcafe_get_gold_chart_empty_datasets')) {
+	function jewelcafe_get_gold_chart_empty_datasets() {
+		return array(
+			'1m'  => array('prices' => array(), 'dates' => array()),
+			'1y'  => array('prices' => array(), 'dates' => array()),
+			'5y'  => array('prices' => array(), 'dates' => array()),
+			'10y' => array('prices' => array(), 'dates' => array()),
+		);
+	}
+}
+
+if (!function_exists('jewelcafe_get_gold_chart_rows')) {
+	function jewelcafe_get_gold_chart_rows($price_column = 'gold_price') {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'goldchart';
+		$allowed_columns = array('gold_price', 'k24_price', 'k22_price', 'k18_price');
+
+		if (!in_array($price_column, $allowed_columns, true)) {
+			$price_column = 'gold_price';
+		}
+
+		$table_exists = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $table_name));
+
+		if ($table_exists !== $table_name) {
+			return array();
+		}
+
+		return $wpdb->get_results(
+			"
+			SELECT parsed.recorded_at, parsed.gold_price
+			FROM (
+				SELECT
+					STR_TO_DATE(gold_time, '%Y-%m-%d %H:%i:%s') AS recorded_at,
+					{$price_column} AS gold_price
+				FROM `{$table_name}`
+			) AS parsed
+			WHERE parsed.recorded_at IS NOT NULL
+				AND parsed.recorded_at >= DATE_SUB(CURDATE(), INTERVAL 11 YEAR)
+			ORDER BY parsed.recorded_at ASC
+			"
+		);
+	}
+}
+
+if (!function_exists('jewelcafe_build_gold_chart_daily_lookup')) {
+	function jewelcafe_build_gold_chart_daily_lookup($rows, DateTimeZone $timezone) {
+		$daily_lookup = array();
+
+		foreach ($rows as $row) {
+			if (empty($row->recorded_at)) {
+				continue;
+			}
+
+			$recorded_at = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $row->recorded_at, $timezone);
+			$price = jewelcafe_normalize_gold_chart_price($row->gold_price);
+
+			if (!$recorded_at || $price === null) {
+				continue;
+			}
+
+			$daily_lookup[$recorded_at->format('Y-m-d')] = array(
+				'price'       => (int) round($price),
+				'date'        => $recorded_at->setTime(0, 0, 0),
+				'recorded_at' => $recorded_at,
+			);
+		}
+
+		ksort($daily_lookup);
+
+		return $daily_lookup;
+	}
+}
+
+if (!function_exists('jewelcafe_find_gold_chart_point_for_date')) {
+	function jewelcafe_find_gold_chart_point_for_date($daily_lookup, DateTimeImmutable $target_date, $same_month_only = true) {
+		$cursor = $target_date->setTime(0, 0, 0);
+		$target_month = $cursor->format('Y-m');
+
+		while (true) {
+			$date_key = $cursor->format('Y-m-d');
+
+			if (isset($daily_lookup[$date_key])) {
+				return $daily_lookup[$date_key];
+			}
+
+			$previous = $cursor->sub(new DateInterval('P1D'));
+
+			if ($same_month_only && $previous->format('Y-m') !== $target_month) {
+				break;
+			}
+
+			if (!$same_month_only && $previous < new DateTimeImmutable('2000-01-01 00:00:00', $cursor->getTimezone())) {
+				break;
+			}
+
+			$cursor = $previous;
+		}
+
+		return null;
+	}
+}
+
+if (!function_exists('jewelcafe_get_latest_gold_chart_point')) {
+	function jewelcafe_get_latest_gold_chart_point($daily_lookup) {
+		if (empty($daily_lookup)) {
+			return null;
+		}
+
+		$points = array_values($daily_lookup);
+
+		return end($points);
+	}
+}
+
+if (!function_exists('jewelcafe_get_previous_gold_chart_point')) {
+	function jewelcafe_get_previous_gold_chart_point($daily_lookup, DateTimeImmutable $from_date) {
+		$cursor = $from_date->sub(new DateInterval('P1D'))->setTime(0, 0, 0);
+
+		while ($cursor >= new DateTimeImmutable('2000-01-01 00:00:00', $from_date->getTimezone())) {
+			$date_key = $cursor->format('Y-m-d');
+
+			if (isset($daily_lookup[$date_key])) {
+				return $daily_lookup[$date_key];
+			}
+
+			$cursor = $cursor->sub(new DateInterval('P1D'));
+		}
+
+		return null;
+	}
+}
+
+if (!function_exists('jewelcafe_build_gold_chart_recent_daily_dataset')) {
+	function jewelcafe_build_gold_chart_recent_daily_dataset($daily_lookup, DateTimeImmutable $start_at, DateTimeImmutable $end_at) {
+		$dataset = array(
+			'prices' => array(),
+			'dates'  => array(),
+		);
+
+		foreach ($daily_lookup as $point) {
+			if ($point['date'] < $start_at || $point['date'] > $end_at) {
+				continue;
+			}
+
+			$dataset['prices'][] = $point['price'];
+			$dataset['dates'][] = $point['date']->format('n/j');
+		}
+
+		return $dataset;
+	}
+}
+
+if (!function_exists('jewelcafe_build_gold_chart_monthly_same_day_dataset')) {
+	function jewelcafe_build_gold_chart_monthly_same_day_dataset($daily_lookup, DateTimeImmutable $anchor_date, $months_count) {
+		$dataset = array(
+			'prices' => array(),
+			'dates'  => array(),
+		);
+
+		$anchor_day = (int) $anchor_date->format('j');
+		$month_cursor = new DateTimeImmutable($anchor_date->format('Y-m-01 00:00:00'), $anchor_date->getTimezone());
+		$month_cursor = $month_cursor->sub(new DateInterval('P' . max(0, (int) $months_count - 1) . 'M'));
+
+		for ($i = 0; $i < $months_count; $i++) {
+			$current_month = $month_cursor->add(new DateInterval('P' . $i . 'M'));
+			$target_day = min($anchor_day, (int) $current_month->format('t'));
+			$target_date = $current_month->setDate(
+				(int) $current_month->format('Y'),
+				(int) $current_month->format('n'),
+				$target_day
+			);
+			$point = jewelcafe_find_gold_chart_point_for_date($daily_lookup, $target_date, true);
+
+			if (!$point) {
+				continue;
+			}
+
+			$dataset['prices'][] = $point['price'];
+			$dataset['dates'][] = $current_month->format('y年n月');
+		}
+
+		return $dataset;
+	}
+}
+
+if (!function_exists('jewelcafe_build_gold_chart_yearly_same_day_dataset')) {
+	function jewelcafe_build_gold_chart_yearly_same_day_dataset($daily_lookup, DateTimeImmutable $anchor_date, $years_count) {
+		$dataset = array(
+			'prices' => array(),
+			'dates'  => array(),
+		);
+
+		$current_year = (int) $anchor_date->format('Y');
+		$start_year = $current_year - max(0, (int) $years_count - 1);
+		$anchor_month = (int) $anchor_date->format('n');
+		$anchor_day = (int) $anchor_date->format('j');
+
+		for ($year = $start_year; $year <= $current_year; $year++) {
+			$month_start = new DateTimeImmutable(sprintf('%04d-%02d-01 00:00:00', $year, $anchor_month), $anchor_date->getTimezone());
+			$target_day = min($anchor_day, (int) $month_start->format('t'));
+			$target_date = $month_start->setDate($year, $anchor_month, $target_day);
+			$point = jewelcafe_find_gold_chart_point_for_date($daily_lookup, $target_date, true);
+
+			if (!$point) {
+				continue;
+			}
+
+			$dataset['prices'][] = $point['price'];
+			$dataset['dates'][] = $target_date->format('Y年');
+		}
+
+		return $dataset;
+	}
+}
+
+if (!function_exists('jewelcafe_build_gold_chart_datasets_v2')) {
+	function jewelcafe_build_gold_chart_datasets_v2($daily_lookup, DateTimeImmutable $anchor_date) {
+		if (empty($daily_lookup)) {
+			return jewelcafe_get_gold_chart_empty_datasets();
+		}
+
+		return array(
+			'1m'  => jewelcafe_build_gold_chart_recent_daily_dataset(
+				$daily_lookup,
+				$anchor_date->sub(new DateInterval('P1M'))->setTime(0, 0, 0),
+				$anchor_date->setTime(23, 59, 59)
+			),
+			'1y'  => jewelcafe_build_gold_chart_monthly_same_day_dataset($daily_lookup, $anchor_date, 12),
+			'5y'  => jewelcafe_build_gold_chart_yearly_same_day_dataset($daily_lookup, $anchor_date, 5),
+			'10y' => jewelcafe_build_gold_chart_yearly_same_day_dataset($daily_lookup, $anchor_date, 10),
+		);
+	}
+}
+
+if (!function_exists('jewelcafe_build_gold_banner_data')) {
+	function jewelcafe_build_gold_banner_data($daily_lookup, DateTimeImmutable $anchor_date) {
+		$empty_banner = array(
+			'current' => null,
+			'previous' => null,
+			'change' => null,
+			'past_points' => array(),
+		);
+
+		$current_point = jewelcafe_get_latest_gold_chart_point($daily_lookup);
+
+		if (!$current_point) {
+			return $empty_banner;
+		}
+
+		$previous_point = jewelcafe_get_previous_gold_chart_point($daily_lookup, $current_point['date']);
+		$past_points = array();
+
+		foreach (array(2, 1) as $year_offset) {
+			$comparison_year = (int) $current_point['date']->format('Y') - $year_offset;
+			$month_start = new DateTimeImmutable(
+				sprintf('%04d-%02d-01 00:00:00', $comparison_year, (int) $current_point['date']->format('n')),
+				$anchor_date->getTimezone()
+			);
+			$target_day = min((int) $current_point['date']->format('j'), (int) $month_start->format('t'));
+			$target_date = $month_start->setDate($comparison_year, (int) $month_start->format('n'), $target_day);
+			$point = jewelcafe_find_gold_chart_point_for_date($daily_lookup, $target_date, true);
+
+			if ($point) {
+				$past_points[] = $point;
+			}
+		}
+
+		return array(
+			'current' => $current_point,
+			'previous' => $previous_point,
+			'change' => $previous_point ? $current_point['price'] - $previous_point['price'] : null,
+			'past_points' => $past_points,
+		);
+	}
+}
+
+if (!function_exists('jewelcafe_build_gold_chart_dataset')) {
+	function jewelcafe_build_gold_chart_dataset($rows, DateTimeZone $timezone, DateTimeImmutable $start_at, $group_by) {
+		$grouped_rows = array();
+
+		foreach ($rows as $row) {
+			if (empty($row->recorded_at)) {
+				continue;
+			}
+
+			$recorded_at = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $row->recorded_at, $timezone);
+
+			if (!$recorded_at || $recorded_at < $start_at) {
+				continue;
+			}
+
+			$price = jewelcafe_normalize_gold_chart_price($row->gold_price);
+
+			if ($price === null) {
+				continue;
+			}
+
+			switch ($group_by) {
+				case 'day':
+					$group_key = $recorded_at->format('Y-m-d');
+					$label = $recorded_at->format('n/j');
+					break;
+				case 'month':
+					$group_key = $recorded_at->format('Y-m');
+					$label = $recorded_at->format('y年n月');
+					break;
+				case 'year':
+				default:
+					$group_key = $recorded_at->format('Y');
+					$label = $recorded_at->format('Y年');
+					break;
+			}
+
+			$grouped_rows[$group_key] = array(
+				'price' => (int) round($price),
+				'label' => $label,
+			);
+		}
+
+		$dataset = array(
+			'prices' => array(),
+			'dates'  => array(),
+		);
+
+		foreach ($grouped_rows as $grouped_row) {
+			$dataset['prices'][] = $grouped_row['price'];
+			$dataset['dates'][] = $grouped_row['label'];
+		}
+
+		return $dataset;
+	}
+}
+
+if (!function_exists('jewelcafe_get_gold_chart_datasets')) {
+	function jewelcafe_get_gold_chart_datasets($price_column = 'gold_price') {
+		global $wpdb;
+
+		$empty_datasets = array(
+			'1m'  => array('prices' => array(), 'dates' => array()),
+			'1y'  => array('prices' => array(), 'dates' => array()),
+			'5y'  => array('prices' => array(), 'dates' => array()),
+			'10y' => array('prices' => array(), 'dates' => array()),
+		);
+
+		$table_name = $wpdb->prefix . 'goldchart';
+		$allowed_columns = array('gold_price', 'k24_price', 'k22_price', 'k18_price');
+
+		if (!in_array($price_column, $allowed_columns, true)) {
+			$price_column = 'gold_price';
+		}
+
+		$table_exists = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $table_name));
+
+		if ($table_exists !== $table_name) {
+			return $empty_datasets;
+		}
+
+		$rows = $wpdb->get_results(
+			"
+			SELECT parsed.recorded_at, parsed.gold_price
+			FROM (
+				SELECT
+					STR_TO_DATE(gold_time, '%Y-%m-%d %H:%i:%s') AS recorded_at,
+					{$price_column} AS gold_price
+				FROM `{$table_name}`
+			) AS parsed
+			WHERE parsed.recorded_at IS NOT NULL
+				AND parsed.recorded_at >= DATE_SUB(CURDATE(), INTERVAL 11 YEAR)
+			ORDER BY parsed.recorded_at ASC
+			"
+		);
+
+		if (empty($rows)) {
+			return $empty_datasets;
+		}
+
+		$timezone = function_exists('wp_timezone') ? wp_timezone() : new DateTimeZone('Asia/Tokyo');
+		$now = new DateTimeImmutable('now', $timezone);
+		$current_year = (int) $now->format('Y');
+		$one_year_start = new DateTimeImmutable($now->format('Y-m-01 00:00:00'), $timezone);
+		$one_year_start = $one_year_start->sub(new DateInterval('P11M'));
+
+		return array(
+			'1m'  => jewelcafe_build_gold_chart_dataset($rows, $timezone, $now->sub(new DateInterval('P1M')), 'day'),
+			'1y'  => jewelcafe_build_gold_chart_dataset($rows, $timezone, $one_year_start, 'month'),
+			'5y'  => jewelcafe_build_gold_chart_dataset($rows, $timezone, new DateTimeImmutable(($current_year - 4) . '-01-01 00:00:00', $timezone), 'year'),
+			'10y' => jewelcafe_build_gold_chart_dataset($rows, $timezone, new DateTimeImmutable(($current_year - 10) . '-01-01 00:00:00', $timezone), 'year'),
+		);
+	}
+}
+
+if (!function_exists('jewelcafe_get_gold_chart_price_config')) {
+	function jewelcafe_get_gold_chart_price_config() {
+		if (is_single('k24')) {
+			return array(
+				'column' => 'k24_price',
+				'label'  => '24金相場価格',
+			);
+		}
+
+		if (is_single('k22')) {
+			return array(
+				'column' => 'k22_price',
+				'label'  => '22金相場価格',
+			);
+		}
+
+		if (is_single('k18')) {
+			return array(
+				'column' => 'k18_price',
+				'label'  => '18金相場価格',
+			);
+		}
+
+		return array(
+			'column' => 'gold_price',
+			'label'  => '金相場価格',
+		);
+	}
+}
+
+$gold_chart_price_config = jewelcafe_get_gold_chart_price_config();
+$gold_chart_timezone = function_exists('wp_timezone') ? wp_timezone() : new DateTimeZone('Asia/Tokyo');
+$gold_chart_anchor_date = new DateTimeImmutable('now', $gold_chart_timezone);
+$gold_chart_rows = jewelcafe_get_gold_chart_rows($gold_chart_price_config['column']);
+$gold_chart_daily_lookup = jewelcafe_build_gold_chart_daily_lookup($gold_chart_rows, $gold_chart_timezone);
+$gold_banner_data = jewelcafe_build_gold_banner_data($gold_chart_daily_lookup, $gold_chart_anchor_date);
+$gold_chart_datasets = jewelcafe_get_gold_chart_empty_datasets();
+
+
+$gold_chart_datasets = jewelcafe_build_gold_chart_datasets_v2($gold_chart_daily_lookup, $gold_chart_anchor_date);
+
 
 
 
@@ -63,15 +514,25 @@ $today_result = $wpdb->get_results($today_sql);
 </script>
  */ ?>
 
+<?php 
+	$desc = get_post_meta( get_the_ID(), '_aioseo_description', true );
+?>
 <script type="application/ld+json">
 	{
-		"@context": "https://schema.org/",
+		"@context": "https://schema.org",
+		"@id": "<?php echo esc_url( get_permalink() ); ?>",
 		"@type": "WebPage",
-		"name": "<?php the_title(); ?>",
-		"datePublished": "2012-03-11",
-		"dateModified": "<?php echo date('Y-m-d');?>"
+		"name": "<?php echo esc_js( wp_get_document_title() ); ?>",
+		"description": "<?php echo esc_js( wp_strip_all_tags( $desc ) ); ?>",
+		"dateModified": "<?php echo date('Y-m-d');?>",
+		"publisher": {
+			"@type": "Organization",
+			"@id": "<?php echo esc_url( home_url( '/' ) ); ?>#organization"
+		}
 	}
 </script>
+
+
 
 <?php /*
 <script type="application/ld+json">
@@ -256,9 +717,170 @@ if (!empty($faq_items)) {
 
 <section class="mv">
 
-	<?php get_template_part( 'template-parts/gold_main_visual' );?>	
+<?php
+$gold_banner_current_point = !empty($gold_banner_data['current']) ? $gold_banner_data['current'] : null;
+$gold_banner_change = isset($gold_banner_data['change']) ? $gold_banner_data['change'] : null;
+$gold_banner_past_points = !empty($gold_banner_data['past_points']) ? array_values($gold_banner_data['past_points']) : array();
+$gold_banner_pc_past_points = $gold_banner_past_points;
+$gold_banner_sp_past_points = array_reverse($gold_banner_past_points);
+
+$gold_banner_update_text = $gold_banner_current_point
+	? (isset($gold_banner_current_point['recorded_at']) ? $gold_banner_current_point['recorded_at'] : $gold_banner_current_point['date'])->format('Y年n月j日H:i更新！')
+	: '--';
+
+$gold_banner_current_price_text = $gold_banner_current_point ? number_format($gold_banner_current_point['price']) : '--';
+
+if ($gold_banner_change === null) {
+	$gold_banner_change_text = '--';
+} else {
+	$gold_banner_change_text = ($gold_banner_change > 0 ? '+' : '') . number_format($gold_banner_change);
+}
+
+$gold_banner_pc_display_points = array();
+
+foreach ($gold_banner_pc_past_points as $point) {
+	$gold_banner_pc_display_points[] = array(
+		'year_label' => sprintf('%d年', (int) $point['date']->format('Y')),
+		'month_day_label' => sprintf('%d月%d日', (int) $point['date']->format('n'), (int) $point['date']->format('j')),
+		'price_text' => number_format($point['price']),
+	);
+}
+
+while (count($gold_banner_pc_display_points) < 2) {
+	$gold_banner_pc_display_points[] = array(
+		'year_label' => '--',
+		'month_day_label' => '--',
+		'price_text' => '--',
+	);
+}
+
+$gold_banner_sp_display_points = array();
+
+foreach ($gold_banner_sp_past_points as $point) {
+	$gold_banner_sp_display_points[] = array(
+		'year_label' => sprintf('%d年', (int) $point['date']->format('Y')),
+		'month_day_label' => sprintf('%d月%d日', (int) $point['date']->format('n'), (int) $point['date']->format('j')),
+		'price_text' => number_format($point['price']),
+	);
+}
+
+while (count($gold_banner_sp_display_points) < 2) {
+	$gold_banner_sp_display_points[] = array(
+		'year_label' => '--',
+		'month_day_label' => '--',
+		'price_text' => '--',
+	);
+}
+?>
 
 
+	<div class="gold_souba_banner_top">
+<div class="banner-wrapper">
+  <div class="banner-bg">
+    <div class="text-layer">
+
+      <!-- Top headline -->
+      <div class="headline-top">
+        <p class="line1">相場高騰中の今なら驚きの価格に!!</p>
+        <p class="line2">「高く売る」<span class="">なら</span>ジュエルカフェ</p>
+      </div>
+
+      <!-- 金買取 main title -->
+      <div class="main-title">
+        <span class="kinkaitori">金買取</span>
+      </div>
+
+      <!-- Price section -->
+      <div class="price-section">
+        <div class="prev-day-badge">前日比<br><div><span class="big"><?php echo esc_html($gold_banner_change_text); ?></span>円</div></div>
+        <div class="price-date-badge"><?php echo esc_html($gold_banner_update_text); ?></div>
+        <div class="price-row">
+          <span class="price-main"><?php echo esc_html($gold_banner_current_price_text); ?></span>
+          <span class="price-unit">円／g</span>
+        </div>
+      </div>
+
+      <!-- Past prices strip -->
+      <div class="past-prices">
+        <div class="past-label">
+          過去価格と比べて<br>
+          <span class="big">大幅高騰中!!</span>
+        </div>
+        <?php foreach ($gold_banner_pc_display_points as $index => $point) : ?>
+        <div class="past-item<?php echo $index === 0 ? ' first' : ''; ?>">
+          <span class="past-item-date"><?php echo esc_html($point['year_label']); ?><span class="small"><?php echo esc_html($point['month_day_label']); ?></span></span>
+          <span class="past-item-price"><?php echo esc_html($point['price_text']); ?><span class="yen">円／g</span></span>
+        </div>
+        <?php endforeach; ?>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="disclaimer">
+        国内取引市場の金相場です。平日午前9-11時に更新いたします。相場や為替の変動により、実際の市場相場と異なる場合があります。店頭買取価格とは異なります。
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SP BANNER ===== -->
+  <div class="banner-bg-sp">
+    <div class="sp-text-layer">
+
+      <!-- SP headline -->
+      <div class="sp-headline">
+        <p>相場高騰中の今なら驚きの価格に!!</p>
+        <p class="sp-line2">「高く売る」<span class="">なら</span>ジュエルカフェ</p>
+      </div>
+
+      <!-- SP 金買取 title -->
+      <div class="sp-main-title">
+        <span class="kinkaitori">金買取</span>
+      </div>
+
+      <!-- SP price area -->
+      <div class="sp-price-area">
+        <div class="sp-prev-badge">前日比<br><div><span class="big"><?php echo esc_html($gold_banner_change_text); ?></span>円</div></div>
+        <div class="sp-date-badge"><?php echo esc_html($gold_banner_update_text); ?></div>
+        <div class="sp-price-main"><?php echo esc_html($gold_banner_current_price_text); ?><span class="sp-price-unit">円／g</span></div>
+      </div>
+
+      <!-- SP past prices -->
+      <div class="sp-past-area">
+        <span class="sp-past-label"><span class="big">過去価格と</span><br>比べてください！</span>
+        <div class="sp-past-items">
+          <?php foreach ($gold_banner_sp_display_points as $point) : ?>
+          <div class="sp-past-item">
+            <div class="sp-past-item-date"><?php echo esc_html($point['year_label']); ?><span class="small"><?php echo esc_html($point['month_day_label']); ?></span></div>
+            <div class="sp-past-item-price"><?php echo esc_html($point['price_text']); ?><span class="yen">円／g</span></div>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+
+      <!-- SP disclaimer -->
+      <div class="sp-disclaimer">
+        国内取引市場の金相場です。平日午前9-11時に更新いたします。<br>
+        相場や為替の変動により、実際の市場相場と異なる場合があります。<br>
+        店頭買取価格とは異なります。
+      </div>
+
+      <!-- SP bottom red strip -->
+      <div class="sp-bottom-strip">
+        <p>金額査定は完全無料！<br>買取価格の確認だけでも大歓迎です。</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+	</div>
+
+<?php
+	/*
+?>
 	<div class="contents">
 		<div class="image-wrap">
 			<picture>
@@ -295,12 +917,10 @@ if (!empty($faq_items)) {
 			</div>
 		</div>
 	</div>
+<?php
+	*/
+?>
 </section>
-
-
-
-
-
 
 			</div>
 
@@ -421,145 +1041,15 @@ if (!empty($faq_items)) {
 
 
 
-
-
-<?php if ( current_user_can('administrator') ): ?>
-<section id="gold-market-chart" class="section-inner">
-	<div class="toolbar">
-		<button id="btn_1m">1ヶ月</button>
-		<button id="btn_1y">1年</button>
-		<button id="btn_5y">5年</button>
-		<button id="btn_10y" class="active">10年</button>
-	</div>
-	<div id="gold-chart"></div>
-</section>
-
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
-  <script>
-    // --- 1. 各期間のデータ ---
-    
-	// 1ヶ月分のデータ
-    var data1Month = {
-      prices: [
-        24100, 24150, 24220,
-        24180, 24300, 24250, 24380, 24400, 
-        24320, 24390, 24450, 24520, 24480,
-        24550, 24600, 24510, 24350, 24624
-      ],
-      dates: [
-        '5/1',  '5/2',  '5/7', 
-        '5/8',  '5/11', '5/12', '5/13', '5/14', 
-        '5/15', '5/18', '5/19', '5/20', '5/21', 
-        '5/22', '5/25', '5/26', '5/27', '5/28'
-      ]
-    };
-
-    // 1年分のデータ（月ごとの推移など）
-    var data1Year = {
-      prices: [16700, 17200, 18500, 19800, 21000, 22500, 24100, 24624],
-      dates: ['25年5月', '25年7月', '25年9月', '25年11月', '26年1月', '26年3月', '26年5月', '5/28']
-    };
-
-    // 5年分のデータ（年ごとの推移）
-    var data5Years = {
-      prices: [8300, 9600, 12700, 18500, 24624],
-      dates: ['2022年', '2023年', '2024年', '2025年', '2026年(現在)']
-    };
-
-    // 10年分のデータ
-    var data10Years = {
-      prices: [4657, 4852, 4824, 5244, 6608, 6934, 8301, 9601, 12758, 18505, 24624],
-      dates: ['2016年', '2017年', '2018年', '2019年', '2020年', '2021年', '2022年', '2023年', '2024年', '2025年', '2026年']
-    };
-
-    // --- 2. グラフの初期設定 ---
-    var options = {
-      chart: {
-        type: 'area',
-        height: 350,
-        animations: { enabled: true }, // 切り替え時に動くアニメーションをON
-		toolbar: { show: false } // 右上のメニューやズームボタンを一式非表示
-      },
-	  colors: ['#D4AF37'],
-      series: [{
-        name: '金相場価格',
-        data: data10Years.prices // 初期データ
-      }],
-      xaxis: {
-        categories: data10Years.dates // 初期の日付
-      },
-      yaxis: {
-        labels: {
-          formatter: function (val) { return val.toLocaleString() + " 円"; }
-        }
-      },
-      stroke: { curve: 'smooth', width: 3 },
-      tooltip: {
-        y: { formatter: function (val) { return val.toLocaleString() + " 円 / g"; } }
-      }
-    };
-
-    // グラフの描画
-    var chart = new ApexCharts(document.querySelector("#gold-chart"), options);
-    chart.render();
-
-    // --- 3. タブ切り替えのロジック ---
-    
-    // データを書き換えてグラフを更新する共通の関数
-    function updateChartData(newData, buttonId) {
-      // 1. すべてのボタンからactiveを消す
-      document.querySelectorAll('.toolbar button').forEach(btn => btn.classList.remove('active'));
-      // 2. クリックされたボタンの色を変える
-      document.getElementById(buttonId).classList.add('active');
-      
-      // 3. ApexChartsのデータとX軸のラベルを瞬時に書き換える（ここが肝です）
-      chart.updateOptions({
-        series: [{ data: newData.prices }],
-        xaxis: { categories: newData.dates }
-      });
-    }
-
-    // 各ボタンをクリックしたときの動作を登録
-    document.getElementById('btn_1m').addEventListener('click', function() {
-      updateChartData(data1Month, 'btn_1m');
-    });
-
-    document.getElementById('btn_1y').addEventListener('click', function() {
-      updateChartData(data1Year, 'btn_1y');
-    });
-
-    document.getElementById('btn_5y').addEventListener('click', function() {
-      updateChartData(data5Years, 'btn_5y');
-    });
-
-    document.getElementById('btn_10y').addEventListener('click', function() {
-      updateChartData(data10Years, 'btn_10y');
-    });
-
-  </script>
-<?php endif; ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<?php get_template_part('template-parts/market-price-chart-gold' , null , $getgoldcoment); ?>
-
-
-
-
+		<?php 
+		
+		get_template_part('template-parts/market-price-chart-gold123' , null , [
+        'getgoldcoment'            => $getgoldcoment,
+        'gold_chart_datasets'      => $gold_chart_datasets,
+        'gold_chart_price_config'  => $gold_chart_price_config,
+		]); 
+		
+		?>
 
 
 		<section class="">
@@ -1437,6 +1927,7 @@ $terms_area = get_the_terms($post->ID,'area');
 		'hinmoku' => '時計',
 		'brand' => 'チューダー',
 		'hobby' => 'カラオケ・旅行',
+		'career' => 'リユース業界歴6年',
 		'voice' => 'ジュエルカフェでは、多様なお品物を取り扱う中で、お客様に安心してご利用いただけることを第一に考えております。査定士として知識や技術の習得に尽力するのはもちろんですが、同時にお品物ひとつひとつに込められた背景や価値を探ることを大切にしています。<br>お客様に安心して査定をお任せいただける存在を目指し、ご納得いただける確かな査定額をご案内することが私達の使命です。ご来店いただいた時間の中で、できる限りの信頼関係を築き、お気持ちに寄り添ったサービスを提供できるよう努めてまいります。どうぞよろしくお願いいたします。
 '
 	];
@@ -1468,6 +1959,10 @@ $terms_area = get_the_terms($post->ID,'area');
 			<dt>趣味</dt>
 			<dd><?php echo $texts['hobby'];?></dd>
 		</dl>
+		<dl>
+			<dt>経歴</dt>
+			<dd><?php echo $texts['career'];?></dd>
+		</dl>
 		<p class="voice"><?php echo $texts['voice'];?></p>
 	</div>
 </div>
@@ -1494,6 +1989,10 @@ $terms_area = get_the_terms($post->ID,'area');
 			<dl>
 				<dt>趣味</dt>
 				<dd><?php echo $texts['hobby'];?></dd>
+			</dl>
+			<dl>
+				<dt>経歴</dt>
+				<dd><?php echo $texts['career'];?></dd>
 			</dl>
 		</div>
 		<div class="right_box">

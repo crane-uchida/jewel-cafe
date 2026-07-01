@@ -138,19 +138,31 @@ Template Name: 買取詳細
 
 				
 			} else {
-				echo 
-				'<a href="'. esc_url( home_url( '/kaitori/'.$parent_term_slug.'/'.$child_term_slug.'/' ) ) .'">'.$child_term_name .'買取<span></span>'.'</a>';
-				if ($grand_child_term_slug === "other-vuitton"	|| $grand_child_term_slug === "other-chanel" || $grand_child_term_slug === "other-hermes-brand" || $grand_child_term_slug === "other"		) { //other-vuitton(その他買取)の場合は、親のルイヴィトンTOPにリンク
-					echo 
-					'<a href="'. esc_url( home_url( '/kaitori/'.$parent_term_slug.'/'.$child_term_slug.'/' ) ) .'">'.$grand_child_term_name .'買取<span></span>'.'</a>';
-				} else {
-					echo 
-					'<a href="'. esc_url( home_url( '/kaitori/'.$parent_term_slug.'/'.$child_term_slug.'/'.$grand_child_term_slug ) ) .'">'.$grand_child_term_name .'買取<span></span>'.'</a>';
+
+				echo '<a href="' . esc_url(home_url('/kaitori/' . $parent_term_slug . '/' . $child_term_slug . '/')) . '">'
+					. esc_html($child_term_name) . '買取<span></span></a>';
+
+				if (!empty($grand_child_term_slug) && !empty($grand_child_term_name)) {
+
+					if (
+						$grand_child_term_slug === "other-vuitton" ||
+						$grand_child_term_slug === "other-chanel" ||
+						$grand_child_term_slug === "other-hermes-brand" ||
+						$grand_child_term_slug === "other"
+					) {
+						// other-vuitton(その他買取)の場合は、親のルイヴィトンTOPにリンク
+						echo '<a href="' . esc_url(home_url('/kaitori/' . $parent_term_slug . '/' . $child_term_slug . '/')) . '">'
+							. esc_html($grand_child_term_name) . '買取<span></span></a>';
+					} else {
+						echo '<a href="' . esc_url(home_url('/kaitori/' . $parent_term_slug . '/' . $child_term_slug . '/' . $grand_child_term_slug . '/')) . '">'
+							. esc_html($grand_child_term_name) . '買取<span></span></a>';
+					}
+
 				}
 
-				echo 
-				'<span>'.the_title( );'</span>';
+				echo '<span>' . esc_html(get_the_title()) . '</span>';
 			}
+
 
 			echo '</div>'.
 						'</div></section></div>';
@@ -216,6 +228,451 @@ Template Name: 買取詳細
 				$dateTimeA = new DateTime($dateA);
 				$dateTimeB = new DateTime($dateB);
 		?>
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+	$hinmoku_term = get_top_parent_term($terms, 'hinmoku');
+	$area_term    = get_bottom_child_term($terms_area, 'area');
+
+
+?>
+
+
+<section id="blog-detail">
+  <div class="jc-main-content">
+  <div class="section-inner">
+    <div class="jc-hero">
+      <p class="jc-meta">更新日：<time datetime="<?php echo $dateTime->format('Y-n-j'); ?>"><?php echo $dateTime->format('Y年n月j日'); ?></time>　|　公開日：<time datetime="<?php echo get_the_date('Y-n-j'); ?>"><?php echo get_the_date('Y年n月j日'); ?></time></p>
+      <h1 class="jc-title"><?php the_title();?></h1>
+      <div class="jc-content-grid">
+        <div class="jc-img-wrap">
+          <div class="jc-img-placeholder">
+			  <?php
+				  $post_thumbnail = get_the_post_thumbnail_url( $post->ID, 'full' );
+			  ?>
+			  <img class="blog-detail-img" src="<?php echo $post_thumbnail;?>" alt="<?php echo $image_alt_title;?>">
+		  </div>
+        </div>
+        <div>
+          <div class="jc-price-card">
+            <div class="jc-price-rows">
+              <div class="jc-price-row">
+                <div class="jc-price-key">カテゴリー</div>
+                <div class="jc-price-val">
+															
+				<?php if (!empty($terms) && !is_wp_error($terms)) : ?>
+					<?php foreach ($terms as $term) : ?>
+						<?php
+						$term_link = get_term_link($term, $term->taxonomy);
+
+						if (is_wp_error($term_link)) {
+							continue;
+						}
+
+						$term_link = str_replace('/blog/', '/kaitori/', $term_link);
+						?>
+
+							<a href="<?php echo esc_url($term_link); ?>">
+								<?php echo esc_html($term->name); ?>買取
+							</a>
+
+					<?php endforeach; ?>
+				<?php endif; ?>
+
+                </div>
+              </div>
+			  
+              <div class="jc-price-row">
+                <div class="jc-price-key">買取日</div>
+                <div class="jc-price-val"><?php echo get_the_date('Y年n月j日'); ?></div>
+              </div>
+              <div class="jc-price-row">
+                <div class="jc-price-key">買取店舗</div>
+                <div class="jc-price-val">
+					<?php
+						echo $area_term->name;
+					?>
+				</div>
+              </div>
+            </div>
+            <div class="jc-price-footer">
+              <div class="jc-price-key">買取価格</div>
+              <div class="jc-price-amount">
+			  
+				<?php if(trim(get_field('買取価格'))):?>
+
+				<?php echo number_format(get_field('買取価格'));?>
+				
+				<span>円</span>
+	
+				<?php endif;?>
+				
+				</div>
+			  
+              <p class="jc-price-note">※買取価格は<?php echo get_the_date('Y年n月j日'); ?>時点での買取参考価格です。<br>各種キャンペーン等や仕入れ状況により買取価格は常時変動いたします。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="jc-desc">
+      <?php the_field('買取査定ポイント');?>
+    </div>
+  </div>
+  </div>
+  
+		
+		<?php
+			$shop = get_shop_admin_by_shop_url($area_term->slug);
+
+		?>
+  
+  <div class="section-inner">
+
+    <div class="jc-store-section">
+      <div class="jc-section-tag">お買取した店舗</div>
+      <div class="jc-store-body">
+        <div class="jc-store-img">
+          <div class="jc-img-placeholder">
+				<img src="<?php echo $shop->shop_image1;?>" ?>
+		  </div>
+        </div>
+        <div>
+
+
+		<p class="jc-store-info-sub">					
+			<?php
+					echo $hinmoku_term->name;
+			?>買取ならジュエルカフェ
+		</p>
+		
+		<p class="jc-store-name">
+			<?php
+				echo $area_term->name;
+			?>
+		</p>
+
+
+          <p class="jc-store-addr"><?php echo $shop->shop_add;?></p>
+          <p class="jc-store-tel">TEL <a href="tel:<?php echo $shop->shop_tel;?>"><?php echo $shop->shop_tel;?></a></p>
+          <div class="jc-store-btns">
+            <a href="/shop/<?php echo $shop->shop_city1;?>/<?php echo $shop->shop_city2;?>/<?php echo $shop->shop_url;?>/#js-purchase-price" class="jc-btn-outline">この店舗の買取実績を見る</a>
+            <a href="/shop/<?php echo $shop->shop_city1;?>/<?php echo $shop->shop_city2;?>/<?php echo $shop->shop_url;?>/#js-store-guide" class="jc-btn-red">店舗の詳細・Googleマップを見る</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="jc-more-section">
+      <div class="jc-more-header">
+        <div class="jc-more-title">その他の <?php
+					echo $hinmoku_term->name;
+			?> お買取実績</div>
+        <a href="/blog/" class="jc-more-link">買取実績をもっと見る ›</a>
+      </div>
+
+<?php
+
+$taxonomy = 'hinmoku';
+
+$parent_term = get_term_by('slug', $hinmoku_term->slug, $taxonomy);
+
+$hinmoku_children = [];
+
+if ($parent_term && !is_wp_error($parent_term)) {
+
+    $child_terms = get_terms([
+        'taxonomy'   => $taxonomy,
+        'hide_empty' => false,
+        'parent'     => $parent_term->term_id,
+        'orderby'    => 'term_order',
+        'order'      => 'ASC',
+    ]);
+
+    if (!empty($child_terms) && !is_wp_error($child_terms)) {
+        foreach ($child_terms as $child_term) {
+            $hinmoku_children[$child_term->slug] = [
+                'term_id' => $child_term->term_id,
+                'name'    => $child_term->name,
+                'slug'    => $child_term->slug,
+            ];
+        }
+    }
+}
+
+if (!empty($hinmoku_children)) {
+    $visible_hinmoku_children = [];
+
+    foreach ($hinmoku_children as $slug => $child) {
+        $child_exists_query = new WP_Query([
+            'post_type'      => 'blog',
+            'post_status'    => 'publish',
+            'posts_per_page' => 1,
+            'no_found_rows'  => true,
+            'tax_query'      => [
+                [
+                    'taxonomy' => 'hinmoku',
+                    'field'    => 'term_id',
+                    'terms'    => [$child['term_id']],
+                ],
+            ],
+        ]);
+
+        if ($child_exists_query->have_posts()) {
+            $visible_hinmoku_children[$slug] = $child;
+        }
+
+        wp_reset_postdata();
+    }
+
+    $hinmoku_children = $visible_hinmoku_children;
+}
+
+$child_term_ids = [];
+$has_tab_posts = false;
+
+if (!empty($hinmoku_children)) {
+    foreach ($hinmoku_children as $child) {
+        $child_term_ids[] = $child['term_id'];
+    }
+
+    $has_tab_posts = !empty($child_term_ids);
+}
+
+?>
+
+
+
+      <!-- タブ -->
+      <?php if ($has_tab_posts) : ?>
+      <div class="jc-tags" role="tablist">
+        <span class="jc-tag active" role="tab" data-tab="all">すべて</span>
+		<?php foreach ($hinmoku_children as $slug => $child) : ?>
+				<span class="jc-tag" role="tab" data-tab="<?php echo esc_attr($child['slug']); ?>">
+					<?php echo esc_html($child['name']); ?>
+				</span>
+		<?php endforeach; ?>
+      </div>
+      <?php endif; ?>
+
+
+
+<?php
+$shop_name = '';
+
+if (!empty($shop) && !empty($shop->shop_name)) {
+    $shop_name = $shop->shop_name;
+}
+?>
+
+<!-- すべて -->
+<?php if ($has_tab_posts) : ?>
+<div class="jc-tab-panel active" data-panel="all">
+    <div class="jc-cards-grid">
+
+        <?php
+        $args = [
+            'post_type'      => 'blog',
+            'post_status'    => 'publish',
+            'posts_per_page' => 10,
+            'tax_query'      => [
+                [
+                    'taxonomy' => 'hinmoku',
+                    'field'    => 'term_id',
+                    'terms'    => $child_term_ids,
+                    'operator' => 'IN',
+                ],
+            ],
+        ];
+
+        $all_query = new WP_Query($args);
+
+        if ($all_query->have_posts()) :
+            while ($all_query->have_posts()) :
+                $all_query->the_post();
+
+                $post_id = get_the_ID();
+                $title   = get_the_title();
+                $url     = get_permalink();
+                $date    = get_the_date('Y年m月d日');
+
+                $price = get_post_meta($post_id, '買取価格', true);
+
+                $thumb = get_the_post_thumbnail_url($post_id, 'medium');
+        ?>
+
+                <a href="<?php echo esc_url($url); ?>" class="jc-item-card">
+                    <div class="jc-item-img">
+                        <?php if ($thumb) : ?>
+                            <img src="<?php echo esc_url($thumb); ?>" alt="<?php echo esc_attr($title); ?>">
+                        <?php else : ?>
+                            <div class="jc-img-placeholder" style="font-size:10px;">画像</div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="jc-item-body">
+                        <div class="jc-item-price-label">参考買取価格</div>
+
+                        <?php if ($price !== '') : ?>
+                            <div class="jc-item-price"><?php echo esc_html(number_format((int)$price)); ?>円</div>
+                        <?php endif; ?>
+
+                        <div class="jc-item-name"><?php echo esc_html($title); ?></div>
+
+                        <?php if ($shop_name !== '') : ?>
+                            <div class="jc-item-store">
+                                <span class="jc-item-dot"></span><?php echo esc_html($shop_name); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="jc-item-date"><?php echo esc_html($date); ?></div>
+                    </div>
+                </a>
+
+        <?php
+            endwhile;
+            wp_reset_postdata();
+		endif; ?>
+
+    </div>
+</div>
+<?php endif; ?>
+
+
+<?php if ($has_tab_posts) : ?>
+    <?php foreach ($hinmoku_children as $slug => $child) : ?>
+
+        <!-- <?php echo esc_html($child['name']); ?> -->
+        <div class="jc-tab-panel" data-panel="<?php echo esc_attr($child['slug']); ?>">
+            <div class="jc-cards-grid">
+
+                <?php
+                $args = [
+                    'post_type'      => 'blog',
+                    'post_status'    => 'publish',
+                    'posts_per_page' => 10,
+                    'tax_query'      => [
+                        [
+                            'taxonomy' => 'hinmoku',
+                            'field'    => 'term_id',
+                            'terms'    => [$child['term_id']],
+                        ],
+                    ],
+                ];
+
+                $child_query = new WP_Query($args);
+
+                if ($child_query->have_posts()) :
+                    while ($child_query->have_posts()) :
+                        $child_query->the_post();
+
+                        $post_id = get_the_ID();
+                        $title   = get_the_title();
+                        $url     = get_permalink();
+                        $date    = get_the_date('Y年m月d日');
+
+                        $price = get_post_meta($post_id, '買取価格', true);
+
+                        $thumb = get_the_post_thumbnail_url($post_id, 'medium');
+                ?>
+
+                        <a href="<?php echo esc_url($url); ?>" class="jc-item-card">
+                            <div class="jc-item-img">
+                                <?php if ($thumb) : ?>
+                                    <img src="<?php echo esc_url($thumb); ?>" alt="<?php echo esc_attr($title); ?>">
+                                <?php else : ?>
+                                    <div class="jc-img-placeholder" style="font-size:10px;">画像</div>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="jc-item-body">
+                                <div class="jc-item-price-label">参考買取価格</div>
+
+                                <?php if ($price !== '') : ?>
+                                    <div class="jc-item-price"><?php echo esc_html(number_format((int)$price)); ?>円</div>
+                                <?php endif; ?>
+
+                                <div class="jc-item-name"><?php echo esc_html($title); ?></div>
+
+                                <?php if ($shop_name !== '') : ?>
+                                    <div class="jc-item-store">
+                                        <span class="jc-item-dot"></span><?php echo esc_html($shop_name); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="jc-item-date"><?php echo esc_html($date); ?></div>
+                            </div>
+                        </a>
+
+                <?php
+                    endwhile;
+                    wp_reset_postdata();
+					endif; ?>
+
+            </div>
+        </div>
+
+    <?php endforeach; ?>
+<?php endif; ?>
+
+
+
+      <div style="text-align:center;">
+        <a href="/blog/" class="jc-more-btn"><?php echo $hinmoku_term->name;?>の買取実績をもっと見る ›</a>
+      </div>
+    </div>
+
+
+	<?php /* ?>
+		<?php get_template_part("template-parts/common-tab"); ?>
+	<?php */ ?>
+
+  </div>
+</section>
+
+<!-- タブ切り替えJS -->
+<script>
+(function () {
+  const tags = document.querySelectorAll('#blog-detail .jc-tag');
+  const panels = document.querySelectorAll('#blog-detail .jc-tab-panel');
+  tags.forEach(function (tag) {
+    tag.addEventListener('click', function () {
+      tags.forEach(function (t) { t.classList.remove('active'); });
+      panels.forEach(function (p) { p.classList.remove('active'); });
+      tag.classList.add('active');
+      var target = tag.getAttribute('data-tab');
+      var panel = document.querySelector('#blog-detail .jc-tab-panel[data-panel="' + target + '"]');
+      if (panel) panel.classList.add('active');
+    });
+  });
+})();
+</script>
+
+
+
+
+
+
+
+
+<?php
+	/*
+?>
+
+
+
 
     <div class="section-inner">
 			<div style="line-height:1;">
@@ -546,36 +1003,6 @@ Template Name: 買取詳細
 			<?php endif;?>
 
 
-<?php
-	/*
-?>
-
-<section class="hot-keyword mt-20">
-	<h3 class="color-red">人気のタグ</h3>
-	<ul class="d-f ai-c keyword-list">
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/gold/'){ echo 'color-red';} ?>" href="/blogs/gold/">#金</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/diamond/'){ echo 'color-red';} ?>" href="/blogs/diamond/">#ダイヤモンド</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/jewelry/'){ echo 'color-red';} ?>" href="/blogs/jewelry/">#宝石</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/brand/'){ echo 'color-red';} ?>" href="/blogs/brand/">#ブランド品</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/tokei/'){ echo 'color-red';} ?>" href="/blogs/tokei/">#ブランド時計</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/k18/'){ echo 'color-red';} ?>" href="/blogs/k18/">#18金</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/ingot/'){ echo 'color-red';} ?>" href="/blogs/ingot/">#インゴット</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/chanel/'){ echo 'color-red';} ?>" href="/blogs/chanel/">#シャネル</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/vuitton/'){ echo 'color-red';} ?>" href="/blogs/vuitton/">#ルイヴィトン</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/rolex-top/'){ echo 'color-red';} ?>" href="/blogs/rolex-top/">#ロレックス</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/card/'){ echo 'color-red';} ?>" href="/blogs/card/">#金券</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/letter-top/'){ echo 'color-red';} ?>" href="/blogs/letter-top/">#切手</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/cosme/'){ echo 'color-red';} ?>" href="/blogs/cosme/">#化粧品</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/osake/'){ echo 'color-red';} ?>" href="/blogs/osake/">#お酒</a></li>
-		<li><a class="<?php if($_SERVER['REQUEST_URI'] == '/blogs/kottou/'){ echo 'color-red';} ?>" href="/blogs/kottou/">#遺品・生前整理</a></li>
-	</ul>
-</section>
-
-<?php
-	*/
-?>
-
-
 
 <?php
 	if($terms[0]->slug !== 'tokei-repair' ){
@@ -805,10 +1232,9 @@ if ($query->have_posts()) {
 } 
 
 
-
+*/
 
 ?>
-
 
 
 

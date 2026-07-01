@@ -742,7 +742,9 @@ if (!function_exists('kaitori_breadcrumb')) {
 
 					}else if($post->post_parent == 0 ){
 						
-							echo '<a href="' . get_permalink($post->ID) . '">' .$post->post_title.'買取</a>';	
+							//echo '<a href="' . get_permalink($post->ID) . '">' .$post->post_title.'買取</a>';	
+							
+							echo '<span>' .$post->post_title.'買取</span>';	
 						
 					}
 					
@@ -3582,7 +3584,7 @@ function change_blogname_option( $value ) {
 				
 			}else{
 			
-			$value = $blog_post_title . '買取実績 | '.date('Y年m月d日',strtotime($post->post_date)). ' | '.$hinmoku_child_name.'買取 | 最新相場で高価買取ならジュエルカフェ';
+			$value = $blog_post_title . ' | '.$hinmoku_parent_name.'買取 | 最新相場で高価買取ならジュエルカフェ';
 			
 			}
 			
@@ -5613,3 +5615,91 @@ add_action('wp_head', function () {
 }, 1);
 
 
+/**
+ * 指定taxonomyの中で一番上位のtermを取得
+ */
+function get_top_parent_term($terms, $taxonomy) {
+    if (empty($terms) || is_wp_error($terms)) {
+        return null;
+    }
+
+    foreach ($terms as $term) {
+        $ancestors = get_ancestors($term->term_id, $taxonomy);
+
+        // 親がない = すでに最上位
+        if (empty($ancestors)) {
+            return $term;
+        }
+
+        // ancestorsの最後が最上位
+        $top_parent_id = end($ancestors);
+        $top_parent = get_term($top_parent_id, $taxonomy);
+
+        if ($top_parent && !is_wp_error($top_parent)) {
+            return $top_parent;
+        }
+    }
+
+    return null;
+}
+
+/**
+ * 指定taxonomyの中で一番下位のtermを取得
+ */
+function get_bottom_child_term($terms, $taxonomy) {
+    if (empty($terms) || is_wp_error($terms)) {
+        return null;
+    }
+
+    $bottom_term = null;
+    $max_depth = -1;
+
+    foreach ($terms as $term) {
+        $ancestors = get_ancestors($term->term_id, $taxonomy);
+        $depth = count($ancestors);
+
+        if ($depth > $max_depth) {
+            $max_depth = $depth;
+            $bottom_term = $term;
+        }
+    }
+
+    return $bottom_term;
+}
+
+
+/**
+ * shop_url から wp_shop_admin の店舗情報を取得
+ *
+ * @param string $shop_url
+ * @return object|null
+ */
+function get_shop_admin_by_shop_url($shop_url) {
+    global $wpdb;
+
+    $table_name = 'wp_shop_admin';
+
+    $shop_url = trim((string) $shop_url);
+
+    if ($shop_url === '') {
+        return null;
+    }
+
+    // 末尾スラッシュあり・なし両方に対応
+    $url_with_slash    = trailingslashit($shop_url);
+    $url_without_slash = untrailingslashit($shop_url);
+
+    $shop = $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT *
+             FROM {$table_name}
+             WHERE shop_url = %s
+                OR shop_url = %s
+             LIMIT 1",
+            $url_with_slash,
+            $url_without_slash
+        )
+    );
+
+    return $shop ?: null;
+}
